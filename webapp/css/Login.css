@@ -1,0 +1,142 @@
+body{
+    margin: 0;
+    position: relative;
+}
+
+.container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+}
+
+.box:nth-child(1) { flex: 6; background: #ffffff; }
+.box:nth-child(2) { flex: 0.02; background: #0FA6A6; }
+.box:nth-child(3) { flex: 3.98; background: #ffffff; }
+
+
+.container-left .title{
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    color: #0FA6A6;
+}
+.image-under-title img {
+    width: 70%;
+    height: auto;   
+    display: block;
+    margin: 0 auto;
+    margin-top: 180px; 
+}
+.sub-title {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+.sub-title h2 {
+    color: #0FA6A6;
+    font-size: 30px;
+}
+.container-login-form {
+    margin: 0 auto;
+    width: 70%;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+.container-main-login-form {
+    margin: 20px 30px 20px 30px;
+}
+
+.input-form {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.email label{
+    display: block;
+    margin-bottom: 5px;
+}
+.email input{
+    width: 100%;    
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 5px;
+    padding-left: 0;
+    padding-right: 0;
+    border: 1px solid #ccc;
+}
+
+.password-wrapper{
+    position: relative;
+    width: 100%; 
+}
+.password label{
+    display: block;
+    margin-bottom: 5px;
+}
+.password input{  
+    width: 100%;  
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 5px;
+    padding-left: 0;
+    padding-right: 0;
+    border: 1px solid #ccc;
+}
+
+.password-wrapper button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.container-main-login-form .button {
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    color: #ffffff;
+    border-radius: 3px;
+    background-color: #34A738;
+    cursor: pointer;
+}
+
+.container-main-login-form .button:hover {
+    background-color: #f1c40f;
+    cursor: pointer;
+}
+
+.container-main-login-form .login {
+    background-color: #000000;
+}
+
+
+.container-main-login-form .forgot-account {
+    margin-top: 0;
+}
+
+.container-main-login-form .forgot-account a{
+    color: #000000;
+}
+
+/* resigter */
+
+.container-register{
+    display: block;
+    position: absolute;
+    width: 40%;
+    height: 80%;
+    top: 50px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border: 2px solid #000000;
+    border-radius: 20px;
+}

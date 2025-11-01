@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: identity-service
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/TheBoyIELTS
+    username: root
+    password: 1234
+
+server:
+  port: 8080
+  servlet:
+    context-path: /identity
+
+jwt:
+  signerKey: "NhBnKYgB2s521kZ2Epn45BEWd5lVKN+Jsy50oyQ4W8Wdqgbdjswzo2inrfuoUe9JrG52PR0VE5cuFSxuyMIrPIOzmTyXVhE5AoW+KXPRHsc="
+  valid-duration: 24 # in hours
+  refreshable-duration: 120 # in hours
+
