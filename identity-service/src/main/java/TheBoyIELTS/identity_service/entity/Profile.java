@@ -23,6 +23,6 @@ public class Profile {
     String numberPhone;
     String avatar;
     String address;
-    String dob;
+    String dob; // change date (don't finish)
     boolean isDeleted;
 }

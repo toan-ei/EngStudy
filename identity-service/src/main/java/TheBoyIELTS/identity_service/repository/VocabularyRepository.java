@@ -11,14 +11,23 @@ import java.util.Optional;
 
 @Repository
 public interface VocabularyRepository extends JpaRepository<Vocabulary,String> {
-    @Query(value = """
-        SELECT * FROM vocabulary v
-        WHERE v.is_deleted = 0
-          AND v.is_learned = 0
-        ORDER BY RAND()
-        LIMIT 50
-        """, nativeQuery = true)
+    @Query(value = "(" +
+            "  SELECT * FROM vocabulary " +
+            "  WHERE is_deleted = false AND is_learned = false AND level = :level " +
+            "  ORDER BY RAND() " +
+            "  LIMIT 50" +
+            ") " +
+            "UNION ALL " +
+            "(" +
+            "  SELECT * FROM vocabulary " +
+            "  WHERE is_deleted = false AND is_learned = true AND level = :level " +
+            "  ORDER BY wrong_count ASC " +
+            "  LIMIT 50" +
+            ") " +
+            "LIMIT 50",
+            nativeQuery = true)
     List<Vocabulary> findByLevel(String level);
     boolean existsByWord(String word);
+    List<Vocabulary> findByIdIn(List<String> vocabularyId);
 
 }

@@ -2,6 +2,7 @@ package TheBoyIELTS.identity_service.controller;
 
 import TheBoyIELTS.identity_service.DTO.ApiResponse;
 import TheBoyIELTS.identity_service.DTO.PageResponse;
+import TheBoyIELTS.identity_service.DTO.Request.UpdateLearnedRequest;
 import TheBoyIELTS.identity_service.DTO.Request.VocabularyRequest;
 import TheBoyIELTS.identity_service.DTO.Request.VocabularyUpdateRequest;
 import TheBoyIELTS.identity_service.DTO.Response.VocabularyResponse;
@@ -81,8 +82,11 @@ public class VocabularyController {
     }
 
     @PutMapping("/learned")
-    public ApiResponse<String> updateVocabulariesLearned(@RequestBody List<VocabularyRequest> requests){
-        return null;
+    public ApiResponse<String> updateVocabulariesLearned(@RequestBody List<UpdateLearnedRequest> requestList){
+        String s = vocabularyService.updateLearned(requestList);
+        return ApiResponse.<String>builder()
+                .result(s)
+                .build();
     }
 
 }

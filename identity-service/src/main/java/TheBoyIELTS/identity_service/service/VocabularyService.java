@@ -2,6 +2,7 @@ package TheBoyIELTS.identity_service.service;
 
 import TheBoyIELTS.identity_service.DTO.DataFromExcelFile;
 import TheBoyIELTS.identity_service.DTO.PageResponse;
+import TheBoyIELTS.identity_service.DTO.Request.UpdateLearnedRequest;
 import TheBoyIELTS.identity_service.DTO.Request.VocabularyRequest;
 import TheBoyIELTS.identity_service.DTO.Request.VocabularyUpdateRequest;
 import TheBoyIELTS.identity_service.DTO.Response.VocabularyResponse;
@@ -20,10 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -123,6 +121,30 @@ public class VocabularyService {
 
     public List<VocabularyResponse> getVocabulariesWithLevel(String level){
         List<Vocabulary> vocabularies = vocabularyRepository.findByLevel(level);
+        log.info("count {}", vocabularies.size());
         return vocabularies.stream().map(vocabularyMapper::toVocabularyResponse).collect(Collectors.toList());
+    }
+
+    public String updateLearned(List<UpdateLearnedRequest> requestList){
+        List<String> vocabularyIdList = new ArrayList<>();
+        for (UpdateLearnedRequest request : requestList){
+            vocabularyIdList.add(request.getVocabularyId());
+        }
+        List<Vocabulary> vocabularyList = vocabularyRepository.findByIdIn(vocabularyIdList);
+        Map<String, Vocabulary> vocabularyMap = new HashMap<>();
+        for (Vocabulary vocabulary : vocabularyList){
+            vocabularyMap.put(vocabulary.getVocabularyId(), vocabulary);
+        }
+        List<Vocabulary> saveUpdate = new ArrayList<>();
+        for(UpdateLearnedRequest request : requestList){
+            Vocabulary vocabulary = vocabularyMap.get(request.getVocabularyId());
+            vocabulary.setWrongCount(vocabulary.getWrongCount() + 1);
+            if (!vocabulary.isLearned()){
+                vocabulary.setLearned(true);
+            }
+            saveUpdate.add(vocabulary);
+        }
+        vocabularyRepository.saveAll(saveUpdate);
+        return "sucessful";
     }
 }
