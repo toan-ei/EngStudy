@@ -1,33 +1,44 @@
 import { Module } from '@nestjs/common';
-import databaseConfig from './config/database.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import databaseConfig from './config/database.config';
+import { ListeningTopicModule } from './listening-topic/listening-topic.module';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
+import { FilesModule } from './files/files.module';
+import { ListeningExerciseModule } from './listening-exercises/listening-exercises.module';
+import { ListeningQuestionModule } from './listening-question/listening-question.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       load: [databaseConfig],
+      envFilePath: '.env',
     }),
 
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: async (configService: ConfigService) => {
-        const dbConfig = configService.get('database');
+      useFactory: (configService: ConfigService) => {
+        const db = configService.get('database'); // ⬅️ lấy config
+
         return {
           type: 'mysql',
-          host: dbConfig.host,
-          port: dbConfig.port,
-          username: dbConfig.username,
-          password: dbConfig.password,
-          database: dbConfig.database,
-          entities: [__dirname + '/**/*.entity{.ts,.js}'],
+          host: db.host,
+          port: db.port,
+          username: db.username,
+          password: db.password,
+          database: db.database,
+          autoLoadEntities: true,
           synchronize: true,
-          logging: true,
         };
       }
     }),
+    ListeningTopicModule,
+    CloudinaryModule,
+    FilesModule,
+    ListeningExerciseModule,
+    ListeningQuestionModule,
   ],
 })
 export class AppModule {}
