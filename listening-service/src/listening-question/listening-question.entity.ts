@@ -11,6 +11,9 @@ export class ListeningQuestion {
   @JoinColumn({ name: 'exercise_id' })
   exercise: ListeningExercise;
 
+  @Column({ name: 'exercise_id' })
+  exerciseId: number;
+
   @Column('text')
   questionText: string;
 
@@ -32,4 +35,5 @@ export class ListeningQuestion {
 
   @UpdateDateColumn({ type: 'datetime' })
   updatedAt: Date;
+    options: any;
 }
