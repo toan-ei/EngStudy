@@ -1,199 +1,110 @@
-body{
-    height: 100%;
-    margin: 0;
-    background-color: #0FA6A6;
-}
-.container{
-    height: 100vh;
-
-}
-.header{
-    width: 100%;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    background-color: rgb(255, 255, 255);
-    border-bottom: 1px solid #ccc ;
+/* ===== ENGSTUDY LISTENING PAGE – NAMESPACE .tbi- ===== */
+.tbi-wrapper * { box-sizing: border-box; }
+.tbi-wrapper {
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #0fa6a6 0%, #087f7f 100%);
+    min-height: 100vh;
+    color: #fff;
 }
 
-.sub-header{
+/* Header & Footer giữ nguyên như trang trước */
+.tbi-header { background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); padding:16px 40px; box-shadow:0 4px 20px rgba(0,0,0,0.1); position:sticky; top:0; z-index:1000; }
+.tbi-header-inner { max-width:1400px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; }
+.tbi-logo { margin:0; font-size:2.8rem; font-weight:900; background:linear-gradient(90deg,#0fa6a6,#48cfcf); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.tbi-header-right { display:flex; align-items:center; gap:20px; }
+.tbi-clock { background:linear-gradient(135deg,#053238,#086767); padding:10px 20px; border-radius:50px; font: bold 1.4rem 'Courier New',monospace; box-shadow:0 8px 25px rgba(5,50,56,0.4); min-width:180px; text-align:center; }
+.tbi-avatar { width:52px; height:52px; border-radius:50%; overflow:hidden; border:4px solid #0fa6a6; box-shadow:0 4px 15px rgba(0,0,0,0.2); }
+.tbi-avatar img { width:100%; height:100%; object-fit:cover; }
+.tbi-dropdown-toggle { background:none; border:none; font-size:2rem; color:#0fa6a6; cursor:pointer; padding:8px; transition:.3s; }
+.tbi-dropdown-toggle:hover { color:#086767; transform:rotate(90deg); }
+.tbi-dropdown-menu { position:absolute; right:0; top:100%; background:white; min-width:200px; border-radius:16px; overflow:hidden; box-shadow:0 15px 40px rgba(0,0,0,0.2); opacity:0; visibility:hidden; transform:translateY(-10px); transition:.3s cubic-bezier(.4,0,.2,1); }
+.tbi-dropdown.active .tbi-dropdown-menu { opacity:1; visibility:visible; transform:translateY(8px); }
+.tbi-dropdown-menu a { display:block; padding:14px 20px; color:#086767; text-decoration:none; font-weight:500; }
+.tbi-dropdown-menu a:hover { background:linear-gradient(135deg,#0fa6a6,#48cfcf); color:white; }
+
+/* Main */
+.tbi-main.tbi-listening { padding: 60px 40px; max-width: 1400px; margin: 0 auto; }
+.tbi-page-title { font-size: 3.2rem; font-weight: 900; text-align: center; margin-bottom: 50px;
+    background: linear-gradient(90deg, #fff, #c0ffff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+.tbi-question-area {
     display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 20px;
-    margin-right: 20px;
-}
-
-.name-centre{
-    display: inline-block;
-}
-
-.sub-header h1{
-    margin: 0;
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    font-size: 50px;
-    color: #0FA6A6;
-}
-
-.container-item {
-    display: flex;
-    justify-content: end;
-    align-items: center;
-}
-
-.clock {
-    width: 220px;
-    height: 50px;
-    background: linear-gradient(to right, #053238, #48a8b9);
-    margin-right: 10px;
-    font-size: 2rem;
-    font-family: monospace;
-    color: #ffffff;
-    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
     justify-content: center;
+    align-items: flex-start;
+}
+
+.tbi-left { flex: 1; min-width: 320px; max-width: 600px; }
+.tbi-audio { width: 100%; margin-bottom: 40px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+
+.tbi-answers { display: flex; flex-direction: column; gap: 20px; }
+
+.tbi-answer-btn {
+    display: flex;
     align-items: center;
-    box-shadow: 0 8px 15px rgba(0,0,0,0.50);
-    border-radius: 5px;
-}
-
-.avatar{
-    width: 50px;
-    height: 50px;
-    background-color: #0FA6A6;
-    border-radius: 100px;
-    margin-right: 10px;
-    box-shadow: 0 8px 15px rgba(0,0,0,0.50);
-}
-.icon i{
-    font-size: 50px;
-    color: #0FA6A6;
-}
-
-.icon i:hover{
-    color:#086767;
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 20px;
+    padding: 18px 24px;
     cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
 }
 
-.list{
-  display: none;
-  position: absolute;
-  background-color: #fff;
-  width: 200px;
-  list-style-type: none; 
-  right: 50px;
-  padding-left: 0;  
-  font-size: 20px;
-  text-align: center;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+.tbi-answer-btn:hover {
+    transform: translateY(-8px);
+    background: rgba(255,255,255,0.4);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
 }
 
-.list li{
-  padding-bottom: 10px;
-  padding-top: 10px;
-  font-family: 'Times New Roman', Times, serif;
-}
-
-.list a{
-  color: #086767;
-  text-decoration: none;
-}
-.list li:hover{
-  cursor: pointer;
-}
-
-.sub-content{
-    display: flex;
-    justify-content: space-between;
-}
-
-.name-feature{
-    display: flex;
-    width: 200px;
-    height: 50px;
-    background-color: #12448A;
-    margin-top: 50px;
-    margin-left: 100px;
+.tbi-answer-btn.selected {
+    background: linear-gradient(135deg, #16ad67, #1ed98b);
     color: white;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-    box-shadow: 0 8px 15px rgba(0,0,0,0.5);
-    border-radius: 2px;
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 20px 40px rgba(22,173,103,0.4);
 }
 
-.main-content{
-    width: 95%;
-    height: 500px;
-    margin: 0 auto;
+.tbi-choice {
+    width: 48px;
+    height: 48px;
+    background: #0fa6a6;
+    color: white;
+    font-weight: bold;
+    font-size: 1.4rem;
+    border-radius: 50%;
     display: flex;
-    margin-top: 20px;
-    background-color: #ffffff;
-    box-shadow: 0 8px 15px rgba(0,0,0,0.5);
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
-.main-content div{
+.tbi-text {
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+/* Cột phải – có thể để ảnh minh họa */
+.tbi-right {
     flex: 1;
-}
-.main-content .left{
+    min-width: 300px;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
+.tbi-right img { max-width: 100%; border-radius: 24px; box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
 
-audio{
-    margin-top: 50px;
-}
+/* Footer – sáng hơn như bạn yêu cầu */
+.tbi-footer { background: rgba(0,0,0,0.15); backdrop-filter: blur(12px); padding:70px 40px 30px; }
+.tbi-footer-col a, .tbi-footer-col p, .tbi-footer-bottom p { color: rgba(255,255,255,0.95) !important; }
+.tbi-footer-col a:hover, .tbi-social a:hover { color: #a0ffff !important; }
 
-.main-content .left .answers{
-    margin-top: 30px;
-}
-
-.main-content .left button{
-    display: flex;
-    width: 480px;
-    justify-content: center;
-    border: 0;
-    padding: 0;
-    background-color: #ffffff;
-    border: 1px solid #8a8888;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    transition: transform 0.3s ease;
-}
-.main-content .left .index{
-    width: 38.200px;
-    height: 35px;
-    background-color: #fff;
-    border-radius: 40px;
-    margin-left: 20.900px;
-    margin-right: 20.900px;
-    border: 1px solid #8a8888;
-    margin-top: 2.5px;
-    margin-bottom: 2.5px;
-}
-.main-content .left .index .A{
-    margin-top: 10px;
-}
-
-.main-content .left .text{
-    width: 390px;
-    text-align: left;
-    white-space: normal;
-    word-wrap: break-word;
-    margin-right: 10px;
-}
-
-.main-content .left button:hover{
-    cursor: pointer;
-    transform: translateY(-10px);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.25);
-    background-color: #16ad67;
-}
-
-
-.main-content .right{
-    
+/* Responsive */
+@media (max-width: 768px) {
+    .tbi-page-title { font-size: 2.5rem; }
+    .tbi-answer-btn { padding: 16px; }
+    .tbi-choice { width: 42px; height: 42px; font-size: 1.2rem; }
 }
