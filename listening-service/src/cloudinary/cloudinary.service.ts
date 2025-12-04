@@ -7,7 +7,7 @@ export class CloudinaryService {
   async uploadImage(file: Express.Multer.File): Promise<string> {
     return new Promise((resolve, reject) => {
       const uploadStream = cloudinary.uploader.upload_stream(
-        { folder: 'listening' },
+        { folder: 'listening', resource_type: 'image' },
         (error, result?: UploadApiResponse) => {
           if (error) return reject(error);
           if (!result)
@@ -27,15 +27,15 @@ export class CloudinaryService {
     return Promise.all(uploadPromises);
   }
 
-  async uploadPdf(file: Express.Multer.File): Promise<string> {
+  // ⚡ Upload AUDIO (.m4a, .mp3, .wav,...)
+  async uploadAudio(file: Express.Multer.File): Promise<string> {
     return new Promise((resolve, reject) => {
       const uploadStream = cloudinary.uploader.upload_stream(
         {
-          folder: 'contracts',
-          resource_type: 'raw',
-          format: 'pdf', // ép thêm đuôi PDF
+          folder: 'audio',
+          resource_type: 'video', // Cloudinary yêu cầu thế này để xử lý audio
         },
-        (error, result) => {
+        (error, result?: UploadApiResponse) => {
           if (error) return reject(error);
           if (!result)
             return reject(new Error('No result returned from Cloudinary.'));
