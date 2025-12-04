@@ -1,10 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, In } from 'typeorm';
+import { Repository } from 'typeorm';
 import { ListeningQuestion } from '../listening-question/listening-question.entity';
-import { ListeningOption } from '../listening-option/listening-option.entity';
 import { UserListeningResult } from '../listening-result/listening-result.entity';
-import { UserListeningAnswer } from './listening-answer.entity';
+import { UserListeningAnswer } from './listening-answers.entity';
 import { SubmitListeningDto } from './dto/submit-listening.dto';
 
 @Injectable()
@@ -12,9 +11,6 @@ export class ListeningSubmitService {
   constructor(
     @InjectRepository(ListeningQuestion)
     private questionRepo: Repository<ListeningQuestion>,
-
-    @InjectRepository(ListeningOption)
-    private optionRepo: Repository<ListeningOption>,
 
     @InjectRepository(UserListeningResult)
     private resultRepo: Repository<UserListeningResult>,
@@ -37,14 +33,10 @@ export class ListeningSubmitService {
 
     const questionIds = questions.map(q => q.questionId);
 
-    // 2. Lấy đáp án đúng của tất cả câu hỏi
-    const options = await this.optionRepo.find({
-      where: { question: { questionId: In(questionIds) }, isCorrect: true },
-    });
-
-    const correctMap = new Map<number, number>();
-    options.forEach(o => {
-      correctMap.set(o.question.questionId, o.optionId);
+    // 2. Lấy đáp án đúng của tất cả câu hỏi (dựa trên `correctOption` A/B/C/D)
+    const correctMap = new Map<number, 'A' | 'B' | 'C' | 'D'>();
+    questions.forEach(q => {
+      correctMap.set(q.questionId, q.correctOption);
     });
 
     // 3. Tạo kết quả tổng
@@ -62,14 +54,14 @@ export class ListeningSubmitService {
     const answerEntities: UserListeningAnswer[] = [];
 
     for (const a of answers) {
-      const correctOptionId = correctMap.get(a.questionId);
-      const isCorrect = a.selectedOptionId === correctOptionId;
+      const correctChar = correctMap.get(a.questionId);
+      const isCorrect = a.selectedOption != null && a.selectedOption === correctChar;
       if (isCorrect) totalScore += 1;
 
       const answerEntity = this.answerRepo.create({
         result,
         question: { questionId: a.questionId },
-        selectedOptionId: a.selectedOptionId ?? undefined,
+        selectedOption: a.selectedOption ?? null,
         isCorrect,
       });
       answerEntities.push(answerEntity);

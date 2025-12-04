@@ -13,8 +13,8 @@ export class UserListeningAnswer {
   @Column({ name: 'question_id' })
   questionId: number;
 
-  @Column({ name: 'selected_option_id', type: 'int', nullable: true })
-  selectedOptionId?: number;
+  @Column({ name: 'selected_option', type: 'char', length: 1, nullable: true })
+  selectedOption?: 'A' | 'B' | 'C' | 'D' | null;
 
   @Column({ name: 'is_correct', type: 'tinyint', default: 0 })
   isCorrect: boolean;
