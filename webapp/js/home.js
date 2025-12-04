@@ -42,6 +42,6 @@ window.addEventListener("DOMContentLoaded", () => {
         window.location.href = 'TranslateChooseLevel.html';
     }
     btnListening.onclick = () =>{
-        window.location.href = 'ListeningChooseLevel.html';
+        window.location.href = 'ListeningChooseTopic.html';
     }
 })

@@ -22,7 +22,7 @@ async function loadTopics() {
             `;
 
             card.addEventListener("click", () => {
-                window.location.href = `ListeningChooseExercise.html?topicId=${topic.topicId}`;
+                window.location.href = `Listening.html`;
             });
 
             container.appendChild(card);
