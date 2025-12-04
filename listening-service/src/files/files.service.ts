@@ -33,8 +33,8 @@ export class FilesService {
 
     if (audioFile) {
       newFile.audioFilename = audioFile.originalname;
-      newFile.audioUrl = await this.cloudinary.uploadPdf(audioFile); // audio treated as raw
-      newFile.audioDurationSeconds = 0; // hoặc parse duration nếu muốn
+      newFile.audioUrl = await this.cloudinary.uploadAudio(audioFile);
+      newFile.audioDurationSeconds = 0;
       newFile.mimeType = audioFile.mimetype;
     }
 
@@ -47,7 +47,6 @@ export class FilesService {
     return this.repo.save(newFile);
   }
 
-  // Update audio hoặc image
   async update(
     id: number,
     audioFile?: Express.Multer.File,
@@ -57,7 +56,7 @@ export class FilesService {
 
     if (audioFile) {
       file.audioFilename = audioFile.originalname;
-      file.audioUrl = await this.cloudinary.uploadPdf(audioFile);
+      file.audioUrl = await this.cloudinary.uploadAudio(audioFile);
       file.audioDurationSeconds = 0;
       file.mimeType = audioFile.mimetype;
     }

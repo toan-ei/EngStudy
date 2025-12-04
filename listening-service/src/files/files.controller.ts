@@ -2,7 +2,8 @@ import { Controller, Get, Post, Delete, Param, Query, UploadedFile, UseIntercept
 import { FilesService } from './files.service';
 import { FileResponseDto } from './dto/file-response.dto';
 import { UploadFileDto } from './dto/upload-file.dto';
-import { AnyFilesInterceptor, FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { UpdateFileDto } from './dto/update-file.dto';
+import { AnyFilesInterceptor, FileFieldsInterceptor, FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { ApiTags, ApiOperation, ApiConsumes, ApiBody } from '@nestjs/swagger';
 import { File } from './file.entity';
 
@@ -34,15 +35,27 @@ export class FilesController {
     return this.filesService.upload(audioFile, imageFile);
   }
 
-  @Put(':id')
+ @Put(':id')
   @ApiOperation({ summary: 'Update audio hoặc image' })
   @ApiConsumes('multipart/form-data')
-  @UseInterceptors(FileInterceptor('audio'), FileInterceptor('image'))
+  @ApiBody({ type: UpdateFileDto })
+  @UseInterceptors(
+    FileFieldsInterceptor([
+      { name: 'audio', maxCount: 1 },
+      { name: 'image', maxCount: 1 },
+    ]),
+  )
   async update(
     @Param('id', ParseIntPipe) id: number,
-    @UploadedFile('audio') audioFile?: Express.Multer.File,
-    @UploadedFile('image') imageFile?: Express.Multer.File,
+    @UploadedFiles()
+    files: {
+      audio?: Express.Multer.File[];
+      image?: Express.Multer.File[];
+    },
   ): Promise<File> {
+    const audioFile = files.audio?.[0];
+    const imageFile = files.image?.[0];
+
     return this.filesService.update(id, audioFile, imageFile);
   }
 
