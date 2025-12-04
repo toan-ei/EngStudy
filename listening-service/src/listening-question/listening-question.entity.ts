@@ -17,12 +17,33 @@ export class ListeningQuestion {
   @Column('text')
   questionText: string;
 
-  @Column('text', { nullable: true })
+  @Column({ name: 'description', type: 'text', nullable: true })
   description?: string;
 
-  @ManyToOne(() => File, { nullable: true, onDelete: 'SET NULL' })
+  @Column({ name: 'option_a', type: 'text' })
+  optionA: string;
+
+  @Column({ name: 'option_b', type: 'text' })
+  optionB: string;
+
+  @Column({ name: 'option_c', type: 'text' })
+  optionC: string;
+
+  @Column({ name: 'option_d', type: 'text' })
+  optionD: string;
+
+  @Column({ name: 'correct_option', type: 'char', length: 1 })
+  correctOption: 'A' | 'B' | 'C' | 'D';
+
+  @Column({ name: 'score', type: 'float', default: 1 })
+  score: number;
+
+  @ManyToOne(() => File , { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'file_id' })
-  file?: File;
+  file: File;
+
+  @Column({ name: 'file_id' })
+  fileId: number;
 
   @Column({ type: 'int', default: 0 })
   orderIndex: number;
@@ -35,5 +56,5 @@ export class ListeningQuestion {
 
   @UpdateDateColumn({ type: 'datetime' })
   updatedAt: Date;
-    options: any;
+  options: any;
 }

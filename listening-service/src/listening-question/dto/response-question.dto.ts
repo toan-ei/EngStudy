@@ -14,8 +14,26 @@ export class ListeningQuestionResponseDto {
   @ApiPropertyOptional()
   description?: string;
 
-  @ApiPropertyOptional({ description: 'File ID chứa audio + image' })
-  fileId?: string;
+  @ApiProperty()
+  optionA: string;
+
+  @ApiProperty()
+  optionB: string;
+
+  @ApiProperty()
+  optionC: string;
+
+  @ApiProperty()
+  optionD: string;
+
+  @ApiProperty({ description: 'A | B | C | D' })
+  correctOption: 'A'|'B'|'C'|'D';
+
+  @ApiProperty()
+  score: number;
+
+  @ApiPropertyOptional()
+  fileId?: number;
 
   @ApiPropertyOptional()
   orderIndex?: number;
