@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Boy IELTS</title>
-    <link rel="stylesheet" href="../css/ListeningChooseLevel.css">
+    <title>EngStudy</title>
+    <link rel="stylesheet" href="../css/ListeningChooseTopic.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
@@ -18,7 +18,8 @@
                         <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
                     </div>
                     <div class="tbi-avatar">
-                        <img src="../images/avatar-placeholder.png" alt="Avatar" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI0ZGRkZGRiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTIgMjBjLTQuNDIgMCA4IDMuNTgtOCA4czMuNTggOCA4IDggOC0zLjU4IDgtOCA0LjQyLTgtOC04eiIvPjwvc3ZnPg=='">
+                        <img src="../images/avatar-placeholder.png" alt="Avatar" 
+                             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI0ZGRkZGRiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTIgMjBjLTQuNDIgMCA4IDMuNTgtOCA4czMuNTggOCA4IDggOC0zLjU4IDgtOCA0LjQyLTgtOC04eiIvPjwvc3ZnPg=='">
                     </div>
                     <div class="tbi-dropdown">
                         <button class="tbi-dropdown-toggle">
@@ -40,20 +41,9 @@
                 <h2>Listening Practice</h2>
             </div>
 
-            <div class="tbi-levels">
-                <button class="tbi-level-card" data-type="person">
-                    <div class="tbi-card-icon">🎨</div>
-                    <p>Tranh tả người</p>
-                </button>
-                <button class="tbi-level-card" data-type="object">
-                    <div class="tbi-card-icon">🖼️</div>
-                    <p>Tranh tả vật</p>
-                </button>
-                <button class="tbi-level-card" data-type="dialogue">
-                    <div class="tbi-card-icon">💬</div>
-                    <p>Hội thoại ngắn</p>
-                </button>
-            </div>
+            <!-- Container đổ dữ liệu -->
+            <div class="tbi-levels" id="topic-container"></div>
+
         </main>
 
         <!-- Footer -->
@@ -89,19 +79,23 @@
         </footer>
     </div>
 
+    <!-- Clock -->
     <script src="../js/clock.js"></script>
+
+    <!-- Dropdown -->
     <script>
-        // Dropdown toggle
         document.querySelector('.tbi-dropdown-toggle').addEventListener('click', function () {
             this.parentElement.classList.toggle('active');
         });
 
-        // Đóng dropdown khi click ra ngoài
         document.addEventListener('click', function (e) {
             if (!e.target.closest('.tbi-dropdown')) {
                 document.querySelector('.tbi-dropdown').classList.remove('active');
             }
         });
     </script>
+
+    <!-- Script load topics -->
+    <script src="../js/listening-topics.js"></script>
 </body>
 </html>
