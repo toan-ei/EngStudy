@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Boy IELTS</title>
+    <title>EngStudy</title>
     <link rel="stylesheet" href="../css/Login.css">
 </head>
 <body>
     <div class="container">
         <div class="container-left box">
             <div class="title">
-                <h1>The Boy IELTS</h1>
+                <h1>EngStudy</h1>
             </div>
             <div class="image-under-title">
                 <img src="../image/book-open.png" alt="">
@@ -46,27 +46,55 @@
             </div>
         </div>
     </div>
-    <div class="container-register" >
-        <div class="sub-title">
-            <h2>Register</h2>
-        </div>
-        <div class="container-login-form">
-            <div class="container-main-login-form">
-                <div class="input-form email">
-                    <label for="email">Email</label>
-                    <input id="register-email" type="text" placeholder="Email">
-                </div>
-                <div class="input-form password">
-                    <label for="password">Password</label>
-                    <div class="password-wrapper">
-                        <input type="password" id="register-password" placeholder="Nhập mật khẩu">
-                        <button type="button" id="togglePassword">👁</button>
-                    </div>
-                </div>
-                <button id="register-submit" type="submit" class="button login">Sign up</button>
+    <div class="container-register">
+    <div class="sub-title">
+        <h2>Register</h2>
+    </div>
+
+    <div class="container-login-form">
+        <div class="container-main-login-form">
+
+            <!-- Email -->
+            <div class="input-form email">
+                <label for="register-email">Email</label>
+                <input id="register-email" type="text" placeholder="Email">
             </div>
+
+            <!-- Password -->
+            <div class="input-form password">
+                <label for="register-password">Password</label>
+                <div class="password-wrapper">
+                    <input type="password" id="register-password" placeholder="Nhập mật khẩu">
+                    <button type="button" class="togglePassword">👁</button>
+                </div>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="input-form password">
+                <label for="register-confirm-password">Confirm Password</label>
+                <div class="password-wrapper">
+                    <input type="password" id="register-confirm-password" placeholder="Nhập lại mật khẩu">
+                    <button type="button" class="togglePassword">👁</button>
+                </div>
+            </div>
+
+            <!-- ✅ CHECKBOX GIỐNG DEMO -->
+            <div class="input-form checkbox-confirm">
+                <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;">
+                    <input type="checkbox" id="agree-policy" style="width:18px; height:18px; cursor:pointer;">
+                    <div style="margin-top: -2px;">
+                        <div style="font-size:16px; font-weight:600; color:#0FA6A6;">Label</div>
+                        <div style="font-size:14px; color:#777;">Description</div>
+                    </div>
+                </label>
+            </div>
+
+            <!-- Submit -->
+            <button id="register-submit" type="submit" class="button login">Sign up</button>
         </div>
     </div>
+</div>
+
 </body>
 <Script src="../js/login.js"></Script>
 </html>

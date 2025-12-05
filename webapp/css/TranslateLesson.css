@@ -160,7 +160,6 @@
 .list li:hover::before {
     transform: scaleY(1);
 }
-
 /* SENTENCE BAR ------------------------------------------------ */
 .sentence-bar {
     background: rgba(255, 255, 255, 0.9);
@@ -248,6 +247,10 @@
     align-items: center;
     gap: 50px;
 }
+.container-content {
+    gap: 20px !important;        /* giảm từ 50px xuống 20px */
+    padding: 30px 0 !important;  /* giảm padding trên/dưới */
+}
 
 /* TOP BAR ------------------------------------------------------ */
 .top-bar {
@@ -298,318 +301,175 @@
 }
 
 
+/* CONTENT */
+.container-content {
+    flex: 1;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-title {
+     margin: 20px 0 0 0; 
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    font-family: var(--font-main);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+.main-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #12448A, #0FA6A6);
+    border-radius: 2px;
+}
+
+/* === CHỮ VOCABULARY: ĐẨY SÁT TRÁI + ĐẸP HƠN === */
 .name-feature {
-    width: 280px;
-    height: 65px;
+   margin: 5px 10px 1% !important;     /* giảm margin-top xuống */
+    align-self: flex-start;   /* sát trái, khoảng cách trên/dưới hợp lý */
+    width: 280px !important;
+    height: 65px !important;
     background: linear-gradient(135deg, #12448A 0%, #0FA6A6 100%);
     color: white;
-    font-size: 30px;
+    font-size: 30px !important;
     font-weight: 700;
-    border-radius: 20px;
+    border-radius: 20px !important;
     display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: 0 15px 40px rgba(18, 68, 138, 0.4);
     position: relative;
     overflow: hidden;
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-main);
+    align-self: flex-start;
 }
 
-.name-feature::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
-    transform: rotate(45deg);
-    transition: all 0.6s;
+/* === GIẢM KHOẢNG TRỐNG THỪA TRÊN DƯỚI === */
+.container-content {
+    flex: 1;
+    padding: 10px 0 !important;   /* giảm padding trên/dưới */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;             /* cực kỳ quan trọng: giảm gap từ 50px → 10px */
 }
-
-.name-feature:hover::before {
-    animation: shine 2s infinite;
-}
+.name-feature:hover::before { animation: shine 2s infinite; }
 
 @keyframes shine {
     0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
     100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
 }
 
-
-
-.container-content {
-    gap: 0px !important;     /* giảm từ 50px xuống còn 20px */
-    padding-top: 10px !important;
-    padding-bottom: 10px !important;
-}
-
-
-.container-language {
+.container-level {
     width: 95%;
-    max-width: 1400px;
-    margin: 40px auto;
-    display: flex;
-    justify-content: center;
-    gap: 50px;
-    padding: 10px 20px;
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 0 20px;
+    justify-items: center;
 }
 
-.language-btn {
-    flex: 1;
-    max-width: 520px;
-    height: 300px;        /* TĂNG TỪ 280px LÊN 300px */
+.container-level button {
+    width: 240px;
+    height: 160px;
     background: linear-gradient(145deg, #ffffff 0%, #f8fcff 100%);
-    border-radius: 30px;
-    padding: 0;
-    border: 2px solid rgba(15, 166, 166, 0.15);
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 20px 45px rgba(0,0,0,0.12);
-    position: relative;
+    border: 2px solid rgba(15, 166, 166, 0.2);
+    border-radius: 18px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c3e50;
     cursor: pointer;
+    text-align: center;
+    padding: 20px 12px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+    font-family: var(--font-main);
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
+    line-height: 1.3;
 }
 
-.language-btn::before {
+.container-level button::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 6px;
+    height: 4px;
+    background: linear-gradient(90deg, #0FA6A6, #12448A, #25bec9);
     z-index: 2;
 }
 
-.viet-to-eng::before {
-    background: linear-gradient(90deg, #0FA6A6, #12448A);
-}
-
-.eng-to-viet::before {
-    background: linear-gradient(90deg, #25bec9, #cde258);
-}
-
-.language-btn:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 35px 70px rgba(0,0,0,0.18);
-}
-
-.language-btn.active {
-    transform: scale(1.03);
-    box-shadow: 0 35px 70px rgba(15, 166, 166, 0.3);
-}
-
-.btn-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 25px 35px;    /* GIẢM TỪ 28px ĐỂ CÒN CHỖ CHO CONTENT */
-    background: linear-gradient(135deg, #12448A 0%, #0FA6A6 100%);
-    color: white;
-    font-weight: 600;
-    position: relative;
-    overflow: hidden;
-    flex-shrink: 0;
-}
-
-.btn-header::after {
+.container-level button::after {
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-    transform: rotate(45deg);
-    transition: all 0.6s;
-    opacity: 0;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.6s;
 }
 
-.language-btn:hover .btn-header::after,
-.language-btn.active .btn-header::after {
-    animation: shine 2s infinite;
-    opacity: 1;
+.container-level button:hover::after { left: 100%; }
+.container-level button:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(15, 166, 166, 0.3);
+    border-color: #0FA6A6;
+}
+.container-level button:active { transform: translateY(-6px) scale(0.98); }
+
+@keyframes fadeUp {
+    0% { transform: translateY(25px) scale(0.95); opacity: 0; }
+    100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+.container-level button:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(15, 166, 166, 0.3);
+    background: linear-gradient(135deg, #0FA6A6, #12448A);
+    color: white;
 }
 
-@keyframes shine {
-    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+.container-level button:active {
+    transform: translateY(-4px) scale(0.96);
 }
-
-.lang-direction {
-    display: flex;
-    align-items: center;
-    gap: 15px;             /* GIẢM TỪ 18px */
-    font-size: 18px;       /* GIẢM TỪ 20px */
-}
-
-.lang-direction i {
-    font-size: 22px;       /* GIẢM TỪ 24px */
-    opacity: 0.9;
-}
-
-.status-badge {
-    display: flex;
-    align-items: center;
-    gap: 8px;              /* GIẢM TỪ 10px */
-    padding: 10px 18px;    /* GIẢM TỪ 12px 22px */
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 25px;   /* GIẢM TỪ 30px */
-    font-size: 14px;       /* GIẢM TỪ 15px */
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    transition: all 0.3s ease;
-}
-
-.status-badge.active {
-    background: rgba(37, 190, 201, 0.3);
-    border-color: #25bec9;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(37, 190, 201, 0.4); }
-    50% { box-shadow: 0 0 0 12px rgba(37, 190, 201, 0); }
-}
-
-.btn-content {
-    flex: 1;
-    padding: 30px 35px;    /* GIẢM TỪ 35px NHƯNG GIỮ PADDING HÀNG NGANG */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    min-height: 0;         /* QUAN TRỌNG: ĐỂ CONTENT CÓ THỂ MỞ RỘNG */
-}
-
-.language-btn h3 {
-    font-size: 30px;       /* GIẢM TỪ 32px */
-    font-weight: 700;
-    color: #2c3e50;
-    margin: 0 0 15px 0;    /* GIẢM TỪ 18px */
-    background: linear-gradient(135deg, #12448A, #0FA6A6);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    line-height: 1.3;      /* THÊM LINE-HEIGHT */
-}
-
-.language-btn .description {
-    font-size: 17px;       /* GIẢM TỪ 18px */
-    color: #7f8c8d;
-    line-height: 1.6;      /* GIẢM TỪ 1.7 */
-    margin: 0;
-    padding: 0 10px;       /* GIẢM TỪ 15px */
-    width: 100%;           /* ĐẢM BẢO CHIẾM ĐẦY ĐỠ */
-    word-wrap: break-word; /* NGĂN CHẮN VƯỢT KHỎI KHUÔN */
-}
-
-.language-btn .arrow-icon {
-    font-size: 38px;       /* GIẢM TỪ 40px */
-    margin: 15px 0;        /* GIẢM TỪ 20px */
-    color: #0FA6A6;
-    transition: all 0.3s ease;
-    flex-shrink: 0;        /* NGĂN ICON BỊ NÉN */
-}
-
-.language-btn:hover .arrow-icon,
-.language-btn.active .arrow-icon {
-    transform: scale(1.2) rotate(12deg);
-    color: #25bec9;
-}
-
-/* RESPONSIVE - SỬA LẠI CHO ĐẸP */
-@media(max-width: 1200px) {
-    .container-language {
-        flex-direction: column;
-        align-items: center;
-        gap: 40px;
-    }
-    
-    .language-btn {
-        max-width: 650px;    /* TĂNG CHO TABLET */
-        height: 280px;       /* GIẢM HƠN ĐỂ VẪN HIỂN THỊ ĐẦY ĐỦ */
-    }
-}
-
-@media(max-width: 950px) {
-    .sub-header h1 { font-size: 38px; }
-    .clock { width: 150px; font-size: 1.2rem; }
-    .avatar { width: 42px; height: 42px; }
-    .icon i { font-size: 30px; }
-    .name-feature {
-        margin-left: 20px;
-        width: 220px;
-        font-size: 26px;
-    }
-    
-    .language-btn {
-        max-width: 550px;
-        height: 260px;
-    }
-    
-    .btn-header {
-        padding: 22px 30px;
-    }
-    
-    .btn-content {
-        padding: 25px 30px;
-    }
-}
-
-@media(max-width: 650px) {
-    .sub-header { flex-direction: column; gap: 12px; }
-    .sub-header h1 { font-size: 34px; }
-    .container-item { gap: 12px; }
-    .name-feature {
-        margin: 20px auto;
-        width: 200px;
-        font-size: 24px;
-    }
-    .container-language {
-        margin: 20px auto;
-        padding: 10px;
-        gap: 50px;
-    }
-    .language-btn {
-        max-width: 100%;
-        height: 240px;
-    }
-    
-    .btn-header {
-        padding: 20px 25px;
-    }
-    
-    .btn-content {
-        padding: 20px 25px;
-    }
-    
-    .language-btn h3 {
-        font-size: 26px;
-    }
-    
-    .language-btn .description {
-        font-size: 15px;
-    }
-    
-    .lang-direction {
-        font-size: 16px;
-        gap: 12px;
-    }
-    
-    .lang-direction i {
-        font-size: 20px;
-    }
-}
-/* FOOTER - SỬA LẠI ĐỂ KHÔNG BỊ LỖI */
+.container-level button:nth-child(1) { animation-delay: 0.1s; }
+.container-level button:nth-child(2) { animation-delay: 0.2s; }
+.container-level button:nth-child(3) { animation-delay: 0.3s; }
+.container-level button:nth-child(4) { animation-delay: 0.4s; }
+.container-level button:nth-child(5) { animation-delay: 0.5s; }
+.container-level button:nth-child(6) { animation-delay: 0.6s; }
+.container-level button:nth-child(7) { animation-delay: 0.7s; }
+.container-level button:nth-child(8) { animation-delay: 0.8s; }
+/* FOOTER */
+/* FOOTER */
 .footer {
   background: linear-gradient(to right,#0fa6a6 0%,#25bec9 80%, #a18a2b 100%);
   color: #fff;
   padding: 30px 12px 13px 12px;
   font-family: var(--font-second);
-   border-radius: 22px 22px 0 0;  
+  border-radius: var(--radius) var(--radius) 0 0;
   box-shadow: var(--shadow);
   margin-top: 30px;
 }
@@ -719,32 +579,33 @@
   .footer-container {flex-direction: column;}
   .footer-column {margin: 0;}
 }
-/* ĐẨY CHỮ "VOCABULARY" SÁT TRÁI - ĐẸP NHƯ CÁC TRANG KHÁC */
-.container-content {
-    align-items: flex-start !important;   /* quan trọng nhất */
-    padding-left: 20px;                   /* khoảng cách vừa đủ từ lề trái */
-    padding-right: 20px;
+/* RESPONSIVE */
+@media(max-width: 1300px) { .container-level { grid-template-columns: repeat(3, 1fr); gap: 18px; } .container-level button { width: 210px; height: 140px; font-size: 15px; } }
+@media(max-width: 950px) {
+    .sub-header h1 { font-size: 34px; }
+    .clock { width: 140px; font-size: 1.1rem; }
+    .avatar { width: 42px; height: 42px; }
+    .icon i { font-size: 28px; }
+    .main-title { font-size: 24px; margin: 15px 0 30px 0; }
+    .name-feature { width: 220px; font-size: 24px; height: 50px; margin: 0 auto 25px 5%; }
+    .container-level { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .container-level button { width: 190px; height: 130px; font-size: 15px; padding: 16px 10px; }
+}
+@media(max-width: 650px) {
+    .sub-header { flex-direction: column; gap: 10px; }
+    .sub-header h1 { font-size: 30px; }
+    .container-item { gap: 12px; }
+    .main-title { font-size: 22px; margin: 15px 0 25px 0; }
+    .name-feature { margin: 0 auto 20px auto; width: 200px; font-size: 22px; height: 45px; }
+    .container-level { grid-template-columns: 1fr; gap: 15px; padding: 0 15px; }
+    .container-level button { width: 100%; max-width: 280px; height: 110px; font-size: 16px; padding: 16px 12px; }
 }
 
-.name-feature {
-    margin-left: 0 !important;            /* không còn margin tự động */
-    margin-right: auto !important;
-    margin-top: 30px !important;
-    margin-bottom: 50px !important;
-}
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-thumb { background: rgba(61,220,222,.30); border-radius: 10px; }
+::-webkit-scrollbar-track { background: rgba(255,255,255,.07); }
 
-/* Khi màn hình nhỏ (điện thoại, tablet) thì cho nó căn giữa lại cho đẹp */
-@media (max-width: 950px) {
-    .container-content {
-        align-items: center !important;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-    .name-feature {
-        margin-left: auto !important;
-        margin-right: auto !important;
-    }
-}
 
 ul li a {
     text-decoration: none;
@@ -754,3 +615,4 @@ ul li a {
 ul li a:hover {
     color: #0FA6A6;
 }
+

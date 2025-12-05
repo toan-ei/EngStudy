@@ -3,54 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Boy IELTS</title>
+    <title>EngStudy - Translate</title>
     <link rel="stylesheet" href="../css/Translate.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
     <div class="container">
+        <!-- HEADER -->
         <div class="header">
             <div class="sub-header">
-                <div class="name-centre">
-                    <H1>The Boy IELTS</H1>
-                </div>
+                <div class="name-centre"><h1>EngStudy</h1></div>
                 <div class="container-item">
-                    <div class="clock">
-
-                    </div>
-                    <div class="avatar">
-                        
-                    </div>
+                    <div class="clock"></div>
+                    <div class="avatar"></div>
                     <div class="icon">
                         <i id="extension-icon" class="fa-solid fa-ellipsis"></i>
                         <ul class="list">
-                            <li><a href="">profile</a></li>
-                            <li><a href="">Change information</a></li>
+                            <li><a href="">Profile</a></li>
+                            <li><a href="">Change Information</a></li>
                             <li><a href="">Logout</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container-content">
-            <div class="sub-content">
-                <div class="name-feature">Translate</div>
-                <div class="submit">
-                    <button>Submit</button>
-                </div>
-            </div>
-            <div class="main-content">
-                <div class="page">
-                     <p>The UN has demanded that Israel’s investigations into unlawful killings in Gaza, including its “double tap” bombing of Nasser hospital which killed 20 people, including five journalists, yield results and ensure accountability.
 
-“There needs to be justice,” Thameen Al-Kheetan, spokesperson for the UN’s human rights office, told reporters on Tuesday in Geneva. He added that the number of journalists killed in Gaza raised many questions about the targeting of media workers.</p>
-                </div>
-                <div class="page">
-                    <p>Liên Hợp Quốc đã yêu cầu các cuộc điều tra của Israel về các vụ giết người trái pháp luật ở Gaza, bao gồm vụ đánh bom "double tap" vào bệnh viện Nasser khiến 20 người thiệt mạng, trong đó có năm nhà báo, phải đưa ra kết quả và đảm bảo trách nhiệm giải trình. "Cần phải có công lý", Thameen Al-Kheetan, phát ngôn viên của Văn phòng Nhân quyền Liên Hợp Quốc, phát biểu với các phóng viên hôm thứ Ba tại Geneva. Ông nói thêm rằng số lượng nhà báo bị giết ở Gaza đã đặt ra nhiều câu hỏi về việc nhắm mục tiêu vào các nhân viên truyền thông.</p>
-                </div>
+        <div class="container-content">
+
+            <!-- TOP BAR MỚI – CÓ THANH 1-50 GIỐNG LISTENING -->
+           <div class="top-bar">
+    <div class="name-feature">Translate</div>
+
+    <!-- BỌC CẢ 2 THẰNG NÀY VÀO MỘT NHÓM BÊN PHẢI -->
+    <div class="right-group">
+        <div class="sentence-bar">
+            <div class="list-vocabulary">
+                <button class="icon-left"><i class="fa-solid fa-arrow-left"></i></button>
+                <!-- JS sẽ thêm số 1-50 vào đây -->
+                <button class="icon-right"><i class="fa-solid fa-arrow-right"></i></button>
             </div>
-            
+        </div>
+
+        <div class="submit">
+            <button>Submit</button>
         </div>
     </div>
+</div>
+
+            <!-- MAIN CONTENT: 2 CARD DỊCH -->
+            <div class="main-content">
+                <!-- ENGLISH -->
+                <div class="translation-card english-card">
+                    <div class="card-header">
+                        <div class="lang-info"><i class="fas fa-globe-americas"></i><span>English</span></div>
+                        <div class="status-badge active"><i class="fas fa-play-circle"></i> Source</div>
+                    </div>
+                    <div class="card-content english-text">
+                        <!-- Nội dung tiếng Anh sẽ được JS chèn vào đây -->
+                    </div>
+                </div>
+
+                <!-- VIETNAMESE -->
+                <div class="translation-card vietnamese-card">
+                    <div class="card-header">
+                        <div class="lang-info"><i class="fas fa-globe-asia"></i><span>Tiếng Việt</span></div>
+                        <div class="status-badge"><i class="fas fa-edit"></i> Your Translation</div>
+                    </div>
+                    <div class="card-content vietnamese-text" contenteditable="true" spellcheck="false" placeholder="Nhập bản dịch của bạn ở đây...">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script src="../js/clock.js"></script>
+    <script src="../js/avatar.js"></script>
+    <script src="../js/dropdown.js"></script>
+    <script src="../js/translate1-50.js"></script> <!-- File JS mới bên dưới -->
 </body>
 </html>
