@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EngStudy</title>
+    <link rel="stylesheet" href="../css/Listening.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="sub-header">
+                <div class="name-centre"><h1>EngStudy</h1></div>
+                <div class="container-item">
+                    <div class="clock"></div>
+                    <div class="avatar"></div>
+                    <div class="icon">
+                        <i id="extension-icon" class="fa-solid fa-ellipsis"></i>
+                        <ul class="list">
+                            <li><a href="">Profile</a></li>
+                            <li><a href="">Change Information</a></li>
+                            <li><a href="">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container-content">
+            <!-- TOP BAR -->
+            <div class="top-bar">
+                <div class="name-feature">Listening</div>
+                <div class="sentence-bar">
+                    <div class="list-vocabulary">
+                        <button class="icon-left"><i class="fa-solid fa-arrow-left"></i></button>
+                        <!-- Các nút số sẽ được JS thêm vào đây -->
+                        <button class="icon-right"><i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- MAIN CONTENT -->
+            <div class="main-content">
+                <!-- LEFT -->
+                <div class="left">
+                    <audio class="audio" controls></audio>
+                    <div class="answers">
+                        <button data-choice="A"><div class="index"><p>A</p></div><p class="text"></p></button>
+                        <button data-choice="B"><div class="index"><p>B</p></div><p class="text"></p></button>
+                        <button data-choice="C"><div class="index"><p>C</p></div><p class="text"></p></button>
+                        <button data-choice="D"><div class="index"><p>D</p></div><p class="text"></p></button>
+                    </div>
+                </div>
+                
+                <!-- RIGHT -->
+                <div class="right">
+                    <div class="transcript-header">
+                        <h2 class="transcript-title">TRANSCRIPT</h2>
+                        <button class="transcript-btn">Show Answer</button>
+                    </div>
+                    <div class="transcript-content">
+                        <p class="transcript-text">Click "Show Answer" để xem transcript và đáp án.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const level = params.get("level");
+
+    if (level) {
+        document.querySelector(".name-feature").textContent = "Listening - " + level;
+    }
+</script>
+
+    <!-- Tách riêng file JS -->
+   <script src="../js/clock.js"></script>
+    <script src="../js/avatar.js"></script>
+    <script src="../js/dropdown.js"></script>
+
+   
+    <script src="../js/listening.js"></script>   <!-- ví dụ trang Listening -->
+</body>
+</html>
