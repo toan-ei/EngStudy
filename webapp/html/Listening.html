@@ -3,113 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listening Practice | EngStudy</title>
+    <title>EngStudy</title>
     <link rel="stylesheet" href="../css/Listening.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    
 </head>
 <body>
-    <div class="tbi-wrapper">
-        <!-- Header (giống hệt trang trước) -->
-        <header class="tbi-header">
-            <div class="tbi-header-inner">
-                <h1 class="tbi-logo">EngStudy</h1>
-                <div class="tbi-header-right">
-                    <div class="tbi-clock" id="tbi-clock">
-                        <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
-                    </div>
-                    <div class="tbi-avatar">
-                        <img src="../images/avatar-placeholder.png" alt="Avatar">
-                    </div>
-                    <div class="tbi-dropdown">
-                        <button class="tbi-dropdown-toggle"><i class="fa-solid fa-ellipsis"></i></button>
-                        <ul class="tbi-dropdown-menu">
-                            <li><a href="#">Profile</a></li>
-                            <li><a href="#">Change information</a></li>
-                            <li><a href="#">Logout</a></li>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="sub-header">
+                <div class="name-centre"><h1>EngStudy</h1></div>
+                <div class="container-item">
+                    <div class="clock"></div>
+                    <div class="avatar"></div>
+                    <div class="icon">
+                        <i id="extension-icon" class="fa-solid fa-ellipsis"></i>
+                        <ul class="list">
+                            <li><a href="">Profile</a></li>
+                            <li><a href="">Change Information</a></li>
+                            <li><a href="">Logout</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
-        </header>
-
-        <!-- Main -->
-        <main class="tbi-main tbi-listening">
-            <!-- Breadcrumb + Nút Back đẹp nhất -->
-            <div class="tbi-breadcrumb">
-                <button class="tbi-back-btn" onclick="history.back()">
-                    <i class="fa-solid fa-arrow-left"></i> Quay lại
-                </button>
-                <div class="tbi-breadcrumb-trail">
-                    <a href="home.html">Trang chủ</a>
-                    <span>></span>
-                    <a href="ListeningChooseTopic.html">Listening Practice</a>
-                    <span>></span>
-                    <span class="current">Bài tập nghe</span>
-                </div>
-            </div>
-
-            <h2 class="tbi-page-title">Listening Practice</h2>
-
-            <div class="tbi-question-area">
-                <!-- Cột trái: Audio + Đáp án -->
-                <div class="tbi-left">
-                    <audio controls class="tbi-audio">
-                        <source src="../audio/sample.mp3" type="audio/mpeg">
-                        Trình duyệt không hỗ trợ audio.
-                    </audio>
-
-                    <div class="tbi-answers">
-                        <!-- Ví dụ 4 đáp án -->
-                        <button class="tbi-answer-btn" data-choice="A">
-                            <span class="tbi-choice">A</span>
-                            <span class="tbi-text">She usually goes to bed at 10 p.m.</span>
-                        </button>
-                        <button class="tbi-answer-btn" data-choice="B">
-                            <span class="tbi-choice">B</span>
-                            <span class="tbi-text">She prefers watching movies at night.</span>
-                        </button>
-                        <button class="tbi-answer-btn" data-choice="C">
-                            <span class="tbi-choice">C</span>
-                            <span class="tbi-text">She sometimes stays up until midnight.</span>
-                        </button>
-                        <button class="tbi-answer-btn" data-choice="D">
-                            <span class="tbi-choice">D</span>
-                            <span class="tbi-text">She goes to bed early on weekdays.</span>
-                        </button>
+        </div>
+        
+        <div class="container-content">
+            <!-- TOP BAR -->
+            <div class="top-bar">
+                <div class="name-feature">Listening</div>
+                <div class="sentence-bar">
+                    <div class="list-vocabulary">
+                        <button class="icon-left"><i class="fa-solid fa-arrow-left"></i></button>
+                        <!-- Các nút số sẽ được JS thêm vào đây -->
+                        <button class="icon-right"><i class="fa-solid fa-arrow-right"></i></button>
                     </div>
                 </div>
-
-                <!-- Cột phải: Có thể để hình ảnh, transcript, hoặc để trống -->
-                <div class="tbi-right">
-                    <!-- <img src="../images/listening-illustration.svg" alt="Listening"> -->
-                </div>
             </div>
-        </main>
-
-        <!-- Footer (giống hệt trang trước) -->
-        <footer class="tbi-footer">
-            <div class="tbi-footer-inner">
-                <div class="tbi-footer-col">
-                    <h3>EngStudy</h3>
-                    <p>Luyện tập Tiếng Anh hiệu quả cùng tài liệu & bài học chất lượng cao.</p>
+            
+            <!-- MAIN CONTENT -->
+            <div class="main-content">
+                <!-- LEFT -->
+                <div class="left">
+                    <audio class="audio" controls></audio>
+                    <div class="answers">
+                        <button data-choice="A"><div class="index"><p>A</p></div><p class="text"></p></button>
+                        <button data-choice="B"><div class="index"><p>B</p></div><p class="text"></p></button>
+                        <button data-choice="C"><div class="index"><p>C</p></div><p class="text"></p></button>
+                        <button data-choice="D"><div class="index"><p>D</p></div><p class="text"></p></button>
+                    </div>
                 </div>
-                <div class="tbi-footer-col">
-                    <h4>Liên kết nhanh</h4>
-                    <ul>
-                        <li><a href="#">Trang chủ</a></li>
-                        <li><a href="#">Khóa học</a></li>
-                        <li><a href="#">Tài liệu</a></li>
-                        <li><a href="#">Liên hệ</a></li>
-                    </ul>
-                </div>
-                <div class="tbi-footer-col">
-                    <h4>Liên hệ</h4>
-                    <p>Email: contact@engstudy4m.com</p>
-                    <p>Hotline: 0123 456 789</p>
-                    <div class="tbi-social">
-                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                
+                <!-- RIGHT -->
+                <div class="right">
+                    <div class="transcript-header">
+                        <h2 class="transcript-title">TRANSCRIPT</h2>
+                        <button class="transcript-btn">Show Answer</button>
+                    </div>
+                    <div class="transcript-content">
+                        <p class="transcript-text">Click "Show Answer" để xem transcript và đáp án.</p>
                     </div>
                 </div>
             </div>
@@ -118,27 +72,21 @@
             </div>
         </footer>
     </div>
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const level = params.get("level");
 
-    <script src="../js/clock.js"></script>
-    <script>
-        // Dropdown (giống trang trước)
-        document.querySelector('.tbi-dropdown-toggle').addEventListener('click', e => {
-            e.stopPropagation();
-            document.querySelector('.tbi-dropdown').classList.toggle('active');
-        });
-        document.addEventListener('click', () => {
-            document.querySelector('.tbi-dropdown').classList.remove('active');
-        });
+    if (level) {
+        document.querySelector(".name-feature").textContent = "Listening - " + level;
+    }
+</script>
 
-        // Chọn đáp án (hiệu ứng đẹp)
-        document.querySelectorAll('.tbi-answer-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                // Bỏ chọn cũ
-                document.querySelectorAll('.tbi-answer-btn').forEach(b => b.classList.remove('selected', 'correct', 'wrong'));
-                // Chọn cái mới
-                this.classList.add('selected');
-            });
-        });
-    </script>
+    <!-- Tách riêng file JS -->
+   <script src="../js/clock.js"></script>
+    <script src="../js/avatar.js"></script>
+    <script src="../js/dropdown.js"></script>
+
+   
+    <script src="../js/listening.js"></script>   <!-- ví dụ trang Listening -->
 </body>
 </html>

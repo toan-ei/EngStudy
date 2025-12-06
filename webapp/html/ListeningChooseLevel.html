@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EngStudy</title>
-    <link rel="stylesheet" href="../css/TranslateChooseLevel.css">
+    <link rel="stylesheet" href="../css/ListeningChooseLevel.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
@@ -16,7 +16,7 @@
                 </div>
                 <div class="container-item">
                     <div class="clock">
-
+                        <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
                     </div>
                     <div class="avatar">
                         
@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class="container-content">
-            <div class="name-feature">Translate</div>
+            <div class="name-feature">Listening</div>
             <div class="container-level">
                 <button id="A1">
                     <p>A1</p>
@@ -92,8 +92,21 @@
             <p>&copy; 2025 EngStudy. All rights reserved.</p>
         </div>
     </div>
-    <script>
-       
+    
+     <script>
+        // Clock functionality
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', {
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            document.querySelector('.clock').textContent = timeString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
 
         // Dropdown menu
         document.getElementById('extension-icon').addEventListener('click', function(e) {
@@ -115,8 +128,22 @@
                 console.log('Selected:', this.querySelector('h3').textContent);
             });
         });
+
+
+         // Điều hướng khi bấm level
+    document.getElementById("A1").onclick = () => window.location.href = "Listening.html?level=A1";
+    document.getElementById("A2").onclick = () => window.location.href = "Listening.html?level=A2";
+    document.getElementById("B1").onclick = () => window.location.href = "Listening.html?level=B1";
+    document.getElementById("B2").onclick = () => window.location.href = "Listening.html?level=B2";
+    document.getElementById("C1").onclick = () => window.location.href = "Listening.html?level=C1";
+    document.getElementById("C2").onclick = () => window.location.href = "Listening.html?level=C2";
     </script>
-    <script src="../js/clock.js"></script>
-        <script src="../js/translateLevel.js"></script>
 </body>
+ <!-- Tách riêng file JS -->
+   <script src="../js/clock.js"></script>
+    <script src="../js/avatar.js"></script>
+    <script src="../js/dropdown.js"></script>
+
+    <!-- JS riêng của trang (nếu có) -->
+    <script src="../js/listening.js"></script>   <!-- ví dụ trang Listening -->
 </html>
