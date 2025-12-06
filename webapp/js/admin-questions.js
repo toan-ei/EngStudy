@@ -48,22 +48,24 @@ async function loadQuestions(exerciseId = '') {
 
     questions.forEach(q => {
       const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td data-label="ID"><strong>#${q.questionId}</strong></td>
-        <td data-label="Câu hỏi">${q.questionText}</td>
-        <td data-label="Bài tập"><span class="topic-badge">${exercisesMap[q.exerciseId] || 'N/A'}</span></td>
-        <td data-label="Đáp án"><span class="correct-badge">${q.correctOption}</span></td>
-        <td data-label="Điểm">${q.score || 1}</td>
-        <td data-label="Thứ tự">${q.orderIndex ?? '-'}</td>
-        <td data-label="Hành động">
-          <button class="btn btn-primary" onclick="openEdit(${q.questionId})" style="padding:8px 16px;font-size:0.9rem;">
-            Sửa
-          </button>
-          <button class="btn btn-danger" onclick="deleteQuestion(${q.questionId})">
-            Xóa
-          </button>
-        </td>
-      `;
+        tr.innerHTML = `
+          <td data-label="ID"><strong>#${q.questionId}</strong></td>
+          <td data-label="Câu hỏi">${q.questionText}</td>
+          <td data-label="Bài tập"><span class="topic-badge">${exercisesMap[q.exerciseId] || 'N/A'}</span></td>
+          <td data-label="Đáp án"><span class="correct-badge">${q.correctOption}</span></td>
+          <td data-label="Điểm">${q.score || 1}</td>
+          <td data-label="Thứ tự">${q.orderIndex ?? '-'}</td>
+          <td data-label="Hành động">
+            <div class="action-buttons">
+              <button class="action-btn edit-btn" onclick="openEdit(${q.questionId})" title="Sửa">
+                <i class="fas fa-eye"></i>
+              </button>
+              <button class="action-btn delete-btn" onclick="deleteQuestion(${q.questionId})" title="Xóa">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+          </td>
+        `;
       els.tbody.appendChild(tr);
     });
   } catch (err) {

@@ -116,33 +116,38 @@ tr:hover { background: var(--card-hover); }
 }
 
 /* Modal */
-.modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.8);
-  backdrop-filter: blur(10px);
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
+.modal { 
+  display: none; 
+  position: fixed; 
+  inset: 0; 
+  background: rgba(0,0,0,0.85); 
+  backdrop-filter: blur(12px); 
+  align-items: center; 
+  justify-content: center; 
+  z-index: 1000; 
+  padding: 20px; /* thêm padding để modal không sát mép trên mobile */
 }
 .modal.active { display: flex; }
 
 .modal-content {
+  position: relative;
   background: #1e1b4b;
-  border-radius: 24px;
-  padding: 36px;
+  border-radius: 28px;
+  padding: 28px 32px;           /* giảm padding trên/dưới một chút */
   width: 90%;
-  max-width: 620px;
+  max-width: 580px;             /* thu nhỏ thêm tí nữa cho gọn */
+  max-height: 90vh;             /* quan trọng: giới hạn chiều cao tối đa 90% màn hình */
+  overflow-y: auto;             /* nếu nội dung vượt quá thì cho scroll */
   border: 1px solid var(--border);
-  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.6);
 }
 
-.modal-header h2 {
-  font-size: 1.9rem;
-  background: linear-gradient(90deg, #c4b5fd, #fff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Header modal + nút đóng ở góc phải */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
 }
 
 .close-modal {

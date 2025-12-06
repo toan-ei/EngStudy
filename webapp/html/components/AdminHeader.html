@@ -1,11 +1,12 @@
-<aside class="sidebar" id="sidebar">
-  <div class="sidebar-header">
+<!-- TOP HEADER NAVIGATION -->
+<header class="admin-header-nav" id="admin-header">
+  <div class="header-left">
     <h2>EngStudy <span>Admin</span></h2>
   </div>
-  
-  <nav class="sidebar-nav">
+
+  <nav class="header-nav">
     <ul>
-      <li><a href="AdminIndex.html" class="nav-link active"><i class="fas fa-home"></i><span>Dashboard</span></a></li>
+      <li><a href="AdminIndex.html" class="nav-link"><i class="fas fa-home"></i><span>Dashboard</span></a></li>
       <li><a href="AdminFiles.html" class="nav-link"><i class="fas fa-folder-open"></i><span>Quản lý File Âm thanh</span></a></li>
       <li><a href="AdminListeningTopics.html" class="nav-link"><i class="fas fa-th-large"></i><span>Chủ đề Bài nghe</span></a></li>
       <li><a href="AdminListeningExercise.html" class="nav-link"><i class="fas fa-headphones"></i><span>Bài tập Nghe</span></a></li>
@@ -13,9 +14,10 @@
     </ul>
   </nav>
 
-  <div class="sidebar-footer"><p>© 2025 EngStudy</p></div>
-</aside>
+  <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+    <i class="fas fa-bars"></i>
+  </button>
+</header>
 
-<button class="mobile-menu-toggle" id="mobile-menu-toggle">
-  <i class="fas fa-bars"></i>
-</button>
+<!-- Overlay cho mobile -->
+<div class="header-overlay" id="header-overlay"></div>
