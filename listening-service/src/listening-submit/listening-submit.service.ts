@@ -22,9 +22,9 @@ export class ListeningSubmitService {
   async submit(dto: SubmitListeningDto) {
     const { exerciseId, userId, answers } = dto;
 
-    // 1. Lấy toàn bộ câu hỏi của bài
+    // 1. Lấy toàn bộ câu hỏi
     const questions = await this.questionRepo.find({
-      where: { exercise: { exerciseId }, isDeleted: false },
+      where: { exerciseId, isDeleted: false },
     });
 
     if (!questions.length) {
@@ -33,10 +33,11 @@ export class ListeningSubmitService {
 
     const questionIds = questions.map(q => q.questionId);
 
-    // 2. Lấy đáp án đúng của tất cả câu hỏi (dựa trên `correctOption` A/B/C/D)
+    // 2. Map đáp án đúng (correctOption)
     const correctMap = new Map<number, 'A' | 'B' | 'C' | 'D'>();
+
     questions.forEach(q => {
-      correctMap.set(q.questionId, q.correctOption);
+      correctMap.set(q.questionId, q.correctOption); // <-- đã có correctOption
     });
 
     // 3. Tạo kết quả tổng
@@ -49,13 +50,16 @@ export class ListeningSubmitService {
     });
     await this.resultRepo.save(result);
 
-    // 4. Tạo entity từng câu trả lời
+    // 4. Tạo câu trả lời
     let totalScore = 0;
     const answerEntities: UserListeningAnswer[] = [];
 
     for (const a of answers) {
       const correctChar = correctMap.get(a.questionId);
-      const isCorrect = a.selectedOption != null && a.selectedOption === correctChar;
+
+      const isCorrect =
+        a.selectedOption != null && a.selectedOption === correctChar;
+
       if (isCorrect) totalScore += 1;
 
       const answerEntity = this.answerRepo.create({
@@ -64,12 +68,13 @@ export class ListeningSubmitService {
         selectedOption: a.selectedOption ?? null,
         isCorrect,
       });
+
       answerEntities.push(answerEntity);
     }
 
     await this.answerRepo.save(answerEntities);
 
-    // 5. Update kết quả cuối
+    // 5. Cập nhật kết quả
     result.totalScore = totalScore;
     result.percent = (totalScore / questions.length) * 100;
     await this.resultRepo.save(result);
@@ -79,6 +84,9 @@ export class ListeningSubmitService {
       totalScore,
       maxScore: questions.length,
       percent: result.percent,
+      // include mapping of questionId -> correctOption so client can highlight answers
+      correctAnswers: Object.fromEntries(Array.from(correctMap.entries()).map(([k, v]) => [k, v])),
     };
   }
+
 }
