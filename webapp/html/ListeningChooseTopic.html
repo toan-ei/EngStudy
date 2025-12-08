@@ -39,11 +39,23 @@
         <main class="tbi-main">
             <div class="tbi-title">
                 <h2>Listening Practice</h2>
+                <p>Chọn chủ đề bạn muốn luyện tập</p>
+
+                <div class="tbi-practice-info">
+                    <div class="tbi-info-icon">
+                        <i class="fa-solid fa-circle-info"></i>
+                    </div>
+                    <div class="tbi-info-text">
+                        <strong>Mỗi lần luyện tập gồm 10 câu hỏi được chọn ngẫu nhiên</strong> theo tỷ lệ:
+                        <span class="tbi-level-highlight beginner">5 câu A1, 2 câu A2</span> (dễ),
+                        <span class="tbi-level-highlight intermediate">2 câu B1</span> (trung bình),
+                        <span class="tbi-level-highlight advanced">1 câu B2</span> (khó).
+                    </div>
+                </div>
             </div>
 
-            <!-- Container đổ dữ liệu -->
+            <!-- Container để đổ dữ liệu topics động -->
             <div class="tbi-levels" id="topic-container"></div>
-
         </main>
 
         <!-- Footer -->
@@ -51,7 +63,7 @@
             <div class="tbi-footer-inner">
                 <div class="tbi-footer-col">
                     <h3>EngStudy</h3>
-                    <p>Luyện tập Tiếng Anh hiệu quả cùng tài liệu & bài học chất lượng cao.</p>
+                    <p>Luyện thi IELTS hiệu quả cùng tài liệu & bài học chất lượng cao.</p>
                 </div>
                 <div class="tbi-footer-col">
                     <h4>Liên kết nhanh</h4>
@@ -74,17 +86,19 @@
                 </div>
             </div>
             <div class="tbi-footer-bottom">
-                <p>&copy; 2025 Eng Study. All rights reserved.</p>
+                <p>&copy; 2025 EngStudy. All rights reserved.</p>
             </div>
         </footer>
     </div>
 
-    <!-- Clock -->
+    <!-- Các file JS chung -->
     <script src="../js/clock.js"></script>
+    <script src="../js/avatar.js"></script>
 
-    <!-- Dropdown -->
+    <!-- Dropdown menu -->
     <script>
-        document.querySelector('.tbi-dropdown-toggle').addEventListener('click', function () {
+        document.querySelector('.tbi-dropdown-toggle').addEventListener('click', function (e) {
+            e.stopPropagation();
             this.parentElement.classList.toggle('active');
         });
 
@@ -95,7 +109,7 @@
         });
     </script>
 
-    <!-- Script load topics -->
+    <!-- Load topics từ file JS riêng -->
     <script src="../js/listening-topics.js"></script>
 </body>
 </html>
