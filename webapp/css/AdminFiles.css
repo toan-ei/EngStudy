@@ -195,3 +195,28 @@ tr:hover { background: var(--card-hover); }
   .preview-img { width: 100%; height: 200px; border-radius: 16px; }
 }
 
+#submit-btn {
+  position: relative;
+  min-width: 140px; /* tránh nút bị co lại khi đổi nội dung */
+}
+
+#submit-btn .submit-icon,
+#submit-btn .submit-text,
+#submit-btn .submit-spinner {
+  display: inline-block;
+}
+
+#submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Khi đang loading thì ẩn icon + text cũ */
+#submit-btn.loading .submit-icon,
+#submit-btn.loading .submit-text {
+  display: none;
+}
+
+#submit-btn.loading .submit-spinner {
+  display: inline-block;
+}

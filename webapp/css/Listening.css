@@ -252,7 +252,7 @@
 }
 
 .name-feature {
-    width: 280px;
+    width: 600px;
     height: 65px;
     background: linear-gradient(135deg, #12448A 0%, #0FA6A6 100%);
     color: white;
@@ -540,4 +540,51 @@ ul li a {
 
 ul li a:hover {
     color: #0FA6A6;
+}
+
+/* ====================== SUBMIT BUTTON ====================== */
+.submit-btn {
+    background: linear-gradient(135deg, #12448A, #0FA6A6);
+    color: white;
+    border: none;
+    padding: 16px 40px;
+    border-radius: 16px;
+    font-size: 18px;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(15, 166, 166, 0.35);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.submit-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(15, 166, 166, 0.45);
+}
+
+.submit-btn:disabled {
+    background: #95a5a6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Hiệu ứng khi đã nộp bài */
+.answers button.correct {
+    background: linear-gradient(135deg, #27ae60, #2ecc71) !important;
+    border-color: #27ae60 !important;
+}
+
+.answers button.wrong {
+    background: linear-gradient(135deg, #e74c3c, #c0392b) !important;
+    border-color: #e74c3c !important;
+}
+
+.answers button.correct .index,
+.answers button.wrong .index {
+    background: white !important;
+    color: #2c3e50 !important;
 }

@@ -52,9 +52,9 @@ async function loadQuestions(exerciseId = '') {
           <td data-label="ID"><strong>#${q.questionId}</strong></td>
           <td data-label="Câu hỏi">${q.questionText}</td>
           <td data-label="Bài tập"><span class="topic-badge">${exercisesMap[q.exerciseId] || 'N/A'}</span></td>
+          <td data-label="File ID">${q.fileId}</td>
           <td data-label="Đáp án"><span class="correct-badge">${q.correctOption}</span></td>
           <td data-label="Điểm">${q.score || 1}</td>
-          <td data-label="Thứ tự">${q.orderIndex ?? '-'}</td>
           <td data-label="Hành động">
             <div class="action-buttons">
               <button class="action-btn edit-btn" onclick="openEdit(${q.questionId})" title="Sửa">
@@ -89,7 +89,9 @@ document.getElementById('open-modal').onclick = () => {
 // Mở modal sửa
 window.openEdit = async (id) => {
   try {
-    const res = await fetch(`${API_QUESTIONS}/${id}`);
+    const res = await fetch(`${API_QUESTIONS}/${id}`, {
+        cache: "no-store"
+    });
     const q = await res.json();
 
     document.getElementById('question-id').value = q.questionId;
@@ -100,9 +102,10 @@ window.openEdit = async (id) => {
     document.getElementById('optionC').value = q.optionC;
     document.getElementById('optionD').value = q.optionD;
     document.querySelector(`input[name="correct"][value="${q.correctOption}"]`).checked = true;
+    document.getElementById('file-id').value = q.fileId;
+    document.getElementById('description').value = q.description || '';
     document.getElementById('score').value = q.score || '';
     document.getElementById('order-index').value = q.orderIndex || '';
-
     els.modalTitle.textContent = 'Chỉnh sửa câu hỏi';
     els.submitText.textContent = 'Cập nhật';
     els.modal.classList.add('active');
@@ -131,6 +134,8 @@ els.form.onsubmit = async (e) => {
     optionC: document.getElementById('optionC').value.trim(),
     optionD: document.getElementById('optionD').value.trim(),
     correctOption: correct,
+    fileId: parseInt(document.getElementById('file-id').value),
+    description: document.getElementById('description').value.trim(),
     score: document.getElementById('score').value ? parseInt(document.getElementById('score').value) : undefined,
     orderIndex: document.getElementById('order-index').value ? parseInt(document.getElementById('order-index').value) : undefined,
   };

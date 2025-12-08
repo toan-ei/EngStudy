@@ -94,6 +94,7 @@ els.form.onsubmit = async (e) => {
 
   const id = els.form.getAttribute('data-id');
   const formData = new FormData();
+  const submitBtn = document.getElementById('submit-btn');
 
   if (els.audioInput.files[0]) formData.append('audio', els.audioInput.files[0]);
   if (els.imageInput.files[0]) formData.append('image', els.imageInput.files[0]);
@@ -103,6 +104,9 @@ els.form.onsubmit = async (e) => {
     alert('Vui lòng chọn ít nhất 1 file');
     return;
   }
+
+  submitBtn.disabled = true;
+  submitBtn.classList.add('loading');
 
   try {
     const method = id ? 'PUT' : 'POST';
@@ -124,6 +128,9 @@ els.form.onsubmit = async (e) => {
   } catch (err) {
     alert('Lỗi kết nối!');
     console.error(err);
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.classList.remove('loading');
   }
 };
 

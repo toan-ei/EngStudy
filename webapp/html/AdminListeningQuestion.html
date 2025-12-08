@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/AdminListeningQuestions.css">
-  <link rel="stylesheet" href="/css/AdminLayout.css">
+  <link rel="stylesheet" href="../css/AdminLayout.css">
 </head>
 <body>
 
@@ -36,9 +36,9 @@
               <th>ID</th>
               <th>Câu hỏi</th>
               <th>Bài tập</th>
+              <th>File ID</th>
               <th>Đáp án đúng</th>
               <th>Điểm</th>
-              <th>Thứ tự</th>
               <th>Hành động</th>
             </tr>
           </thead>
@@ -99,6 +99,17 @@
             <label><input type="radio" name="correct" value="B"> B</label>
             <label><input type="radio" name="correct" value="C"> C</label>
             <label><input type="radio" name="correct" value="D"> D</label>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="file-id">File ID *</label>
+            <input type="number" id="file-id" required placeholder="Nhập ID file âm thanh"/>
+          </div>
+          <div class="form-group">
+            <label for="description">Mô tả câu hỏi *</label>
+            <input type="text" id="description" required placeholder="Nhập mô tả câu hỏi của bạn"/>
           </div>
         </div>
 
