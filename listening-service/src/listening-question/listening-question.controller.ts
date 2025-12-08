@@ -4,6 +4,7 @@ import { ApiTags, ApiOperation, ApiQuery } from '@nestjs/swagger';
 import { CreateListeningQuestionDto } from './dto/create-question.dto';
 import { UpdateListeningQuestionDto } from './dto/update-question.dto';
 import { ListeningQuestionResponseDto } from './dto/response-question.dto';
+import { ListeningQuestionForStudyDto } from './dto/get-10-questions-topicId-response';
 
 @ApiTags('Listening Questions')
 @Controller('listening/questions')
@@ -53,4 +54,13 @@ export class ListeningQuestionController {
     await this.service.softDelete(id);
     return { message: 'Deleted' };
   }
+
+  @Get('study/:topicId')
+  @ApiOperation({ summary: 'Get 10 random questions for study (unique by fileId)' })
+  async getQuestionsByTopic(
+    @Param('topicId', ParseIntPipe) topicId: number,
+  ): Promise<ListeningQuestionForStudyDto[]> {
+    return this.service.get10QuestionsByTopic(topicId);
+  }
+
 }
