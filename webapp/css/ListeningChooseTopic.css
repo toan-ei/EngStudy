@@ -1,79 +1,82 @@
-/* ===== NAMESPACE: .tbi- (The Boy IELTS) ===== */
-.tbi-wrapper * {
+/* ====================== LISTENING CHOOSE TOPIC CSS ====================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Roboto:wght@400;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
-.tbi-wrapper {
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', 'Roboto', sans-serif;
-    background: linear-gradient(135deg, #0fb8b8 0%, #067070 100%);
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(120deg, #0FA6A6 0%, #d9faff 100%);
     min-height: 100vh;
-    color: #fff;
+    color: #2c3e50;
 }
 
-/* Header – Nâng cấp độ nổi + tương phản */
+/* ====================== WRAPPER ====================== */
+.tbi-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ====================== HEADER ====================== */
 .tbi-header {
-    background: rgba(255, 255, 255, 0.98);  /* Trắng mạnh hơn */
-    backdrop-filter: blur(14px);
-    padding: 18px 40px;
-    box-shadow: 0 6px 30px rgba(0,0,0,0.12);
+    width: 100%;
+    padding: 20px 0;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #dde8ea;
     position: sticky;
     top: 0;
-    z-index: 1000;
-    border-bottom: 1px solid rgba(0,0,0,0.08);
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(15, 166, 166, 0.15);
 }
 
 .tbi-header-inner {
     max-width: 1400px;
     margin: 0 auto;
+    padding: 0 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .tbi-logo {
-    margin: 0;
-    font-size: 3rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 38px;
     font-weight: 900;
-    background: linear-gradient(90deg, #0fa6a6, #44e0e0);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    letter-spacing: -1px;
+    color: #0FA6A6;
 }
 
 .tbi-header-right {
     display: flex;
     align-items: center;
-    gap: 22px;
+    gap: 25px;
 }
 
-/* Đồng hồ rõ hơn */
 .tbi-clock {
-    background: linear-gradient(135deg, #05494f, #0b7b83);
-    padding: 12px 22px;
-    border-radius: 50px;
-    font-family: 'Courier New', monospace;
+    width: 180px;
+    height: 44px;
+    background: linear-gradient(90deg, #053238, #3da8be);
+    border-radius: 12px;
+    color: #fff;
+    font-family: monospace;
     font-size: 1.35rem;
-    font-weight: bold;
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
-    min-width: 180px;
-    text-align: center;
-}
-
-.tbi-avatar {
-    width: 54px;
-    height: 54px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 3px solid #0fa6a6;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
 }
 
 .tbi-avatar img {
-    width: 100%;
-    height: 100%;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
     object-fit: cover;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
 }
 
 .tbi-dropdown {
@@ -83,176 +86,358 @@
 .tbi-dropdown-toggle {
     background: none;
     border: none;
-    font-size: 2rem;
-    color: #0fa6a6;
+    font-size: 34px;
+    color: #0FA6A6;
     cursor: pointer;
     padding: 8px;
+    border-radius: 50%;
     transition: all 0.3s ease;
 }
 
 .tbi-dropdown-toggle:hover {
-    color: #065d5d;
-    transform: rotate(90deg);
+    background: rgba(15, 166, 166, 0.12);
+    transform: scale(1.15);
 }
 
 .tbi-dropdown-menu {
     position: absolute;
     right: 0;
-    top: 100%;
-    background: #ffffff;
-    min-width: 200px;
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 18px 45px rgba(0,0,0,0.22);
+    top: 60px;
+    min-width: 220px;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    border-radius: 18px;
+    border: 1.5px solid rgba(15, 166, 166, 0.2);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.35s ease;
+    z-index: 1000;
+    padding: 12px 0;
 }
 
 .tbi-dropdown.active .tbi-dropdown-menu {
     opacity: 1;
     visibility: visible;
-    transform: translateY(10px);
+    transform: translateY(0);
 }
 
-.tbi-dropdown-menu a {
-    display: block;
-    padding: 14px 20px;
-    color: #096060;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s;
+.tbi-dropdown-menu li {
+    padding: 14px 24px;
+    font-weight: 500;
+    font-size: 15px;
+    color: #2c3e50;
+    transition: all 0.25s ease;
+    cursor: pointer;
 }
 
-.tbi-dropdown-menu a:hover {
-    background: linear-gradient(135deg, #0fa6a6, #48cfcf);
-    color: white;
+.tbi-dropdown-menu li:hover {
+    background: linear-gradient(135deg, #e6f7ff, #f0fdfc);
+    color: #0FA6A6;
+    padding-left: 32px;
 }
 
-/* MAIN */
+/* ====================== MAIN ====================== */
 .tbi-main {
     flex: 1;
-    padding: 90px 40px;
+    padding: 50px 20px;
     max-width: 1400px;
     margin: 0 auto;
+    width: 100%;
+}
+
+.tbi-title {
     text-align: center;
+    margin-bottom: 50px;
 }
 
 .tbi-title h2 {
-    font-size: 3.6rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 42px;
     font-weight: 900;
-    margin-bottom: 60px;
-    background: linear-gradient(90deg, #ffffff, #e6ffff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+    color: #0FA6A6;
+    margin-bottom: 12px;
 }
 
+.tbi-title p {
+    font-size: 1.3rem;
+    color: #555;
+}
+
+/* ====================== TOPIC CARDS ====================== */
 .tbi-levels {
-    display: flex;
-    justify-content: center;
-    gap: 55px;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 40px;
+    justify-items: center;
+    justify-content: center;   
 }
 
 .tbi-level-card {
-    width: 280px;
-    height: 320px;
-    background: rgba(255, 255, 255, 0.28);
-    backdrop-filter: blur(16px);
-    border-radius: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.45);
+    width: 100%;
+    max-width: 280px;
+    height: 280px;
+    background: #ffffff;
+    border-radius: 32px;
+    box-shadow: 0 10px 30px rgba(15, 166, 166, 0.15);
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    gap: 26px;
+    align-items: center;
     cursor: pointer;
-    transition: all 0.4s ease;
-    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    position: relative;
+    border: 2px solid transparent;
 }
 
 .tbi-level-card:hover {
-    transform: translateY(-18px) scale(1.07);
-    background: rgba(255, 255, 255, 0.42);
-    box-shadow: 0 35px 85px rgba(0,0,0,0.4);
-    border: 1px solid rgba(255, 255, 255, 0.65);
+    transform: translateY(-15px) scale(1.05);
+    box-shadow: 0 25px 50px rgba(15, 166, 166, 0.3);
+    border: 2px solid #0FA6A6;
+    background: linear-gradient(135deg, #0FA6A6, #12448A);
+    color: white;
 }
 
 .tbi-card-icon {
-    font-size: 5.2rem;
-    filter: drop-shadow(0 6px 18px rgba(0,0,0,0.35));
+    font-size: 90px;
+    margin-bottom: 20px;
+    transition: transform 0.4s ease;
+}
+
+.tbi-level-card:hover .tbi-card-icon {
+    transform: scale(1.2);
 }
 
 .tbi-level-card p {
-    font-size: 1.55rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
     font-weight: 700;
-    margin: 0;
-    text-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    text-align: center;
+    padding: 0 20px;
 }
 
-/* FOOTER – nâng cấp mạnh để hài hòa với body */
+/* ====================== FOOTER ====================== */
 .tbi-footer {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(16px);
-    padding: 75px 40px 35px;
+    background: linear-gradient(to right, #0fa6a6 0%, #25bec9 80%, #a18a2b 100%);
+    color: #fff;
+    padding: 50px 20px 20px;
     margin-top: auto;
-    box-shadow: 0 -12px 35px rgba(0,0,0,0.15);
-    border-top: 1px solid rgba(255,255,255,0.25);
 }
 
 .tbi-footer-inner {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
-    gap: 40px;
     justify-content: space-between;
+    gap: 40px;
+}
+
+.tbi-footer-col {
+    flex: 1;
+    min-width: 220px;
 }
 
 .tbi-footer-col h3,
 .tbi-footer-col h4 {
-    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
     margin-bottom: 20px;
-    font-weight: 700;
-    text-shadow: 0 3px 12px rgba(0,0,0,0.3);
+    font-size: 1.4rem;
 }
 
-.tbi-footer-col a {
-    color: rgba(255,255,255,0.85);
+.tbi-footer-col ul {
+    list-style: none;
+}
+
+.tbi-footer-col ul li {
+    margin-bottom: 10px;
+}
+
+.tbi-footer-col ul li a {
+    color: #fff;
     text-decoration: none;
-    transition: 0.25s ease;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
 
-.tbi-footer-col a:hover {
-    color: #7ff7f7;
+.tbi-footer-col ul li a:hover {
+    color: #f1c40f;
+    padding-left: 10px;
+}
+
+.tbi-social {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
 }
 
 .tbi-social a {
-    font-size: 1.7rem;
-    margin-right: 18px;
-    color: white;
-    transition: 0.3s;
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: #fff;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.2);
 }
 
 .tbi-social a:hover {
-    color: #7ff7f7;
-    transform: translateY(-4px);
+    background: rgba(241, 196, 15, 0.3);
+    color: #f1c40f;
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 10px 25px rgba(241, 196, 15, 0.3);
 }
 
 .tbi-footer-bottom {
     text-align: center;
-    margin-top: 45px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255,255,255,0.25);
-    font-size: 0.95rem;
-    color: rgba(255,255,255,0.78);
+    padding-top: 30px;
+    border-top: 2px solid rgba(255,255,255,0.2);
+    margin-top: 40px;
+    font-size: 14px;
+    opacity: 0.9;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .tbi-logo { font-size: 2.4rem; }
-    .tbi-title h2 { font-size: 2.9rem; }
-    .tbi-level-card { width: 240px; height: 280px; }
+/* ====================== RESPONSIVE ====================== */
+@media (max-width: 992px) {
+    .tbi-levels {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 30px;
+    }
+    .tbi-level-card {
+        height: 250px;
+    }
+    .tbi-card-icon {
+        font-size: 80px;
+    }
 }
+
+@media (max-width: 768px) {
+    .tbi-title h2 {
+        font-size: 34px;
+    }
+    .tbi-header-inner {
+        padding: 0 15px;
+    }
+    .tbi-logo {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 576px) {
+    .tbi-levels {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    .tbi-level-card {
+        max-width: 300px;
+        margin: 0 auto;
+        height: 240px;
+    }
+    .tbi-card-icon {
+        font-size: 75px;
+    }
+    .tbi-title p {
+        font-size: 1.1rem;
+    }
+}
+
+/* ====================== PRACTICE INFO BOX ====================== */
+.tbi-practice-info {
+    max-width: 1150px;
+    margin: 40px auto 0;
+    padding: 20px 28px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(15, 166, 166, 0.15);
+    border: 2px solid rgba(15, 166, 166, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #2c3e50;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.tbi-practice-info:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(15, 166, 166, 0.22);
+    border-color: #0FA6A6;
+}
+
+.tbi-info-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #0FA6A6, #12b89d);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    box-shadow: 0 6px 15px rgba(15, 166, 166, 0.3);
+}
+
+.tbi-info-text {
+    flex: 1;
+}
+
+.tbi-info-text strong {
+    color: #0FA6A6;
+    font-weight: 700;
+}
+
+.tbi-level-highlight {
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 8px;
+    margin: 0 4px;
+    font-size: 0.95em;
+}
+
+.tbi-level-highlight.beginner {
+    background: #e6f7ff;
+    color: #0891b2;
+}
+
+.tbi-level-highlight.intermediate {
+    background: #fff4e6;
+    color: #d97706;
+}
+
+.tbi-level-highlight.advanced {
+    background: #ffe6e6;
+    color: #dc2626;
+}
+
+/* Responsive cho mobile */
+@media (max-width: 768px) {
+    .tbi-practice-info {
+        margin: 30px 20px 0;
+        padding: 18px 20px;
+        flex-direction: column;
+        text-align: center;
+        font-size: 1rem;
+    }
+    .tbi-info-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 20px;
+    }
+    .tbi-info-text {
+        text-align: left;
+    }
+}
+
+/* ====================== SCROLLBAR ====================== */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-thumb { background: rgba(61,220,222,.40); border-radius: 8px; }
+::-webkit-scrollbar-track { background: rgba(255,255,255,.07); }
