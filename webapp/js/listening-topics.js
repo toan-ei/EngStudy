@@ -24,8 +24,15 @@ async function loadTopics() {
             `;
 
             card.addEventListener("click", () => {
-                // Bạn có thể thay đổi tham số tùy theo nhu cầu (topicId, level, ...)
-                window.location.href = `Listening.html?topicId=${topic.topicId}`;
+
+                if (topic.topicId === 3) {
+                    // 👉 Topic hội thoại → sang trang hội thoại
+                    window.location.href = `ListeningConversation.html?topicId=${topic.topicId}`;
+                } else {
+                    // 👉 Các topic còn lại → sang trang tranh
+                    window.location.href = `ListeningPicture.html?topicId=${topic.topicId}`;
+                }
+
             });
 
             container.appendChild(card);

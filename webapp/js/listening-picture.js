@@ -6,6 +6,7 @@ let correctAnswers = {};               // mapping returned from server: { questi
 
 // DOM Elements
 const audio = document.querySelector('.audio');
+const titleEl = document.getElementById('question-title');
 const buttons = document.querySelectorAll('.answers button');
 const transcriptContent = document.querySelector('.transcript-content');
 const leftArrow = document.querySelector('.icon-left');
@@ -63,10 +64,14 @@ function loadQuestion(idx) {
         audio.innerHTML = '<p style="color:#e74c3c;">Không có audio</p>';
     }
 
-    // Hình ảnh minh họa
-    transcriptContent.innerHTML = q.imageUrl
-        ? `<img src="${q.imageUrl}" alt="Hình minh họa" style="max-width:100%;border-radius:16px;box-shadow:0 8px 25px rgba(0,0,0,.15);">`
-        : '<p style="color:#95a5a6;text-align:center;margin-top:40px;">Không có hình minh họa</p>';
+    titleEl.textContent = `Câu ${idx + 1}: ` + q.questionText || q.text || q.question || q.title || q.questionTitle;
+
+    const questionDesc = q.description || q.explain || q.hint || '';
+
+    transcriptContent.innerHTML = `
+        ${q.imageUrl ? `<div class="image-wrap"><img src="${q.imageUrl}" alt="Hình minh họa" style="max-width:100%;border-radius:16px;box-shadow:0 8px 25px rgba(0,0,0,.15);"></div>` : `<p style="color:#95a5a6;text-align:center;margin-top:40px;">Không có hình minh họa</p>`}
+        ${questionDesc ? `<h2 style="margin:14px 0 6px;color:#1b3a57;font-family:Poppins, sans-serif;">${questionDesc}</h2>` : ''}
+    `;
 
     // Options A-D
     buttons.forEach(btn => {

@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EngStudy - Listening Practice</title>
-    <link rel="stylesheet" href="../css/Listening.css"> <!-- Giữ CSS cũ của bạn -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EngStudy - Listening Conversation</title>
+    <link rel="stylesheet" href="../css/Listening.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <!-- Conversation-specific styles -->
+    <link rel="stylesheet" href="../css/ListeningConversation.css" />
 </head>
 <body>
     <div class="container">
-        <!-- HEADER (giữ nguyên như cũ của bạn) -->
         <div class="header">
             <div class="sub-header">
                 <div class="name-centre"><h1>EngStudy</h1></div>
-                <div class="tbi-header-right">  <!-- dùng đúng class đã có style flex -->
-                    <div class="clock" id="clock">00:00:00</div>  <!-- thêm id nếu cần cho JS clock -->
-                    <div class="avatar-wrapper">
-                        <div class="avatar"></div>
-                    </div>
+                <div class="tbi-header-right">
+                    <div class="clock" id="clock">00:00:00</div>
+                    <div class="avatar-wrapper"><div class="avatar"></div></div>
                     <div class="icon">
                         <i id="extension-icon" class="fa-solid fa-ellipsis"></i>
                         <ul class="list">
@@ -29,26 +31,32 @@
                 </div>
             </div>
         </div>
-        
+
+        <!-- CONTENT -->
         <div class="container-content">
-            <!-- TOP BAR -->
             <div class="top-bar">
-                <div class="name-feature">Listening</div>
+                <div class="name-feature">Listening Conversation</div>
+
                 <div class="sentence-bar">
                     <div class="list-vocabulary">
                         <button class="icon-left"><i class="fa-solid fa-arrow-left"></i></button>
-                        <!-- Các nút số sẽ được JS thêm vào -->
+                        <!-- Pagination numbers sẽ được JS thêm -->
                         <button class="icon-right"><i class="fa-solid fa-arrow-right"></i></button>
                     </div>
                 </div>
             </div>
-            
-            <!-- MAIN CONTENT -->
-            <div class="main-content">
-                <!-- LEFT: Audio + Choices -->
-                <div class="left">
-                    <audio class="audio" controls></audio>
 
+            <div class="main-content">
+                <!-- LEFT -->
+                <div class="left">
+                    <!-- Audio hội thoại -->
+                    <audio class="audio conversation-audio" controls></audio>
+
+                    <div id="question-title" 
+                        style="text-align:center;margin:18px 0;font-size:20px;font-weight:600;color:#1b3a57;font-family:Poppins, sans-serif;">
+                    </div>
+
+                    <!-- Các lựa chọn -->
                     <div class="answers">
                         <button data-choice="A"><div class="index"><p>A</p></div><p class="text"></p></button>
                         <button data-choice="B"><div class="index"><p>B</p></div><p class="text"></p></button>
@@ -65,31 +73,34 @@
                         </p>
                     </div>
                 </div>
-                
-                <!-- RIGHT: Image minh họa (không còn transcript dài dòng) -->
+
+                <!-- RIGHT -->
                 <div class="right">
                     <div class="transcript-header">
-                        <h2 class="transcript-title">Image</h2>
+                        <h2 class="transcript-title">Illustration</h2>
                     </div>
                     <div class="transcript-content">
-                        <!-- JS sẽ chèn <img> hoặc thông báo nếu không có ảnh -->
-                        <p class="no-image" style="color:#888; text-align:center; margin-top: 50px;">
-                            Loading image...
-                        </p>
+                        <p style="text-align:center;color:#888;margin-top:40px;">Loading script...</p>
                     </div>
                 </div>
             </div>
-
+                <div class="tbi-practice-info">
+                    <div class="tbi-info-icon"><i class="fa-solid fa-circle-info"></i></div>
+                    <div class="tbi-info-text">
+                        <strong>Mỗi lần luyện tập gồm 5 hội thoại, mỗi đoạn có 2 câu hỏi</strong> được chọn ngẫu nhiên.
+                    </div>
+                </div>
             <div class="tbi-footer-bottom">
                 <p>&copy; 2025 EngStudy. All rights reserved.</p>
             </div>
         </div>
     </div>
 
-    <!-- JS -->
     <script src="../js/clock.js"></script>
     <script src="../js/avatar.js"></script>
     <script src="../js/dropdown.js"></script>
-    <script src="../js/listening.js"></script> <!-- File mới bên dưới -->
+
+    <!-- JS mới -->
+    <script src="../js/listening-conversation.js"></script>
 </body>
 </html>

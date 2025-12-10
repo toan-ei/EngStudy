@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EngStudy - Listening Practice</title>
+    <link rel="stylesheet" href="../css/Listening.css"> <!-- Giữ CSS cũ của bạn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER (giữ nguyên như cũ của bạn) -->
+        <div class="header">
+            <div class="sub-header">
+                <div class="name-centre"><h1>EngStudy</h1></div>
+                <div class="tbi-header-right">  <!-- dùng đúng class đã có style flex -->
+                    <div class="clock" id="clock">00:00:00</div>  <!-- thêm id nếu cần cho JS clock -->
+                    <div class="avatar-wrapper">
+                        <div class="avatar"></div>
+                    </div>
+                    <div class="icon">
+                        <i id="extension-icon" class="fa-solid fa-ellipsis"></i>
+                        <ul class="list">
+                            <li><a href="">Profile</a></li>
+                            <li><a href="">Change Information</a></li>
+                            <li><a href="">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container-content">
+            <!-- TOP BAR -->
+            <div class="top-bar">
+                <div class="name-feature">Listening Picture</div>
+                <div class="sentence-bar">
+                    <div class="list-vocabulary">
+                        <button class="icon-left"><i class="fa-solid fa-arrow-left"></i></button>
+                        <!-- Các nút số sẽ được JS thêm vào -->
+                        <button class="icon-right"><i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- MAIN CONTENT -->
+            <div class="main-content">
+                <!-- LEFT: Audio + Choices -->
+                <div class="left">
+                    
+                    <audio class="audio" controls></audio>
+
+                    <div id="question-title" 
+                        style="text-align:center;margin:18px 0;font-size:20px;font-weight:600;color:#1b3a57;font-family:Poppins, sans-serif;">
+                    </div>
+
+                    <div class="answers">
+                        <button data-choice="A"><div class="index"><p>A</p></div><p class="text"></p></button>
+                        <button data-choice="B"><div class="index"><p>B</p></div><p class="text"></p></button>
+                        <button data-choice="C"><div class="index"><p>C</p></div><p class="text"></p></button>
+                        <button data-choice="D"><div class="index"><p>D</p></div><p class="text"></p></button>
+                    </div>
+
+                    <div class="submit-section" style="margin-top: 30px; text-align: center;">
+                        <button id="submit-btn" class="submit-btn">
+                            <i class="fa-solid fa-paper-plane"></i> NỘP BÀI
+                        </button>
+                        <p class="submit-note" style="margin-top: 12px; font-size: 14px; color: #7f8c8d;">
+                            Bạn đã trả lời <span id="answered-count">0</span>/10 câu
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- RIGHT: Image minh họa (không còn transcript dài dòng) -->
+                <div class="right">
+                    <div class="transcript-header">
+                        <h2 class="transcript-title">Illustration</h2>
+                    </div>
+                    <div class="transcript-content">
+                        <!-- JS sẽ chèn <img> hoặc thông báo nếu không có ảnh -->
+                        <p class="no-image" style="color:#888; text-align:center; margin-top: 50px;">
+                            Loading image...
+                        </p>
+                    </div>
+                </div>
+            </div>
+                <div class="tbi-practice-info">
+                    <div class="tbi-info-icon">
+                        <i class="fa-solid fa-circle-info"></i>
+                    </div>
+                    <div class="tbi-info-text">
+                        <strong>Mỗi lần luyện tập gồm 10 câu hỏi được chọn ngẫu nhiên</strong> theo tỷ lệ:
+                        <span class="tbi-level-highlight beginner">5 câu A1, 2 câu A2</span> (dễ),
+                        <span class="tbi-level-highlight intermediate">2 câu B1</span> (trung bình),
+                        <span class="tbi-level-highlight advanced">1 câu B2</span> (khó).
+                    </div>
+                </div>
+            <div class="tbi-footer-bottom">
+                <p>&copy; 2025 EngStudy. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script src="../js/clock.js"></script>
+    <script src="../js/avatar.js"></script>
+    <script src="../js/dropdown.js"></script>
+    <script src="../js/listening-picture.js"></script> <!-- File mới bên dưới -->
+</body>
+</html>
