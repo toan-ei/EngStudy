@@ -5,6 +5,7 @@ import { ListeningQuestion } from './listening-question.entity';
 import { CreateListeningQuestionDto } from './dto/create-question.dto';
 import { UpdateListeningQuestionDto } from './dto/update-question.dto';
 import { ListeningExercise } from '../listening-exercises/listening-exercises.entity';
+import { ExerciseGroupDto } from './dto/create-group.dto';
 
 
 @Injectable()
@@ -27,18 +28,30 @@ export class ListeningQuestionService {
     return this.repo.save(entity);
   }
 
-  async findAll(exerciseId?: number, skip = 0, take = 50): Promise<ListeningQuestion[]> {
+  async paginate(exerciseId: number | undefined, page = 1, limit = 10) {
     const where: any = { isDeleted: false };
-    if (exerciseId !== undefined) where.exerciseId = exerciseId;
+    if (exerciseId !== undefined) {
+      where.exerciseId = exerciseId;
+    }
 
-    const options: FindManyOptions<ListeningQuestion> = {
+    const skip = (page - 1) * limit;
+
+    const [items, total] = await this.repo.findAndCount({
       where,
       order: { orderIndex: 'ASC', createdAt: 'ASC' },
       skip,
-      take,
+      take: limit,
+    });
+
+    return {
+      items,
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
     };
-    return this.repo.find(options);
   }
+
 
   async findOne(id: number): Promise<ListeningQuestion> {
     const q = await this.repo.findOne({ where: { questionId: id, isDeleted: false } });
@@ -116,4 +129,49 @@ export class ListeningQuestionService {
     }));
   }
 
+  async getGroupedQuestionsByTopic(topicId: number): Promise<ExerciseGroupDto[]> {
+
+    if (topicId !== 3) {
+      return []; // hoặc throw new BadRequestException(...)
+    }
+    const exercises = await this.exerciseRepo.find({
+      where: { topicId, isDeleted: false },
+      order: { exerciseId: 'ASC' },
+      take: 5,
+    });
+
+    if (exercises.length === 0) return [];
+
+    const exerciseIds = exercises.map(e => e.exerciseId);
+
+    const questions = await this.repo.find({
+      where: {
+        exerciseId: In(exerciseIds),
+        isDeleted: false,
+      },
+      relations: ['file'],
+    });
+
+    return exercises.map(ex => {
+      const questionsForExercise = questions.filter(q => q.exerciseId === ex.exerciseId);
+      const sampleFile = questionsForExercise[0]?.file;
+
+      return {
+        exerciseId: ex.exerciseId,
+        exerciseTitle: ex.title,
+        audioUrl: sampleFile?.audioUrl || null,
+        imageUrl: sampleFile?.imageUrl || null,
+        questions: questionsForExercise.map(q => ({
+          questionId: q.questionId,
+          questionText: q.questionText,
+          description: q.description,
+          optionA: q.optionA,
+          optionB: q.optionB,
+          optionC: q.optionC,
+          optionD: q.optionD,
+          score: q.score,
+        })),
+      };
+    });
+  }
 }

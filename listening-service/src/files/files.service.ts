@@ -12,13 +12,23 @@ export class FilesService {
     private cloudinary: CloudinaryService,
   ) {}
 
-  async findAll(skip = 0, take = 20): Promise<File[]> {
-    return this.repo.find({
+ async findAllPaged(page = 1, limit = 20) {
+    const skip = (page - 1) * limit;
+
+    const [data, total] = await this.repo.findAndCount({
       where: { isDeleted: false },
       order: { createdAt: 'DESC' },
       skip,
-      take,
+      take: limit,
     });
+
+    return {
+      data,
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
+    };
   }
 
   async findOne(id: number): Promise<File> {

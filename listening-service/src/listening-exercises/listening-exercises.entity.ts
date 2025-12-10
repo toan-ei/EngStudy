@@ -30,4 +30,5 @@ export class ListeningExercise {
 
   @UpdateDateColumn({ type: 'datetime' })
   updatedAt: Date;
+  file: any;
 }

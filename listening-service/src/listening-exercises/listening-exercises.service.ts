@@ -12,8 +12,29 @@ export class ListeningExerciseService {
     private repo: Repository<ListeningExercise>,
   ) {}
 
-  async findAll(): Promise<ListeningExercise[]> {
-    return this.repo.find({ where: { isDeleted: false }, order: { createdAt: 'DESC' } });
+  async paginate(page = 1, limit = 10): Promise<{
+    items: ListeningExercise[];
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  }> {
+    const skip = (page - 1) * limit;
+
+    const [items, total] = await this.repo.findAndCount({
+      where: { isDeleted: false },
+      order: { createdAt: 'DESC' },
+      skip,
+      take: limit,
+    });
+
+    return {
+      items,
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
+    };
   }
 
   async findOne(id: number): Promise<ListeningExercise> {

@@ -4,7 +4,7 @@ import { FileResponseDto } from './dto/file-response.dto';
 import { UploadFileDto } from './dto/upload-file.dto';
 import { UpdateFileDto } from './dto/update-file.dto';
 import { AnyFilesInterceptor, FileFieldsInterceptor, FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
-import { ApiTags, ApiOperation, ApiConsumes, ApiBody } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiConsumes, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { File } from './file.entity';
 
 @ApiTags('Files')
@@ -12,10 +12,15 @@ import { File } from './file.entity';
 export class FilesController {
   constructor(private readonly filesService: FilesService) {}
 
-  @Get()
-  @ApiOperation({ summary: 'Lấy tất cả file' })
-  async findAll(): Promise<File[]> {
-    return this.filesService.findAll();
+ @Get()
+  @ApiOperation({ summary: 'Lấy tất cả file (có phân trang)' })
+  @ApiQuery({ name: 'page', required: false })
+  @ApiQuery({ name: 'limit', required: false })
+  async findAll(
+    @Query('page') page: string = '1',
+    @Query('limit') limit: string = '20',
+  ) {
+    return this.filesService.findAllPaged(Number(page), Number(limit));
   }
 
   @Get(':id')

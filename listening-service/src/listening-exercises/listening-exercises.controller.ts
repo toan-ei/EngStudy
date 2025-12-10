@@ -1,8 +1,8 @@
-import { Controller, Get, Post, Put, Delete, Body, Param, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, ParseIntPipe, Query } from '@nestjs/common';
 import { ListeningExerciseService } from './listening-exercises.service';
 import { CreateExerciseDto } from './dto/create-exercise.dto';
 import { UpdateExerciseDto } from './dto/update-exercise.dto';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiQuery } from '@nestjs/swagger';
 import { ListeningExercise } from './listening-exercises.entity';
 
 @ApiTags('Listening Exercises')
@@ -11,10 +11,17 @@ export class ListeningExerciseController {
   constructor(private readonly service: ListeningExerciseService) {}
 
   @Get()
-  @ApiOperation({ summary: 'Lấy tất cả exercises' })
-  @ApiResponse({ status: 200, description: 'Danh sách exercises', type: [ListeningExercise] })
-  getAll(): Promise<ListeningExercise[]> {
-    return this.service.findAll();
+  @ApiOperation({ summary: 'Lấy danh sách exercises (có phân trang)' })
+  @ApiQuery({ name: 'page', required: false })
+  @ApiQuery({ name: 'limit', required: false })
+  getAll(
+    @Query('page') page: number = 1,
+    @Query('limit') limit: number = 10,
+  ) {
+    page = Number(page);
+    limit = Number(limit);
+
+    return this.service.paginate(page, limit);
   }
 
   @Get(':id')
