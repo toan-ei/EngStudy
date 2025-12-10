@@ -44,11 +44,24 @@ async function loadTopics() {
   }
 }
 
+
+let currentPage = 1;
+let limit = 10;          // số bài tập / trang
+let totalPages = 1;
+
+
 // Load danh sách bài tập
 async function loadExercises() {
   try {
-    const res = await fetch(API_EXERCISES);
-    const exercises = await res.json();
+    const url = new URL(API_EXERCISES);
+    url.searchParams.append('page', currentPage);
+    url.searchParams.append('limit', limit);
+
+    const res = await fetch(url);
+    const data = await res.json();
+
+    const exercises = data.items;
+    totalPages = data.totalPages;
 
     els.tbody.innerHTML = '';
 
@@ -71,6 +84,14 @@ async function loadExercises() {
       `;
       els.tbody.appendChild(tr);
     });
+
+     // Cập nhật số trang
+    document.getElementById('page-info').textContent = `Trang ${currentPage}/${totalPages}`;
+
+    // Disable prev/next khi cần
+    document.getElementById('prev-page').disabled = currentPage === 1;
+    document.getElementById('next-page').disabled = currentPage === totalPages;
+
   } catch (err) {
     alert('Lỗi tải bài tập: ' + err.message);
   }
@@ -130,6 +151,7 @@ els.form.onsubmit = async (e) => {
     if (res.ok) {
       alert(id ? 'Cập nhật thành công!' : 'Thêm bài tập thành công!');
       els.modal.classList.remove('active');
+      currentPage = 1;
       loadExercises();
     } else {
       const txt = await res.text();
@@ -146,6 +168,7 @@ window.deleteExercise = async (id) => {
   try {
     await fetch(`${API_EXERCISES}/${id}`, { method: 'DELETE' });
     alert('Xóa thành công!');
+    currentPage = 1;
     loadExercises();
   } catch {
     alert('Xóa thất bại');
@@ -155,6 +178,20 @@ window.deleteExercise = async (id) => {
 // Đóng modal
 document.querySelector('.close-modal').onclick = () => els.modal.classList.remove('active');
 window.onclick = (e) => { if (e.target === els.modal) els.modal.classList.remove('active'); };
+
+document.getElementById('prev-page').onclick = () => {
+  if (currentPage > 1) {
+    currentPage--;
+    loadExercises();
+  }
+};
+
+document.getElementById('next-page').onclick = () => {
+  if (currentPage < totalPages) {
+    currentPage++;
+    loadExercises();
+  }
+};
 
 // Khởi động
 Promise.all([loadTopics(), loadExercises()]);

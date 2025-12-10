@@ -36,13 +36,22 @@ async function loadExercises() {
   }
 }
 
+let currentPage = 1;
+const limit = 10;
+let totalPages = 1;
+
 async function loadQuestions(exerciseId = '') {
   try {
     const url = new URL(API_QUESTIONS);
+    url.searchParams.append('page', currentPage);
+    url.searchParams.append('limit', limit);
     if (exerciseId) url.searchParams.append('exerciseId', exerciseId);
 
     const res = await fetch(url);
-    const questions = await res.json();
+    const data = await res.json();
+
+    const questions = data.items;
+    totalPages = data.totalPages;
 
     els.tbody.innerHTML = '';
 
@@ -68,6 +77,12 @@ async function loadQuestions(exerciseId = '') {
         `;
       els.tbody.appendChild(tr);
     });
+
+    document.getElementById('page-info').textContent =
+      `Trang ${currentPage}/${totalPages}`;
+
+    document.getElementById('prev-page').disabled = currentPage === 1;
+    document.getElementById('next-page').disabled = currentPage === totalPages;
   } catch (err) {
     alert('Lỗi tải câu hỏi');
   }
@@ -178,6 +193,20 @@ window.deleteQuestion = async (id) => {
 // Đóng modal
 document.querySelector('.close-modal').onclick = () => els.modal.classList.remove('active');
 window.onclick = (e) => { if (e.target === els.modal) els.modal.classList.remove('active'); };
+
+document.getElementById('prev-page').onclick = () => {
+  if (currentPage > 1) {
+    currentPage--;
+    loadQuestions(els.filterExercise.value);
+  }
+};
+
+document.getElementById('next-page').onclick = () => {
+  if (currentPage < totalPages) {
+    currentPage++;
+    loadQuestions(els.filterExercise.value);
+  }
+};
 
 // Khởi động
 loadExercises().then(() => loadQuestions());
