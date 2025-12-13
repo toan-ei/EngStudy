@@ -1,0 +1,167 @@
+/* ===== ENGSTUDY ADMIN – PURPLE PREMIUM THEME 2025 ===== */
+:root {
+  --primary: #8b5cf6;
+  --primary-dark: #7c3aed;
+  --primary-light: #a78bfa;
+  --accent: #c4b5fd;
+  --accent2: #ddd6fe;
+  --success: #10b981;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  
+  --bg: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
+  --card: rgba(255, 255, 255, 0.09);
+  --card-hover: rgba(255, 255, 255, 0.18);
+  --glass: rgba(255, 255, 255, 0.08);
+  
+  --text: #e0e7ff;
+  --text-muted: #94a3b8;
+  --text-light: #c4b5fd;
+  --border: rgba(139, 92, 246, 0.3);
+  --border-strong: rgba(139, 92, 246, 0.6);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  background-attachment: fixed;
+  color: var(--text);
+  min-height: 100vh;
+  padding: 20px 0;
+}
+
+.esadmin-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  margin-top: 20px;
+}
+
+/* Header */
+.esadmin-header {
+  text-align: center;
+  margin-bottom: 50px;
+  padding: 50px 30px;
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  border-radius: 32px;
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.esadmin-header h1 {
+  font-size: 3.8rem;
+  font-weight: 900;
+  background: linear-gradient(90deg, var(--accent), var(--accent2), #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -1px;
+  margin-bottom: 12px;
+}
+
+.esadmin-header p {
+  font-size: 1.3rem;
+  opacity: 0.9;
+  color: var(--text-light);
+}
+
+/* Stats Grid */
+.esadmin-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
+  margin-bottom: 60px;
+}
+
+.esadmin-stat-card {
+  background: var(--card);
+  backdrop-filter: blur(20px);
+  border-radius: 28px;
+  padding: 36px 28px;
+  text-align: center;
+  border: 1px solid var(--border);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.esadmin-stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, rgba(139,92,246,0.15), transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
+  border-radius: 28px;
+}
+
+.esadmin-stat-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 10px rgba(139,92,246,0.5));
+}
+
+.esadmin-stat-number {
+  font-size: 3.4rem;
+  font-weight: 900;
+  color: #fff;
+  margin: 12px 0;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.esadmin-stat-label {
+  color: var(--text-light);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Chart Container */
+.esadmin-chart-container {
+  background: var(--card);
+  backdrop-filter: blur(20px);
+  border-radius: 32px;
+  padding: 40px;
+  border: 1px solid var(--border);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+  margin-bottom: 40px;
+}
+
+.esadmin-chart-title {
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 32px;
+  background: linear-gradient(90deg, var(--accent), #fff, var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
+}
+
+/* Loading */
+.esadmin-loading {
+  text-align: center;
+  padding: 60px;
+  font-size: 1.4rem;
+  color: var(--accent);
+  opacity: 0.8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .esadmin-header h1 { font-size: 2.8rem; }
+  .esadmin-header { padding: 40px 20px; }
+  .esadmin-stat-card { padding: 28px 20px; }
+  .esadmin-stat-number { font-size: 2.8rem; }
+  .esadmin-chart-container { padding: 24px; }
+}

@@ -17,25 +17,27 @@ let exercisesMap = {};
 
 async function loadExercises() {
   try {
-    const res = await fetch(API_EXERCISES);
-    const exercises = await res.json();
+    const res = await fetch(API_EXERCISES + "/mapping");
+    exercisesMap = await res.json();   // <-- dùng luôn map backend trả về
 
-    // Đổ vào filter và modal
+    console.log("EXERCISES MAP:", exercisesMap);
+
+    // Đổ dropdown
     [els.filterExercise, els.exerciseSelect].forEach(select => {
       select.innerHTML = '<option value="">Tất cả / -- Chọn bài tập --</option>';
-      exercises.forEach(ex => {
-        exercisesMap[ex.exerciseId] = ex.title;
-        const opt = document.createElement('option');
-        opt.value = ex.exerciseId;
-        opt.textContent = `${ex.exerciseId}. ${ex.title}`;
+
+      Object.keys(exercisesMap).forEach(id => {
+        const opt = document.createElement("option");
+        opt.value = id;
+        opt.textContent = `${id}. ${exercisesMap[id]}`;
         select.appendChild(opt);
       });
     });
+
   } catch (err) {
-    console.error('Không tải được bài tập', err);
+    console.error("Không tải được mapping", err);
   }
 }
-
 let currentPage = 1;
 const limit = 10;
 let totalPages = 1;
@@ -60,7 +62,7 @@ async function loadQuestions(exerciseId = '') {
         tr.innerHTML = `
           <td data-label="ID"><strong>#${q.questionId}</strong></td>
           <td data-label="Câu hỏi">${q.questionText}</td>
-          <td data-label="Bài tập"><span class="topic-badge">${exercisesMap[q.exerciseId] || 'N/A'}</span></td>
+          <td data-label="Bài tập"><span class="topic-badge">${exercisesMap[String(q.exerciseId)] || 'N/A'}</span></td>
           <td data-label="File ID">${q.fileId}</td>
           <td data-label="Đáp án"><span class="correct-badge">${q.correctOption}</span></td>
           <td data-label="Điểm">${q.score || 1}</td>
