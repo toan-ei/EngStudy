@@ -9,6 +9,7 @@ import { ListeningExerciseModule } from './listening-exercises/listening-exercis
 import { ListeningQuestionModule } from './listening-question/listening-question.module';
 import { ListeningSubmitModule } from './listening-submit/listening-submit.module';
 import { ListeningResultModule } from './listening-result/listening-result.module';
+import { StatsModule } from './common/stats.module';
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { ListeningResultModule } from './listening-result/listening-result.modul
     ListeningQuestionModule,
     ListeningSubmitModule,
     ListeningResultModule,
+    StatsModule,
   ],
 })
 export class AppModule {}

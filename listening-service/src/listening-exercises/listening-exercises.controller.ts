@@ -24,6 +24,12 @@ export class ListeningExerciseController {
     return this.service.paginate(page, limit);
   }
 
+  @Get('mapping')
+  @ApiOperation({ summary: 'Lấy mapping exerciseId → title' })
+  async getMapping() {
+    return this.service.getMapping();
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Lấy exercise theo ID' })
   @ApiResponse({ status: 200, description: 'Chi tiết exercise', type: ListeningExercise })

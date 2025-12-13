@@ -37,6 +37,17 @@ export class ListeningExerciseService {
     };
   }
 
+  async getMapping() {
+    const all = await this.repo.find(); // lấy toàn bộ bài tập
+
+    const map: Record<number, string> = {};
+    all.forEach(ex => {
+      map[ex.exerciseId] = ex.title;
+    });
+
+    return map;
+  }
+
   async findOne(id: number): Promise<ListeningExercise> {
     const exercise = await this.repo.findOne({ where: { exerciseId: id, isDeleted: false } });
     if (!exercise) throw new NotFoundException(`Exercise ${id} not found`);
@@ -53,6 +64,8 @@ export class ListeningExerciseService {
     Object.assign(exercise, dto);
     return this.repo.save(exercise);
   }
+
+  
 
   async softDelete(id: number): Promise<ListeningExercise> {
     const exercise = await this.findOne(id);

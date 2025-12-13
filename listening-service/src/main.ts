@@ -7,6 +7,7 @@ import { ListeningExerciseModule } from './listening-exercises/listening-exercis
 import { ListeningQuestionModule } from './listening-question/listening-question.module';
 import { ListeningSubmitModule } from './listening-submit/listening-submit.module';
 import { ListeningResultModule } from './listening-result/listening-result.module';
+import { StatsModule } from './common/stats.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -19,7 +20,7 @@ async function bootstrap() {
     .build();
 
   const document = SwaggerModule.createDocument(app, config, {
-    include: [ListeningTopicModule, FilesModule, ListeningExerciseModule, ListeningQuestionModule, ListeningSubmitModule, ListeningResultModule],
+    include: [ListeningTopicModule, FilesModule, ListeningExerciseModule, ListeningQuestionModule, ListeningSubmitModule, ListeningResultModule, StatsModule],
   });
 
   SwaggerModule.setup('api/docs', app, document);
