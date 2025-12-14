@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin - Quản lý Chủ đề Nghe | EngStudy</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/AdminListeningTopics.css" />
+  <link rel="stylesheet" href="../css/AdminLayout.css">
+</head>
+<body>
+
+  <div class="admin-container">
+
+    <!-- Main Card -->
+    <div class="admin-card">
+      <div class="admin-actions">
+        <h2>Danh sách chủ đề</h2>
+        <button class="btn btn-primary" id="open-modal">
+          <i class="fas fa-plus"></i> Thêm chủ đề mới
+        </button>
+      </div>
+
+      <table id="topics-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Tên chủ đề</th>
+            <th>Mô tả</th>
+            <th>Ngày tạo</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Data sẽ được JS đổ vào đây -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Modal Thêm/Sửa -->
+  <div class="modal" id="topic-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-title">Thêm chủ đề mới</h2>
+        <button class="close-modal">&times;</button>
+      </div>
+      <form id="topic-form">
+        <input type="hidden" id="topic-id" />
+
+        <div class="form-group">
+          <label for="topic-name">Tên chủ đề *</label>
+          <input type="text" id="topic-name" required placeholder="VD: Hội thoại ngắn" />
+        </div>
+
+        <div class="form-group">
+          <label for="topic-desc">Mô tả (tùy chọn)</label>
+          <textarea id="topic-desc" placeholder="Mô tả ngắn về chủ đề này..."></textarea>
+        </div>
+
+        <div style="text-align: right; margin-top: 30px;">
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-save"></i> <span id="submit-text">Lưu chủ đề</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/admin-listening-topics.js"></script>
+  <script src="../js/admin-header.js"></script>
+</body>
+</html>

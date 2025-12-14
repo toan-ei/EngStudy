@@ -1,0 +1,335 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+    background: linear-gradient(120deg,#d0f1fa 0%,#fff 100%);
+    min-height: 100vh;
+}
+
+/* Layout container giữa màn hình */
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100vw;
+    background: none;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* KHUNG BÊN TRÁI: LOGO + ẢNH VÀ HIỆU ỨNG */
+.box:nth-child(1) {
+    flex: 1.5; /* giữ tỉ lệ */
+    background: linear-gradient(135deg, #f0fdff 65%, #c6eeea 100%);
+    border-radius: 30px 0 0 30px;
+    box-shadow: 0 8px 42px 0 rgba(76,187,194,0.16);
+    min-width: 250px;
+    max-width: 430px;
+     padding: 30px 28px; /* giảm trái phải, cân bằng padding trên dưới */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* căn giữa nội dung ngang */
+    justify-content: center; /* căn giữa nội dung dọc */
+    position: relative;
+}
+
+/* Hiệu ứng glowy nền */
+.box:nth-child(1)::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%; /* đổi từ 20px -> 50% để cân đối */
+    transform: translate(-50%, -50%);
+    width: 80%;  /* cân chỉnh vừa hơn */
+    height: 80%;
+    background: radial-gradient(circle, #d4faff 0%, #a6eaf9 50%, transparent 90%);
+    filter: blur(24px);
+    z-index: 0;
+    opacity: 0.7;
+}
+
+/* Container con bên trái */
+.container-left {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* thêm để cân bằng dọc */
+    text-align: center; /* nội dung trung tâm */
+    z-index: 2;
+}
+
+.container-left .title {
+    font-size: 40px;
+    font-weight: bold;
+    color: #0FA6A6;
+    letter-spacing: 3px;
+    margin: 0 0 16px 0; /* cân bằng khoảng cách dưới */
+    text-align: center;
+    text-shadow: 0 6px 18px #0fa6a627;
+    position: relative;
+    z-index: 2;
+}
+
+.container-left .title::after {
+    content: "";
+    display: block;
+    margin: 12px auto 0 auto;
+    width: 82px;
+    height: 4px;
+    background: linear-gradient(90deg,#0FA6A6 10%,#24e1e6 90%);
+    border-radius: 2px;
+    opacity: 0.5;
+}
+
+/* Ảnh dưới title */
+.image-under-title {
+    position: relative;
+    z-index: 2;
+    margin-top: 16px; /* tạo khoảng cách vừa phải */
+}
+
+.image-under-title img {
+    width: 100%;
+    max-width: 340px;
+    min-width: 180px; /* tăng min-width cho cân đối */
+    border-radius: 20px; /* bo nhẹ hơn */
+    background: rgba(255,255,255,0.54);
+    padding: 20px 12px;
+    box-shadow: 0 12px 48px 0 rgba(44,176,181,0.2);
+    transition: transform 0.3s, box-shadow 0.22s;
+    display: block;
+}
+
+.image-under-title img:hover {
+    transform: scale(1.06) rotate(-2deg);
+    box-shadow: 0 16px 58px 0 #0fa6a630;
+}
+
+/* Vạch chia giữa 2 khung */
+.box:nth-child(2) {
+    flex: 0.065;
+    background: linear-gradient(180deg,#0FA6A6 15%,#fff 100%);
+    border-radius: 12px;
+    min-width: 7px;
+    max-width: 12px;
+    margin: 0 0.7vw;
+}
+
+/* Phần phải: form login */
+.box:nth-child(3) {
+    flex: 1.1;
+    background: #ffffff;
+    border-radius: 0 30px 30px 0;
+    box-shadow: 0 6px 24px rgba(45,115,115,0.12);
+    min-width: 330px;
+    max-width: 430px;
+    align-items: center;
+    justify-content: center;
+}
+
+.sub-title {
+    display: flex;
+    justify-content: center;
+    margin-top: 38px;
+    margin-bottom: 12px;
+}
+.sub-title h2 {
+    color: #0FA6A6;
+    font-size: 31px;
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.container-login-form {
+    margin: 0 auto;
+    width: 83%;
+    max-width: 340px;
+    border: 1px solid #e6e6e6;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.96);
+    box-shadow: 0 2.5px 13px rgba(44,166,166,0.07);
+    padding: 21px 0;
+}
+.container-main-login-form {
+    margin: 7px 22px 7px 22px;
+}
+.input-form {
+    margin-bottom: 17px;
+    text-align: left;
+}
+.email label,
+.password label{
+    display: block;
+    margin-bottom: 6px;
+    font-size: 15px;
+    color: #0FA6A6;
+    font-weight: 500;
+}
+.email input,
+.password input{
+    width: 100%;
+    padding: 11px 14px;
+    border-radius: 8px;
+    border: 1px solid #cce0e0;
+    background: #f7fbfc;
+    font-size: 15px;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.18s, box-shadow 0.18s;
+}
+.email input:focus,
+.password input:focus {
+    border: 1.5px solid #0FA6A6;
+    box-shadow: 0 0 0 2px #e2f7fa7a;
+}
+.password-wrapper {
+    position: relative;
+    width: 100%; 
+}
+.password-wrapper button {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #0FA6A6;
+    padding: 4px;
+    transition: color 0.18s;
+}
+.password-wrapper button:hover {
+    color: #1a8344;
+}
+
+.container-main-login-form .button {
+    width: 100%;
+    padding: 12px 0;
+    margin-bottom: 14px;
+    color: #ffffff;
+    border-radius: 6px;
+    border: none;
+    font-size: 17px;
+    font-weight: 600;
+    background: linear-gradient(90deg,#1bef6e,#0FA6A6 90%);
+    cursor: pointer;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+    transition: background 0.18s, color 0.16s, box-shadow 0.18s;
+}
+.container-main-login-form .button:hover {
+    background: linear-gradient(90deg,#0fa6a6,#1bef6e 90%);
+    color: #222;
+    box-shadow: 0 6px 24px rgba(16,234,41,0.09);
+}
+.container-main-login-form .login {
+    background: linear-gradient(90deg,#000000,#24a7bc 96%);
+}
+.container-main-login-form .login:hover {
+    background: linear-gradient(90deg,#24a7bc,#090a0b 60%);
+    color: #ffffff;
+}
+.container-main-login-form .new-account {
+    background: linear-gradient(90deg,#bf9107 0%,#0FA6A6 100%);
+    color: #fff;
+    font-weight: 600;
+    margin-top: -2px;
+    margin-bottom: 8px;
+}
+.container-main-login-form .forgot-account {
+    margin-top: -6px;
+    margin-bottom: 12px;
+    text-align: right;
+}
+.container-main-login-form .forgot-account a {
+    color: #0FA6A6;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 450;
+    transition: color 0.2s;
+}
+.container-main-login-form .forgot-account a:hover {
+    color: #1bec28;
+    text-decoration: underline;
+}
+.container-main-login-form .with-google {
+    background: #4285F4;
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px #e3e7ff;
+    margin-top: -1px;
+}
+.container-main-login-form .with-google:hover {
+    background: #2757b6;
+    color: #fff;
+}
+
+/* Popup REGISTER ở giữa tất cả, nổi và đẹp */
+.container-register{
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 370px;
+    min-width: 240px;
+    max-width: 97vw;
+    background-color: #fafafa;
+    border: 2.5px solid #0FA6A6;
+    border-radius: 19px;
+    box-shadow: 0 8px 40px 0 rgba(44,166,166,0.13);
+    z-index: 88;
+    animation: fadeInScale 0.32s cubic-bezier(.44,1.56,.37,.87);
+    overflow: auto;
+    max-height: 92vh;
+    padding-bottom: 6px;
+}
+@keyframes fadeInScale {
+    from { opacity: 0; transform: translate(-50%,-60%) scale(0.86);}
+    to   { opacity: 1; transform: translate(-50%,-50%) scale(1);}
+}
+
+/* Đáp ứng mobile cân đối! */
+@media (max-width: 790px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        width: 100vw;
+    }
+    .box:nth-child(1),
+    .box:nth-child(3) {
+        border-radius: 18px;
+        min-width: 0;
+        max-width: 95vw;
+        width: 90vw;
+        margin: 13px auto;
+    }
+    .box:nth-child(2) {
+        display: none;
+    }
+}
+
+/* Giảm shadow khi register mất focus */
+.container-register { transition: box-shadow 0.21s;}
+.container-register:focus-within { box-shadow: 0 8px 60px 0 #0fa6a660; }
+
+/* Hiệu ứng input focus */
+.input-form input:focus {
+    box-shadow: 0 0 0 2px #0fa6a62a;
+}
+
+/* Ẩn scroll bar ở popup register nếu không cần */
+.container-register::-webkit-scrollbar {
+    display: none;
+}

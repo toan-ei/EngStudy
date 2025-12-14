@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="width=device-width, initial-scale=1.0"/>
+  <title>Admin - Quản lý File Nghe & Hình | EngStudy</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/AdminFiles.css">
+  <link rel="stylesheet" href="../css/AdminLayout.css"> 
+</head>
+<body>
+
+  <div class="admin-container">
+
+
+    <div class="admin-card">
+      <div class="admin-actions">
+        <h2>Danh sách file</h2>
+        <button class="btn btn-primary" id="open-modal">
+          <i class="fas fa-upload"></i> Upload file mới
+        </button>
+      </div>
+
+      <div class="table-wrapper">
+        <table id="files-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Audio</th>
+              <th>Hình ảnh</th>
+              <th>Ngày tạo</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- JS sẽ đổ dữ liệu vào đây -->
+          </tbody>
+        </table>
+          <div class="pagination">
+            <button id="prev-page" class="btn">← Trước</button>
+            <span id="page-info"></span>
+            <button id="next-page" class="btn">Tiếp →</button>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Upload / Edit -->
+  <div class="modal" id="file-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-title">Upload file mới</h2>
+        <button class="close-modal">x</button>
+      </div>
+
+      <form id="file-form" enctype="multipart/form-data">
+        <input type="hidden" id="file-id" />
+
+        <div class="form-group">
+          <label>Audio (mp3, m4a, wav)</label>
+          <input type="file" id="audio-input" name="audio" accept="audio/*" />
+          <small id="current-audio" class="file-info"></small>
+        </div>
+
+        <div class="form-group">
+          <label>Hình ảnh (jpg, png, webp)</label>
+          <input type="file" id="image-input" name="image" accept="image/*" />
+          <small id="current-image" class="file-info"></small>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" id="submit-btn">
+            <span class="submit-icon">
+              <i class="fas fa-save"></i>
+            </span>
+            <span class="submit-text" id="submit-text">Upload mới</span>
+            <span class="submit-spinner" style="display: none;">
+              <i class="fas fa-spinner fa-spin"></i> Đang xử lý...
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/admin-files.js"></script>
+  <script src="../js/admin-header.js"></script>
+</body>
+</html>

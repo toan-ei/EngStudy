@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin - Quản lý Bài tập Nghe | EngStudy</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/AdminListeningExercises.css">
+  <link rel="stylesheet" href="../css/AdminLayout.css">
+</head>
+<body>
+
+  <div class="admin-container">
+    <div class="admin-card">
+      <div class="admin-actions">
+        <h2>Danh sách bài tập nghe</h2>
+        <button class="btn btn-primary" id="open-modal">
+          <i class="fas fa-plus"></i> Thêm bài tập mới
+        </button>
+      </div>
+
+      <div class="table-wrapper">
+        <table id="exercises-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Tiêu đề</th>
+              <th>Chủ đề</th>
+              <th>Thời lượng</th>
+              <th>Ngày tạo</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- JS sẽ đổ dữ liệu vào đây -->
+          </tbody>
+        </table>
+          <div class="pagination">
+            <button id="prev-page" class="btn">← Trước</button>
+            <span id="page-info"></span>
+            <button id="next-page" class="btn">Tiếp →</button>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Thêm / Sửa -->
+  <div class="modal" id="exercise-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-title">Thêm bài tập nghe mới</h2>
+        <button class="close-modal">x</button>
+      </div>
+
+      <form id="exercise-form">
+        <input type="hidden" id="exercise-id" />
+
+        <div class="form-group">
+          <label for="topic-id">Chủ đề *</label>
+          <select id="topic-id" required>
+            <option value="">-- Chọn chủ đề --</option>
+            <!-- JS sẽ đổ options -->
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="title">Tiêu đề bài nghe *</label>
+          <input type="text" id="title" required placeholder="VD: Daily Conversation Part 1" />
+        </div>
+
+        <div class="form-group">
+          <label for="description">Mô tả (tùy chọn)</label>
+          <textarea id="description" rows="3" placeholder="Mô tả ngắn về bài nghe..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="duration">Thời lượng (giây)</label>
+          <input type="number" id="duration" min="0" placeholder="VD: 125" />
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-save"></i> <span id="submit-text">Thêm bài tập</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/admin-exercises.js"></script>
+  <script src="../js/admin-header.js"></script>
+</body>
+</html>

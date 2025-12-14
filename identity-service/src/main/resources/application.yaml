@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: identity-service
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      chat:
+        options:
+          model: gpt-4o-mini
+    vectorstore:
+      mongodb:
+        uri: ${MONGODB_URI}
+        database-name: AI-Engstudy
+        collection-name: writing_rules
+
+server:
+  port: 8080
+  servlet:
+    context-path: /identity
+
+jwt:
+  signerKey: ${JWT_SIGNER_KEY}
+  valid-duration: 24
+  refreshable-duration: 120
+
+outbound:
+  clientId: ${GOOGLE_CLIENT_ID}
+  clientSecret: ${GOOGLE_CLIENT_SECRET}
+  redirectUri: http://127.0.0.1:5500/webapp/html/Authenticate.html
+
+app:
+  file:
+    storage-dir-avatar: ${AVATAR_DIR}
+    download-prefix: http://localhost:8080/identity/file/media/download/

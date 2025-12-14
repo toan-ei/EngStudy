@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EngStudy - Translate</title>
+    <link rel="stylesheet" href="../css/Translate.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="sub-header">
+                <div class="name-centre"><a style="text-decoration: none;" href="home.html">
+                        <h1>EngStudy</h1>
+                    </a></div>
+                <div class="container-item">
+                    <div class="clock"></div>
+                    <div class="avatar-wrapper">
+                        <img class="avatar" id="avatar-preview" src="" alt="">
+                        <input type="file" id="avatar-input" accept="image/*" style="display: none;">
+                    </div>
+                    <div class="icon">
+                        <i id="extension-icon" class="fa-solid fa-ellipsis"></i>
+                        <ul class="list">
+                            <li id="profile">Profile</li>
+                            <li id="change-information">Change information</li>
+                            <li id="logout">Logout</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-content">
+
+            <!-- TOP BAR MỚI – CÓ THANH 1-50 GIỐNG LISTENING -->
+            <div class="top-bar">
+                <div class="name-feature">Translate</div>
+
+                <div class="right-group">
+                    <div class="submit">
+                        <button id="submit">Submit</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <!-- ENGLISH -->
+                <div class="translation-card english-card">
+                    <div class="card-header">
+                        <div class="lang-info"><i class="fas fa-globe-americas"></i><span>Văn bản gốc</span></div>
+                        <div class="status-badge active"><i class="fas fa-play-circle"></i> Source</div>
+                    </div>
+                    <div id="contentLocal" class="card-content english-text">
+                        <!-- Nội dung tiếng Anh sẽ được JS chèn vào đây -->
+                    </div>
+                </div>
+
+                <!-- VIETNAMESE -->
+                <div class="translation-card vietnamese-card">
+                    <div class="card-header">
+                        <div class="lang-info"><i class="fas fa-globe-asia"></i><span>Đoạn người dùng dịch</span></div>
+                        <div class="status-badge"><i class="fas fa-edit"></i> Your Translation</div>
+                    </div>
+                    <div class="card-content vietnamese-text" contenteditable="true" spellcheck="false"
+                        placeholder="Nhập bản dịch của bạn ở đây...">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <div class="loading-text">AI đang xử lý...</div>
+            <div class="loading-subtext">Vui lòng chờ trong giây lát</div>
+            <div class="ai-thinking">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS -->
+</body>
+    <script src="../js/clock.js"></script>
+    <script type="module" src="../js/avatar.js"></script>
+    <script type="module" src="../js/checkLogined.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script type="module" src="../js/translate.js"></script>
+    <script type="module" src="../js/logout.js"></script>
+</html>

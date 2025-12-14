@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard | EngStudy</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/AdminDashboard.css">
+  <link rel="stylesheet" href="../css/AdminLayout.css">
+</head>
+<body>
+  <main class="main-content">
+    <div class="esadmin-container">
+
+      <div class="esadmin-stats-grid">
+        <div class="esadmin-stat-card">
+          <div class="esadmin-stat-icon"><i class="fas fa-headphones"></i></div>
+          <div class="esadmin-stat-number">--</div>
+          <div class="esadmin-stat-label">Bài tập nghe</div>
+        </div>
+
+        <div class="esadmin-stat-card">
+          <div class="esadmin-stat-icon"><i class="fas fa-question-circle"></i></div>
+          <div class="esadmin-stat-number">--</div>
+          <div class="esadmin-stat-label">Câu hỏi</div>
+        </div>
+
+        <div class="esadmin-stat-card">
+          <div class="esadmin-stat-icon"><i class="fas fa-file-audio"></i></div>
+          <div class="esadmin-stat-number">--</div>
+          <div class="esadmin-stat-label">File âm thanh</div>
+        </div>
+
+        <div class="esadmin-stat-card">
+          <div class="esadmin-stat-icon"><i class="fas fa-th-large"></i></div>
+          <div class="esadmin-stat-number">--</div>
+          <div class="esadmin-stat-label">Chủ đề</div>
+        </div>
+      </div>
+
+      <!-- Biểu đồ sẽ được JS chèn vào đây -->
+
+      <!-- User Management Section -->
+      <div class="esadmin-section">
+        <div class="esadmin-section-header">
+          <h2 class="esadmin-section-title">
+            <i class="fas fa-users"></i>
+            Quản lý người dùng
+          </h2>
+          <div class="esadmin-actions">
+            <div class="esadmin-search-box">
+              <i class="fas fa-search"></i>
+              <input type="text" id="userSearch" placeholder="Tìm kiếm người dùng...">
+            </div>
+          </div>
+        </div>
+
+        <div class="esadmin-table-container">
+          <table class="esadmin-table">
+            <thead>
+              <tr>
+                <th>Avatar</th>
+                <th>Họ và tên</th>
+                <th>Gmail</th>
+                <th>Vai trò</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+            <tbody id="userTableBody">
+              <tr>
+                <td colspan="5" class="esadmin-loading">
+                  <i class="fas fa-spinner fa-spin"></i> Đang tải dữ liệu...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="esadmin-pagination">
+          <button class="esadmin-btn-page" id="prevPage" disabled>
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <span class="esadmin-page-info">Trang <span id="currentPage">1</span> / <span id="totalPages">1</span></span>
+          <button class="esadmin-btn-page" id="nextPage">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+
+  <script src="../js/admin-header.js"></script>
+  <script type="module" src="../js/admin-dashboard.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</html>

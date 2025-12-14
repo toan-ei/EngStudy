@@ -1,0 +1,32 @@
+{
+    "api": {
+        "login": "http://localhost:8080/identity/authentication/login",
+        "register": "http://localhost:8080/identity/users",
+        "getUser": "",
+        "getAllUser": "http://localhost:8080/identity/users/all",
+        "outboundToken": "http://localhost:8080/identity/authentication/outbound/authentication",
+        "checkToken": "http://localhost:8080/identity/authentication/validCheck",
+        "refeshToken": "http://localhost:8080/identity/authentication/refreshToken",
+        "logout": "http://localhost:8080/identity/authentication/logout",
+        "getProfile": "http://localhost:8080/identity/profile/withProfileId/",
+        "getAllProfile": "http://localhost:8080/identity/profile/all",
+        "getProfileFromUserId": "http://localhost:8080/identity/profile/withUserId/",
+        "updateProfile": "http://localhost:8080/identity/profile/",
+        "createVocabulary": "http://localhost:8080/identity/vocabylaries",
+        "getVocabulary": "",
+        "deleteVocabulary": "http://localhost:8080/identity/vocabylaries/",
+        "getAllVocabulary": "http://localhost:8080/identity/vocabylaries/all",
+        "updateMeaning": "http://localhost:8080/identity/meaning/",
+        "findVocabularyByLevel": "http://localhost:8080/identity/vocabylaries/level/",
+        "fixParagraphWithVietnamese": "http://localhost:8080/identity/AI/fixParagraphWithVietnamese",
+        "fixParagraphWithEnglish": "http://localhost:8080/identity/AI/fixParagraphWithEnglish",
+        "suggestVocabulary": "http://localhost:8080/identity/AI/suggest",
+        "uploadFile": "http://localhost:8080/identity/file/media/upload",
+        "getFile": "http://localhost:8080/identity/file/media/download/",
+        "getAllTranslates": "http://localhost:8080/identity/translate/translate",
+        "getTranslate": "http://localhost:8080/identity/translate/ByLevelAndLanguage/",
+        "createTranslate": "http://localhost:8080/identity/translate/add",
+        "deleteTranslate": "http://localhost:8080/identity/translate/deleteAll",
+        "getTranslateViaTranslateId": "http://localhost:8080/identity/translate/translateViaTranslateId/"
+    }
+}

@@ -1,0 +1,162 @@
+/* ===== TOP HEADER NAVIGATION – PURPLE GALAXY ===== */
+.admin-header-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 78px;
+  background: rgba(30, 27, 75, 0.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+  z-index: 1000;
+  transition: all 0.4s ease;
+}
+
+.header-left h2 {
+  font-size: 1.8rem;
+  font-weight: 900;
+  background: linear-gradient(90deg, #c4b5fd, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.header-nav ul {
+  display: flex;
+  list-style: none;
+  margin-left: 50px;
+  gap: 8px;
+}
+
+.header-nav .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border-radius: 16px;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.header-nav .nav-link:hover {
+  background: rgba(139,92,246,0.3);
+  color: white;
+  transform: translateY(-3px);
+}
+
+.header-nav .nav-link.active {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  box-shadow: 0 8px 25px rgba(139,92,246,0.4);
+  font-weight: 600;
+}
+
+/* Mobile toggle button */
+.mobile-menu-toggle {
+  display: none;
+  background: var(--primary);
+  color: white;
+  border: none;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+}
+
+/* Overlay khi mở menu mobile */
+.header-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 998;
+}
+.header-overlay.active { display: block; }
+
+/* ===== MAIN CONTENT – ĐẨY XUỐNG DƯỚI HEADER (CHỈ ĐỊNH NGHĨA 1 LẦN) ===== */
+.main-content {
+  margin-top: 90px;                    /* 78px header + 12px khoảng thở → đẹp nhất */
+  padding: 30px;
+  min-height: calc(100vh - 90px);      /* nội dung chiếm hết phần còn lại của màn hình */
+  transition: margin-top 0.4s ease;    /* mượt khi mobile menu mở (nếu cần) */
+}
+
+/* Nếu một số trang cũ vẫn dùng .admin-container thì thêm luôn */
+.admin-container {
+  margin-top: 90px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1100px) {
+  .header-nav ul { 
+    gap: 4px; 
+  }
+  .header-nav .nav-link span { 
+    display: none; 
+  }
+  .header-nav .nav-link { 
+    padding: 12px 16px; 
+  }
+}
+
+@media (max-width: 992px) {
+  .admin-header-nav {
+    padding: 0 20px;
+    justify-content: space-between;
+  }
+  
+  .header-left h2 { 
+    font-size: 1.6rem; 
+  }
+
+  /* Menu mobile bung xuống */
+  .header-nav {
+    position: fixed;
+    top: 78px;
+    left: 0;
+    right: 0;
+    background: rgba(30, 27, 75, 0.98);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 20px;
+    transform: translateY(-100%);
+    transition: transform 0.4s ease;
+    z-index: 999;
+  }
+  
+  .header-nav.active { 
+    transform: translateY(0); 
+  }
+  
+  .header-nav ul {
+    flex-direction: column;
+    margin-left: 0;
+    gap: 8px;
+  }
+  
+  .header-nav .nav-link span { 
+    display: inline; 
+  }
+  .header-nav .nav-link { 
+    justify-content: center; 
+  }
+  
+  .mobile-menu-toggle { 
+    display: block; 
+  }
+
+  /* Khi menu mobile mở, đẩy nội dung xuống thêm để không bị che */
+  .header-nav.active ~ .main-content,
+  .header-nav.active ~ .admin-container {
+    margin-top: calc(90px + 300px); /* tùy chiều cao menu mobile thực tế, có thể chỉnh thành 350px nếu cần */
+  }
+}
