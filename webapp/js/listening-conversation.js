@@ -10,6 +10,8 @@ let flatQuestions = [];           // Array chứa 10 câu hỏi
 let currentIndex = 0;             // Đang ở câu số mấy (0 → 9)
 let userAnswers = {};             // { questionId: "A" }
 let answeredCount = 0;
+let hasSubmitted = false;
+let correctAnswers = {};
 
 // DOM elements
 const audioEl = document.querySelector(".conversation-audio");
@@ -103,10 +105,21 @@ function loadQuestion(index) {
         const choice = btn.dataset.choice;
         btn.querySelector(".text").textContent = question[`option${choice}`];
 
-        btn.classList.remove("selected");
+        btn.classList.remove("selected", "correct", "wrong");
+        btn.disabled = hasSubmitted;
 
+        // user selected
         if (userAnswers[question.questionId] === choice) {
             btn.classList.add("selected");
+        }
+
+        // after submit → highlight
+        if (hasSubmitted && correctAnswers[question.questionId]) {
+            if (choice === correctAnswers[question.questionId]) {
+                btn.classList.add("correct");   // đáp án đúng
+            } else if (userAnswers[question.questionId] === choice) {
+                btn.classList.add("wrong");     // chọn sai
+            }
         }
     });
 
@@ -172,14 +185,56 @@ function setupEvents() {
     });
 
     // Submit
-    document.getElementById("submit-btn").addEventListener("click", () => {
-        if (answeredCount < 10) {
-            alert("Bạn chưa trả lời đủ 10 câu!");
-            return;
-        }
+    document.getElementById("submit-btn").addEventListener("click", submitListening);
+}
 
-        alert("Nộp bài thành công!");
-    });
+async function submitListening() {
+    if (hasSubmitted) return;
+
+    if (answeredCount < flatQuestions.length) {
+        alert(`Bạn chưa trả lời đủ ${flatQuestions.length} câu!`);
+        return;
+    }
+
+    const payload = {
+        userId: "current-user-id", // TODO: thay bằng auth thật
+        answers: flatQuestions.map(q => ({
+            questionId: q.questionId,
+            selectedOption: userAnswers[q.questionId] ?? null
+        }))
+    };
+
+    const submitBtn = document.getElementById("submit-btn");
+
+    try {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "Đang chấm...";
+
+        const res = await fetch("http://localhost:5001/listening-submit", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        });
+
+        if (!res.ok) throw new Error("Submit failed");
+
+        const data = await res.json();
+
+        hasSubmitted = true;
+        correctAnswers = data.correctAnswers || {};
+
+        showResult(data);
+        loadQuestion(currentIndex);
+
+        submitBtn.innerHTML = "ĐÃ NỘP";
+        submitBtn.disabled = true;
+
+    } catch (err) {
+        console.error(err);
+        alert("Có lỗi khi nộp bài");
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = "NỘP BÀI";
+    }
 }
 
 
@@ -189,4 +244,26 @@ function setupEvents() {
 function updateAnsweredCount() {
     answeredCount = Object.keys(userAnswers).length;
     answeredCountEl.textContent = answeredCount;
+}
+
+function showResult(data) {
+    const message =
+        data.totalScore >= 8 ? "Xuất sắc!" :
+        data.totalScore >= 6 ? "Tốt lắm!" :
+        "Cố gắng hơn nhé!";
+
+    transcriptBox.innerHTML = `
+        <div style="text-align:center;padding:30px;border-radius:20px;background:rgba(15,166,166,0.1);">
+            <h2 style="font-size:28px;color:#0FA6A6;">KẾT QUẢ</h2>
+            <p style="font-size:48px;font-weight:900;">
+                ${data.totalScore} / ${data.maxScore}
+            </p>
+            <p style="font-size:22px;">
+                Đúng ${data.percent.toFixed(1)}%
+            </p>
+            <p style="margin-top:20px;font-size:18px;">
+                ${message}
+            </p>
+        </div>
+    `;
 }

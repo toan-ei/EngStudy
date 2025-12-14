@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { ListeningQuestion } from '../listening-question/listening-question.entity';
 import { UserListeningResult } from '../listening-result/listening-result.entity';
 import { UserListeningAnswer } from './listening-answers.entity';
@@ -19,62 +19,64 @@ export class ListeningSubmitService {
     private answerRepo: Repository<UserListeningAnswer>,
   ) {}
 
-  async submit(dto: SubmitListeningDto) {
-    const { exerciseId, userId, answers } = dto;
 
-    // 1. Lấy toàn bộ câu hỏi
+  async submit(dto: SubmitListeningDto) {
+    const { userId, answers } = dto;
+
+    // 1. Lấy danh sách questionId user đã làm
+    const questionIds = answers.map(a => a.questionId);
+
+    // 2. Lấy đúng các câu hỏi đó từ DB
     const questions = await this.questionRepo.find({
-      where: { exerciseId, isDeleted: false },
+      where: {
+        questionId: In(questionIds),
+        isDeleted: false,
+      },
     });
 
     if (!questions.length) {
-      throw new NotFoundException(`Exercise ${exerciseId} not found`);
+      throw new NotFoundException('No questions found for submission');
     }
 
-    const questionIds = questions.map(q => q.questionId);
-
-    // 2. Map đáp án đúng (correctOption)
+    // 3. Map đáp án đúng
     const correctMap = new Map<number, 'A' | 'B' | 'C' | 'D'>();
-
     questions.forEach(q => {
-      correctMap.set(q.questionId, q.correctOption); // <-- đã có correctOption
+      correctMap.set(q.questionId, q.correctOption);
     });
 
-    // 3. Tạo kết quả tổng
+    // 4. Tạo result (exerciseId giờ chỉ mang tính tham chiếu)
     const result = this.resultRepo.create({
       userId,
-      exercise: { exerciseId },
       totalScore: 0,
       maxScore: questions.length,
       percent: 0,
     });
     await this.resultRepo.save(result);
 
-    // 4. Tạo câu trả lời
+    // 5. Chấm điểm
     let totalScore = 0;
     const answerEntities: UserListeningAnswer[] = [];
 
     for (const a of answers) {
       const correctChar = correctMap.get(a.questionId);
-
       const isCorrect =
         a.selectedOption != null && a.selectedOption === correctChar;
 
       if (isCorrect) totalScore += 1;
 
-      const answerEntity = this.answerRepo.create({
-        result,
-        question: { questionId: a.questionId },
-        selectedOption: a.selectedOption ?? null,
-        isCorrect,
-      });
-
-      answerEntities.push(answerEntity);
+      answerEntities.push(
+        this.answerRepo.create({
+          result,
+          question: { questionId: a.questionId },
+          selectedOption: a.selectedOption ?? null,
+          isCorrect,
+        }),
+      );
     }
 
     await this.answerRepo.save(answerEntities);
 
-    // 5. Cập nhật kết quả
+    // 6. Update kết quả
     result.totalScore = totalScore;
     result.percent = (totalScore / questions.length) * 100;
     await this.resultRepo.save(result);
@@ -84,9 +86,9 @@ export class ListeningSubmitService {
       totalScore,
       maxScore: questions.length,
       percent: result.percent,
-      // include mapping of questionId -> correctOption so client can highlight answers
-      correctAnswers: Object.fromEntries(Array.from(correctMap.entries()).map(([k, v]) => [k, v])),
+      correctAnswers: Object.fromEntries(correctMap),
     };
   }
+
 
 }

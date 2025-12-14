@@ -9,8 +9,6 @@ export class AnswerDto {
 }
 
 export class SubmitListeningDto {
-  @ApiProperty({ description: 'ID của bài nghe' })
-  exerciseId: number;
 
   @ApiProperty({ description: 'ID của user' })
   userId: string;

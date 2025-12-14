@@ -136,7 +136,6 @@ submitBtn.addEventListener('click', async () => {
     if (hasSubmitted || submitBtn.disabled) return;
 
     const payload = {
-        exerciseId: questions[0].exerciseId,
         userId: "current-user-id", // ← thay bằng userId thật khi có auth
         answers: questions.map(q => ({
             questionId: q.questionId,
@@ -159,7 +158,7 @@ submitBtn.addEventListener('click', async () => {
         const data = await res.json();
 
         hasSubmitted = true;
-
+        correctAnswers = data.correctAnswers || {};
         showResult(data);
 
         submitBtn.disabled = true;
@@ -201,7 +200,7 @@ function setupPagination() {
     const oldBtns = paginationContainer.querySelectorAll('button:not(.icon-left):not(.icon-right)');
     oldBtns.forEach(b => b.remove());
 
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= questions.length; i++) {
         const btn = document.createElement('button');
         btn.textContent = i;
         btn.addEventListener('click', () => loadQuestion(i - 1));
@@ -214,7 +213,7 @@ function updatePagination() {
     nums.forEach((b, i) => b.classList.toggle('active', i === currentIndex));
 
     leftArrow.disabled = currentIndex === 0;
-    rightArrow.disabled = currentIndex === 9;
+    rightArrow.disabled = currentIndex === questions.length - 1;
 }
 
 leftArrow.onclick = () => currentIndex > 0 && loadQuestion(currentIndex - 1);
