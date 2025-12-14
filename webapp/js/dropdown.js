@@ -1,5 +1,3 @@
-// ../js/dropdown.js
-// Giữ nguyên hoàn toàn class "list", chỉ dùng CSS có sẵn của bạn
 document.addEventListener('DOMContentLoaded', () => {
     const btn = document.getElementById('extension-icon');
     const menu = btn.parentElement.querySelector('.list'); // lấy đúng <ul class="list">
@@ -45,3 +43,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+

@@ -9,10 +9,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.antlr.v4.runtime.Token;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 
@@ -23,22 +20,30 @@ import java.text.ParseException;
 public class AuthenticationController {
     AuthenticationService authenticationService;
 
+    @PostMapping("/outbound/authentication")
+    public ApiResponse<AuthenticationResponse> outboundAuthenticate(
+            @RequestParam("code") String code) {
+        return ApiResponse.<AuthenticationResponse>builder()
+                .result(authenticationService.outboundAuthenticate(code))
+                .build();
+    }
+
     @PostMapping("/login")
-    public ApiResponse<AuthenticationResponse> authentication(@RequestBody AuthenticationRequest request){
+    public ApiResponse<AuthenticationResponse> authentication(@RequestBody AuthenticationRequest request) {
         return ApiResponse.<AuthenticationResponse>builder()
                 .result(authenticationService.authentication(request))
                 .build();
     }
 
     @PostMapping("/validCheck")
-    public ApiResponse<AuthenticationResponse> checkToken(@RequestBody TokenRequest request){
+    public ApiResponse<AuthenticationResponse> checkToken(@RequestBody TokenRequest request) {
         return ApiResponse.<AuthenticationResponse>builder()
                 .result(authenticationService.checkToken(request))
                 .build();
     }
 
     @PostMapping("/logout")
-    public ApiResponse<String> logout(@RequestBody TokenRequest request){
+    public ApiResponse<String> logout(@RequestBody TokenRequest request) {
         return ApiResponse.<String>builder()
                 .result(authenticationService.logout(request))
                 .build();

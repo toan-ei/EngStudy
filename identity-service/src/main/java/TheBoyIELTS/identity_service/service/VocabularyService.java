@@ -26,15 +26,16 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Slf4j
 public class VocabularyService {
     VocabularyRepository vocabularyRepository;
     VocabularyMapper vocabularyMapper;
 
-    public VocabularyResponse createVocabulary(VocabularyRequest request){
+    public VocabularyResponse createVocabulary(VocabularyRequest request) {
         boolean exists = vocabularyRepository.existsByWord(request.getWord());
-        if (exists) throw new RuntimeException("word already exists");
+        if (exists)
+            throw new RuntimeException("word already exists");
 
         Vocabulary vocabulary = Vocabulary.builder()
                 .word(request.getWord())
@@ -61,9 +62,10 @@ public class VocabularyService {
         return vocabularyMapper.toVocabularyResponse(save);
     }
 
-    public String getDataFromFileExcelToDatabase(MultipartFile file){
+    public String getDataFromFileExcelToDatabase(MultipartFile file) {
         boolean validExcelFile = UploadFileExcel.isValidExcelFile(file);
-        if(!validExcelFile) throw new RuntimeException("not an excel file");
+        if (!validExcelFile)
+            throw new RuntimeException("not an excel file");
         try {
             List<DataFromExcelFile> datas = UploadFileExcel.getDataFromExcelFile(file.getInputStream());
             List<Vocabulary> vocabularies = new ArrayList<>();
@@ -94,52 +96,52 @@ public class VocabularyService {
         }
     }
 
-    public VocabularyResponse getVovabulary(String vocabularyId){
+    public VocabularyResponse getVovabulary(String vocabularyId) {
         Vocabulary vocabulary = vocabularyRepository.findById(vocabularyId)
                 .orElseThrow(() -> new RuntimeException("vocabulary not found"));
         return vocabularyMapper.toVocabularyResponse(vocabulary);
     }
 
-    public List<VocabularyResponse> getVocabularies(){
+    public List<VocabularyResponse> getVocabularies() {
         return vocabularyRepository.findAll()
                 .stream().map(vocabularyMapper::toVocabularyResponse).collect(Collectors.toList());
     }
 
-    public VocabularyResponse updateVocabulary(String vocabularyId, VocabularyUpdateRequest request){
+    public VocabularyResponse updateVocabulary(String vocabularyId, VocabularyUpdateRequest request) {
         Vocabulary vocabulary = vocabularyRepository.findById(vocabularyId)
                 .orElseThrow(() -> new RuntimeException("vocabulary not found"));
         vocabularyMapper.updateVocabulary(vocabulary, request);
         return vocabularyMapper.toVocabularyResponse(vocabularyRepository.save(vocabulary));
     }
 
-    public VocabularyResponse deleteVocabulary(String vocabularyId){
+    public VocabularyResponse deleteVocabulary(String vocabularyId) {
         Vocabulary vocabulary = vocabularyRepository.findById(vocabularyId)
                 .orElseThrow(() -> new RuntimeException("vocabulary not found"));
         vocabulary.setDeleted(true);
         return vocabularyMapper.toVocabularyResponse(vocabularyRepository.save(vocabulary));
     }
 
-    public List<VocabularyResponse> getVocabulariesWithLevel(String level){
+    public List<VocabularyResponse> getVocabulariesWithLevel(String level) {
         List<Vocabulary> vocabularies = vocabularyRepository.findByLevel(level);
         log.info("count {}", vocabularies.size());
         return vocabularies.stream().map(vocabularyMapper::toVocabularyResponse).collect(Collectors.toList());
     }
 
-    public String updateLearned(List<UpdateLearnedRequest> requestList){
+    public String updateLearned(List<UpdateLearnedRequest> requestList) {
         List<String> vocabularyIdList = new ArrayList<>();
-        for (UpdateLearnedRequest request : requestList){
+        for (UpdateLearnedRequest request : requestList) {
             vocabularyIdList.add(request.getVocabularyId());
         }
-        List<Vocabulary> vocabularyList = vocabularyRepository.findByIdIn(vocabularyIdList);
+        List<Vocabulary> vocabularyList = vocabularyRepository.findByVocabularyIdIn(vocabularyIdList);
         Map<String, Vocabulary> vocabularyMap = new HashMap<>();
-        for (Vocabulary vocabulary : vocabularyList){
+        for (Vocabulary vocabulary : vocabularyList) {
             vocabularyMap.put(vocabulary.getVocabularyId(), vocabulary);
         }
         List<Vocabulary> saveUpdate = new ArrayList<>();
-        for(UpdateLearnedRequest request : requestList){
+        for (UpdateLearnedRequest request : requestList) {
             Vocabulary vocabulary = vocabularyMap.get(request.getVocabularyId());
             vocabulary.setWrongCount(vocabulary.getWrongCount() + 1);
-            if (!vocabulary.isLearned()){
+            if (!vocabulary.isLearned()) {
                 vocabulary.setLearned(true);
             }
             saveUpdate.add(vocabulary);

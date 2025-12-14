@@ -40,7 +40,7 @@
     height: 42px;
     background: linear-gradient(90deg, #053238, #3da8be);
     border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
     color: #fff;
     display: flex;
     justify-content: center;
@@ -55,7 +55,7 @@
     height: 52px;
     background: #0FA6A6;
     border-radius: 50%;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 }
 
 .icon {
@@ -78,18 +78,94 @@
     box-shadow: 0 6px 20px rgba(15, 166, 166, 0.25);
 }
 
+/* SENTENCE BAR ------------------------------------------------ */
+.sentence-bar {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 12px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.list-vocabulary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 4px 0;
+    scrollbar-width: none;
+}
+
+.list-vocabulary::-webkit-scrollbar {
+    display: none;
+}
+
+.list-vocabulary button {
+    min-width: 44px;
+    height: 38px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px solid rgba(15, 166, 166, 0.3);
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #2c3e50;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.list-vocabulary button:hover {
+    background: white;
+    border-color: #0FA6A6;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(15, 166, 166, 0.25);
+}
+
+.list-vocabulary button.active {
+    background: linear-gradient(135deg, #0FA6A6, #12448A);
+    color: white;
+    border-color: #0FA6A6;
+    box-shadow: 0 8px 25px rgba(15, 166, 166, 0.35);
+}
+
+.icon-left,
+.icon-right {
+    width: 36px !important;
+    height: 36px !important;
+    background: linear-gradient(135deg, #12448A, #0FA6A6) !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: 0 6px 15px rgba(18, 68, 138, 0.35) !important;
+    font-size: 12px !important;
+}
+
+.icon-left:hover,
+.icon-right:hover {
+    transform: scale(1.08);
+    box-shadow: 0 10px 20px rgba(18, 68, 138, 0.5) !important;
+}
+
 /* Dropdown menu */
 .list {
-   
+    display: none;
     position: absolute;
     right: 0;
-    top: 68px;                    /* điều chỉnh theo chiều cao avatar + padding */
+    top: 68px;
+    /* điều chỉnh theo chiều cao avatar + padding */
     min-width: 210px;
     background: rgba(255, 255, 255, 0.98);
     backdrop-filter: blur(20px);
     border-radius: 18px;
-    border: 1.5px solid rgba(16, 251, 251, 0.2);
-    box-shadow: 
+    border: 1.5px solid rgba(15, 166, 166, 0.2);
+    box-shadow:
         0 20px 50px rgba(0, 0, 0, 0.15),
         0 8px 25px rgba(15, 166, 166, 0.18);
     overflow: hidden;
@@ -168,8 +244,8 @@
     backdrop-filter: blur(20px);
     border-radius: 20px;
     padding: 12px 20px;
-    border: 1px solid rgba(255,255,255,0.3);
-    box-shadow: 0 12px 35px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     gap: 10px;
@@ -184,7 +260,9 @@
     scrollbar-width: none;
 }
 
-.list-vocabulary::-webkit-scrollbar { display: none; }
+.list-vocabulary::-webkit-scrollbar {
+    display: none;
+}
 
 .list-vocabulary button {
     min-width: 44px;
@@ -199,7 +277,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     flex-shrink: 0;
 }
@@ -218,7 +296,8 @@
     box-shadow: 0 8px 25px rgba(15, 166, 166, 0.35);
 }
 
-.icon-left, .icon-right {
+.icon-left,
+.icon-right {
     width: 36px !important;
     height: 36px !important;
     background: linear-gradient(135deg, #12448A, #0FA6A6) !important;
@@ -228,7 +307,8 @@
     font-size: 12px !important;
 }
 
-.icon-left:hover, .icon-right:hover {
+.icon-left:hover,
+.icon-right:hover {
     transform: scale(1.08);
     box-shadow: 0 10px 20px rgba(18, 68, 138, 0.5) !important;
 }
@@ -284,7 +364,7 @@
     left: -50%;
     width: 200%;
     height: 200%;
-    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
     transform: rotate(45deg);
     transition: all 0.6s;
 }
@@ -294,15 +374,23 @@
 }
 
 @keyframes shine {
-    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+
+    100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
 }
+
 .right-group {
     display: flex;
     align-items: center;
-    gap: 20px; /* khoảng cách giữa thanh số và nút Submit */
+    gap: 20px;
+    /* khoảng cách giữa thanh số và nút Submit */
     order: 2;
 }
+
 /* MAIN CONTENT */
 /* THÊM HOẶC THAY ĐỔI CHỈ 1 DÒNG NÀY TRONG PHẦN .main-content */
 .main-content {
@@ -310,23 +398,32 @@
     gap: 20px;
     width: 98%;
     max-width: 1700px;
-    margin: 0 auto 60px auto;     /* tăng khoảng cách dưới */
+    margin: 0 auto 60px auto;
+    /* tăng khoảng cách dưới */
     padding: 0 20px;
-    flex: 1;                      /* quan trọng: chiếm hết chiều cao còn lại */
-    min-height: calc(100vh - 280px); /* mới thêm: đảm bảo luôn cao đủ đẹp */
+    flex: 1;
+    /* quan trọng: chiếm hết chiều cao còn lại */
+    min-height: calc(100vh - 280px);
+    /* mới thêm: đảm bảo luôn cao đủ đẹp */
 }
+
 /* GIẢM KHOẢNG TRỐNG TỪ "Translate" XUỐNG 2 CARD */
 .container-content {
-    gap: 30px !important;        /* giảm từ 50px xuống 20px */
-    padding: 40px 0 !important;  /* giảm padding trên/dưới */
+    gap: 30px !important;
+    /* giảm từ 50px xuống 20px */
+    padding: 40px 0 !important;
+    /* giảm padding trên/dưới */
 }
 
 /* ĐỒNG THỜI LÀM 2 CARD CAO HƠN, ĐẦY ĐỦ HƠN */
 .main-content {
-    flex: 1 !important;                    /* bắt buộc chiếm hết chiều cao còn lại */
-    min-height: calc(100vh - 220px) !important;  /* tăng chiều cao tối thiểu */
+    flex: 1 !important;
+    /* bắt buộc chiếm hết chiều cao còn lại */
+    min-height: calc(100vh - 220px) !important;
+    /* tăng chiều cao tối thiểu */
     margin-bottom: 40px !important;
 }
+
 /* PAGE INSIDE MAIN CONTENT */
 .page {
     flex: 1;
@@ -368,7 +465,8 @@
 /* TRANSLATION CARDS - THÊM VÀO CUỐI FILE CSS */
 .main-content {
     display: flex;
-    gap: 25px; /* Khoảng cách giữa 2 card */
+    gap: 25px;
+    /* Khoảng cách giữa 2 card */
 }
 
 .translation-card {
@@ -379,7 +477,7 @@
     border: 1px solid rgba(15, 166, 166, 0.15);
     overflow: hidden;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
     position: relative;
 }
 
@@ -403,7 +501,7 @@
 
 .translation-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
 }
 
 .card-header {
@@ -425,7 +523,7 @@
     left: -50%;
     width: 200%;
     height: 200%;
-    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
     transform: rotate(45deg);
     transition: all 0.6s;
     opacity: 0;
@@ -437,8 +535,13 @@
 }
 
 @keyframes shine {
-    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+
+    100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
 }
 
 .lang-info {
@@ -473,8 +576,15 @@
 }
 
 @keyframes pulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(37, 190, 201, 0.4); }
-    50% { box-shadow: 0 0 0 8px rgba(37, 190, 201, 0); }
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(37, 190, 201, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 0 0 8px rgba(37, 190, 201, 0);
+    }
 }
 
 .card-content {
@@ -571,22 +681,27 @@
     left: -50%;
     width: 200%;
     height: 200%;
-    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
     transform: rotate(45deg);
     transition: all 0.6s;
 }
 
 /* ==================== NÚT SUBMIT NHỎ VÀ MÀU KHÁC ==================== */
 .submit button {
-    width: 160px;                    /* nhỏ hơn hẳn (trước là 280px) */
-    height: 52px;                    /* thấp hơn một chút */
-    background: linear-gradient(135deg, #ff6b6b, #ee5a52);  /* màu đỏ cam nổi bật */
-   
+    width: 160px;
+    /* nhỏ hơn hẳn (trước là 280px) */
+    height: 52px;
+    /* thấp hơn một chút */
+    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+    /* màu đỏ cam nổi bật */
+
     color: white;
-    font-size: 20px;                 /* chữ nhỏ hơn */
+    font-size: 20px;
+    /* chữ nhỏ hơn */
     font-weight: 700;
     border: none;
-    border-radius: 16px;             /* bo tròn mềm hơn */
+    border-radius: 16px;
+    /* bo tròn mềm hơn */
     box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
     cursor: pointer;
     transition: all 0.3s ease;
@@ -599,9 +714,11 @@
 .submit button::before {
     content: '';
     position: absolute;
-    top: -50%; left: -50%;
-    width: 200%; height: 200%;
-    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
     transform: rotate(45deg);
     transition: all 0.6s;
 }
@@ -616,8 +733,13 @@
 }
 
 @keyframes shine {
-    0%   { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+
+    100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
 }
 
 /* Khi màn hình nhỏ thì Submit vẫn nhỏ gọn */
@@ -630,51 +752,55 @@
 }
 
 
- .correct {
-            background: #d4edda !important;
-            border-left: 5px solid #28a745 !important;
-            padding-left: 12px !important;
-            border-radius: 0 8px 8px 0;
-            margin: 10px 0;
-        }
-        .wrong {
-            background: #f8d7da !important;
-            border-left: 5px solid #dc3545 !important;
-            padding-left: 12px !important;
-            border-radius: 0 8px 8px 0;
-            margin: 10px 0;
-        }
-        .correct-answer {
-            background: #e3f2fd !important;
-            border-left: 5px solid #2196F3 !important;
-            padding: 12px 12px 12px 16px !important;
-            margin: 8px 0 20px 0;
-            border-radius: 0 8px 8px 0;
-            font-size: 16.5px;
-            color: #1565c0;
-            font-weight: 500;
-        }
-        .correct-answer::before {
-            content: "Đáp án đúng:";
-            font-weight: bold;
-            color: #1976d2;
-            display: block;
-            margin-bottom: 6px;
-        }
-        .submit button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
+.correct {
+    background: #d4edda !important;
+    border-left: 5px solid #28a745 !important;
+    padding-left: 12px !important;
+    border-radius: 0 8px 8px 0;
+    margin: 10px 0;
+}
+
+.wrong {
+    background: #f8d7da !important;
+    border-left: 5px solid #dc3545 !important;
+    padding-left: 12px !important;
+    border-radius: 0 8px 8px 0;
+    margin: 10px 0;
+}
+
+.correct-answer {
+    background: #e3f2fd !important;
+    border-left: 5px solid #2196F3 !important;
+    padding: 12px 12px 12px 16px !important;
+    margin: 8px 0 20px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 16.5px;
+    color: #1565c0;
+    font-weight: 500;
+}
+
+.correct-answer::before {
+    content: "Đáp án đúng:";
+    font-weight: bold;
+    color: #1976d2;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.submit button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
 
 
- /* SENTENCE BAR ------------------------------------------------ */
+/* SENTENCE BAR ------------------------------------------------ */
 .sentence-bar {
     background: rgba(255, 255, 255, 0.9);
     backdrop-filter: blur(20px);
     border-radius: 20px;
     padding: 12px 20px;
-    border: 1px solid rgba(255,255,255,0.3);
-    box-shadow: 0 12px 35px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     gap: 10px;
@@ -689,7 +815,9 @@
     scrollbar-width: none;
 }
 
-.list-vocabulary::-webkit-scrollbar { display: none; }
+.list-vocabulary::-webkit-scrollbar {
+    display: none;
+}
 
 .list-vocabulary button {
     min-width: 44px;
@@ -704,7 +832,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     flex-shrink: 0;
 }
@@ -723,7 +851,8 @@
     box-shadow: 0 8px 25px rgba(15, 166, 166, 0.35);
 }
 
-.icon-left, .icon-right {
+.icon-left,
+.icon-right {
     width: 36px !important;
     height: 36px !important;
     background: linear-gradient(135deg, #12448A, #0FA6A6) !important;
@@ -733,10 +862,12 @@
     font-size: 12px !important;
 }
 
-.icon-left:hover, .icon-right:hover {
+.icon-left:hover,
+.icon-right:hover {
     transform: scale(1.08);
     box-shadow: 0 10px 20px rgba(18, 68, 138, 0.5) !important;
 }
+
 .top-bar {
     display: flex;
     align-items: center;
@@ -765,4 +896,136 @@ ul li a {
 
 ul li a:hover {
     color: #0FA6A6;
+}
+
+
+/* Loading Overlay Styles */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.loading-overlay.active {
+    display: flex;
+}
+
+.loading-content {
+    text-align: center;
+    color: white;
+    animation: slideUp 0.4s ease-out;
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #4CAF50;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.loading-text {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.loading-subtext {
+    font-size: 14px;
+    opacity: 0.8;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* AI Animation */
+.ai-thinking {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background: #4CAF50;
+    border-radius: 50%;
+    animation: bounce 1.4s ease-in-out infinite;
+}
+
+.dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    80%,
+    100% {
+        transform: scale(0);
+        opacity: 0.5;
+    }
+
+    40% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }

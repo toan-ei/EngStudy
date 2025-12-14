@@ -1,53 +1,43 @@
+const level = localStorage.getItem("selectedLevel");
+console.log("i selected level: ", level);
+if (level) {
+    document.querySelector(".name-feature").textContent = "Translate - " + level;
+}
 
 
-        // Dropdown menu
-        document.getElementById('extension-icon').addEventListener('click', function(e) {
-            e.stopPropagation();
-            const list = this.parentElement.querySelector('.list');
-            list.style.display = list.style.display === 'block' ? 'none' : 'block';
-        });
+document.getElementById('extension-icon').addEventListener('click', function (e) {
+    e.stopPropagation();
+    const list = this.parentElement.querySelector('.list');
+    list.style.display = list.style.display === 'block' ? 'none' : 'block';
+});
 
-        document.addEventListener('click', function() {
-            const lists = document.querySelectorAll('.list');
-            lists.forEach(list => list.style.display = 'none');
-        });
+document.addEventListener('click', function () {
+    const lists = document.querySelectorAll('.list');
+    lists.forEach(list => list.style.display = 'none');
+});
 
-        // Language button click (demo)
-        document.querySelectorAll('.language-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.language-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                console.log('Selected:', this.querySelector('h3').textContent);
-            });
-        });
-
-
-    // Lấy level đã chọn từ trang trước
-    const level = localStorage.getItem("selectedLevel");
-
-    // Thay đổi tiêu đề Translate → Translate - A1
-    if (level) {
-        document.querySelector(".name-feature").textContent = "Translate - " + level;
-    }
-
-    // Dropdown menu
-    document.getElementById('extension-icon').addEventListener('click', function(e) {
-        e.stopPropagation();
-        const list = this.parentElement.querySelector('.list');
-        list.style.display = list.style.display === 'block' ? 'none' : 'block';
+document.querySelectorAll('.language-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+        document.querySelectorAll('.language-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
     });
+});
 
-    document.addEventListener('click', function() {
-        const lists = document.querySelectorAll('.list');
-        lists.forEach(list => list.style.display = 'none');
-    });
 
-    // Language button click
-    document.querySelectorAll('.language-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            document.querySelectorAll('.language-btn').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-        });
-    });
+const languageVIDiv = document.getElementById("VI-lg");
+const languageENDiv = document.getElementById("EN-lg");
 
-    
+languageVIDiv.addEventListener('click', function(){
+    localStorage.setItem("language", "VI");
+    localStorage.setItem("localLanguage", "EN");
+    window.location.href = "TranslateChooseLesson.html";
+})
+
+languageENDiv.addEventListener('click', function() {
+    localStorage.setItem("language", "EN");
+    localStorage.setItem("localLanguage", "VI");
+    window.location.href = "TranslateChooseLesson.html";
+})
+
+
+

@@ -1,7 +1,7 @@
-const ApiLogin = "http://localhost:8080/identity/authentication/login";
-const ApiRegister = "http://localhost:8080/identity/users";
+import { loadConfig } from "./configloader.js";
 
-function login(email, password){
+
+async function login(email, password){
     if(!email || !password){
         alert("vui lòng nhập đầy đủ email and password!")
         return;
@@ -17,7 +17,10 @@ function login(email, password){
         "gmail": email,
         "password": password
     };
-    fetch(ApiLogin, {
+
+    const config = await loadConfig();
+
+    fetch(config.api.login, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -39,7 +42,8 @@ function login(email, password){
     })
 }
 
-function register(email, password){
+
+async function register(email, password){
     if(!email || !password){
         alert("vui lòng nhập đầy đủ email and password!")
         return;
@@ -57,7 +61,10 @@ function register(email, password){
         "gmail": email,
         "password": password
     };
-    fetch(ApiRegister, {
+
+    const config = await loadConfig();
+
+    fetch(config.api.register, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -106,7 +113,14 @@ window.addEventListener("DOMContentLoaded", () => {
     btnRegister.onclick = () => {
         const email = document.getElementById('register-email').value;
         const password = document.getElementById('register-password').value;
-        register(email, password);
+        const confirmPassword = document.getElementById('register-confirm-password').value;
+        if(password === confirmPassword){
+            register(email, password);
+        }
+        else{
+            alert("vui lòng nhập kiểm tra lại password");
+        }
+        
     }
 
 })

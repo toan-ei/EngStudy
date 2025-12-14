@@ -12,17 +12,20 @@
         <div class="header">
             <div class="sub-header">
                 <div class="name-centre">
-                    <h1>EngStudy</h1>
+                    <a style="text-decoration: none;" href="home.html"><h1>EngStudy</h1></a>
                 </div>
                 <div class="container-item">
                     <div class="clock"></div>
-                    <div class="avatar"></div>
+                    <div class="avatar-wrapper">
+                        <img  class="avatar" id="avatar-preview" src="" alt="">
+                     <input type="file" id="avatar-input" accept="image/*" style="display: none;">
+                    </div>
                     <div class="icon">
                         <i id="extension-icon" class="fa-solid fa-ellipsis"></i>
                         <ul class="list">
-                            <li><a href="">Profile</a></li>
-                            <li><a href="">Change information</a></li>
-                            <li><a href="">Logout</a></li>
+                            <li id="profile">Profile</li>
+                            <li id="change-information">Change information</li>
+                            <li id="logout">Logout</li>
                         </ul>
                     </div>
                 </div>
@@ -40,7 +43,7 @@
                             <i class="fas fa-globe-asia"></i>
                             <span>🇻🇳 Vietnamese</span>
                         </div>
-                        <div class="status-badge active">
+                        <div id="EN-lg" class="status-badge active">
                             <i class="fas fa-arrow-right"></i>
                             English
                         </div>
@@ -59,7 +62,7 @@
                             <i class="fas fa-globe-americas"></i>
                             <span>🇺🇸 English</span>
                         </div>
-                        <div class="status-badge">
+                        <div id="VI-lg" class="status-badge">
                             <i class="fas fa-arrow-right"></i>
                             Vietnamese
                         </div>
@@ -116,6 +119,8 @@
 
     <script src="../js/clock.js"></script>
     <script src="../js/avatar.js"></script>
-     <script src="../js/translateLanguage.js"></script>
+    <script type="module" src="../js/checkLogined.js"></script>
+    <script type="module" src="../js/translateLanguage.js"></script>
+    <script type="module" src="../js/logout.js"></script>
 </body>
 </html>

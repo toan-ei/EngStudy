@@ -432,10 +432,10 @@
     opacity: 1;
 }
 
-@keyframes shine {
+/*@keyframes shine {
     0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
     100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-}
+}*/
 
 .lang-direction {
     display: flex;
@@ -468,11 +468,10 @@
     animation: pulse 2s infinite;
 }
 
-@keyframes pulse {
+/*@keyframes pulse {
     0%, 100% { box-shadow: 0 0 0 0 rgba(37, 190, 201, 0.4); }
     50% { box-shadow: 0 0 0 12px rgba(37, 190, 201, 0); }
-}
-
+}*/
 .btn-content {
     flex: 1;
     padding: 30px 35px;    /* GIẢM TỪ 35px NHƯNG GIỮ PADDING HÀNG NGANG */

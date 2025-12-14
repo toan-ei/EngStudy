@@ -12,17 +12,20 @@
         <div class="header">
             <div class="sub-header">
                 <div class="name-centre">
-                    <h1>EngStudy</h1>
+                    <a style="text-decoration: none;" href="home.html"><h1>EngStudy</h1></a>
                 </div>
                 <div class="container-item">
                     <div class="clock"></div>
-                    <div class="avatar"></div>
+                    <div class="avatar-wrapper">
+                        <img  class="avatar" id="avatar-preview" src="" alt="">
+                     <input type="file" id="avatar-input" accept="image/*" style="display: none;">
+                    </div>
                     <div class="icon">
                         <i id="extension-icon" class="fa-solid fa-ellipsis"></i>
                         <ul class="list">
-                            <li><a href="">Profile</a></li>
-                            <li><a href="">Change Information</a></li>
-                            <li><a href="">Logout</a></li>
+                            <li id="profile">Profile</li>
+                            <li id="change-information">Change information</li>
+                            <li id="logout">Logout</li>
                         </ul>
                     </div>
                 </div>
@@ -32,23 +35,8 @@
         <div class="container-content">
             <div class="main-title">🎓 Bạn hãy chọn chủ đề</div>
             <div class="name-feature">Translate</div>
-            <div class="container-level">
-                <button>Family</button>
-                <button>Never Give Up</button>
-                <button>Learn from Mistakes</button>
-                <button>Animals</button>
-                <button>My Old Brother</button>
-                <button>My Mother</button>
-                <button>Daily Life</button>
-                <button>Food</button>
-                <button>Travel</button>
-                <button>Education</button>
-                <button>Health</button>
-                <button>Technology</button>
-                <button>Environment</button>
-                <button>My Love</button>
-                <button>Sports</button>
-                <button>Business</button>
+            <div id="containerLesson" class="container-level">
+
             </div>
         </div>
 
@@ -85,6 +73,11 @@
     </div>
 
     
-    <script src="../js/clock.js"></script>
+    
 </body>
+<script src="../js/clock.js"></script>
+<script type="module" src="../js/avatar.js"></script>
+<script type="module" src="../js/checkLogined.js"></script>
+<script type="module" src="../js/translateLesson.js"></script>
+<script type="module" src="../js/logout.js"></script>
 </html>

@@ -12,21 +12,21 @@
         <div class="header">
             <div class="sub-header">
                 <div class="name-centre">
-                    <h1>EngStudy</h1>
+                    <a style="text-decoration: none;" href="home.html"><h1>EngStudy</h1></a>
                 </div>
                 <div class="container-item">
                     <div class="clock">
                         <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
                     </div>
                     <div class="avatar-wrapper">
-                     <div class="avatar" id="avatar-preview"></div>
+                        <img  class="avatar" id="avatar-preview" src="" alt="">
                      <input type="file" id="avatar-input" accept="image/*" style="display: none;">
                     </div>
                     <div class="icon">
                         <i id="extension-icon" class="fa-solid fa-ellipsis-vertical"></i>
                         <ul class="list">
-                            <li>Drofile</li>
-                            <li>Change information</li>
+                            <li id="profile">Profile</li>
+                            <li id="change-information">Change information</li>
                             <li id="logout">Logout</li>
                         </ul>
                     </div>
@@ -38,7 +38,7 @@
                 <img src="../image/banner.png" alt="banner">
             </div>
             <div class="container-feature">
-                <h2 class="hello">Hi there, Đức Toàn</h2>
+                <h2 class="hello">Hi there</h2>
                 <div class="main-content">
                     <button id="vocabulary">
                         <p>Vocabulary</p>
@@ -105,13 +105,12 @@
             <p>&copy; 2025 EngStudy. All rights reserved.</p>
         </div>
     </div>
-    <script src="../js/clock.js"></script>
-    <script src="../js/avatar.js"></script>
-    <script src="../js/dropdown.js"></script>
-
-    <!-- JS riêng của trang (nếu có) -->
-    <script src="../js/listening.js"></script>   <!-- ví dụ trang Listening -->
-     <script src="../js/home.js"></script>
+    <script type="module" src="../js/clock.js"></script>
+    <script type="module" src="../js/avatar.js"></script>
+    <script type="module" src="../js/dropdown.js"></script>
+    <script type="module" src="../js/home.js"></script>
+    <script type="module" src="../js/checkLogined.js"></script>
+    <script type="module" src="../js/logout.js"></script>
 </body>
 
 </html>

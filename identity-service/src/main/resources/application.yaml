@@ -6,9 +6,21 @@ spring:
       ddl-auto: update
     show-sql: true
   datasource:
-    url: jdbc:mysql://localhost:3306/TheBoyIELTS
-    username: root
-    password: 1234
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      chat:
+        options:
+          model: gpt-4o-mini
+    vectorstore:
+      mongodb:
+        uri: ${MONGODB_URI}
+        database-name: AI-Engstudy
+        collection-name: writing_rules
 
 server:
   port: 8080
@@ -16,7 +28,16 @@ server:
     context-path: /identity
 
 jwt:
-  signerKey: "NhBnKYgB2s521kZ2Epn45BEWd5lVKN+Jsy50oyQ4W8Wdqgbdjswzo2inrfuoUe9JrG52PR0VE5cuFSxuyMIrPIOzmTyXVhE5AoW+KXPRHsc="
-  valid-duration: 24 # in hours
-  refreshable-duration: 120 # in hours
+  signerKey: ${JWT_SIGNER_KEY}
+  valid-duration: 24
+  refreshable-duration: 120
 
+outbound:
+  clientId: ${GOOGLE_CLIENT_ID}
+  clientSecret: ${GOOGLE_CLIENT_SECRET}
+  redirectUri: http://127.0.0.1:5500/webapp/html/Authenticate.html
+
+app:
+  file:
+    storage-dir-avatar: ${AVATAR_DIR}
+    download-prefix: http://localhost:8080/identity/file/media/download/

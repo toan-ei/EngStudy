@@ -12,17 +12,20 @@
         <div class="header">
             <div class="sub-header">
                 <div class="name-centre">
-                    <h1>EngStudy</h1>
+                    <a style="text-decoration: none;" href="home.html"><h1>EngStudy</h1></a>
                 </div>
                 <div class="container-item">
                     <div class="clock"></div>
-                    <div class="avatar"></div>
+                    <div class="avatar-wrapper">
+                        <img  class="avatar" id="avatar-preview" src="" alt="">
+                     <input type="file" id="avatar-input" accept="image/*" style="display: none;">
+                    </div>
                     <div class="icon">
                         <i id="extension-icon" class="fa-solid fa-ellipsis"></i>
                         <ul class="list">
-                            <li><a href="">Profile</a></li>
-                            <li><a href="">Change Information</a></li>
-                            <li><a href="">Logout</a></li>
+                            <li id="profile">Profile</li>
+                            <li id="change-information">Change information</li>
+                            <li id="logout">Logout</li>
                         </ul>
                     </div>
                 </div>
@@ -43,12 +46,14 @@
 
             <div class="main-content">
                 <div class="vocabulary">
+
                     <div class="word"><p data-index="0">HELLO</p></div>
                     <input type="text" placeholder="Nhập từ bạn nghĩ là đúng...">
                     <div class="control">
                         <button class="prev-btn"><i class="fa-solid fa-arrow-left"></i></button>
                         <button class="next-btn"><i class="fa-solid fa-arrow-right"></i></button>
                     </div>
+                    <button id="submit">Submit</button>
                 </div>
                 <div class="suggest">
                     <div class="container-suggest">
@@ -60,12 +65,49 @@
                     </div>
                 </div>
             </div>
+            <!-- RESULT SECTION -->
+            <div class="result" id="resultSection">
+                <div class="result-header">
+                    <div class="result-score">
+                        Score: <span class="correct-count" id="correctCount">0</span>/<span class="total-count">50</span>
+                    </div>
+                    <div class="result-percentage" id="resultPercentage">0%</div>
+                    <div class="result-message" id="resultMessage">Keep practicing!</div>
+                    <div class="result-message"><strong>Lưu ý: </strong> double click vào bất kì đâu trên màn hình để quay lại trang chọn level</div>
+                </div>
+
+                <div class="answers-list">
+                    <h3>Answer Details</h3>
+                    <div id="answersContainer">
+                        <!-- Answers will be generated here by JavaScript -->
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-
-    <script src="../js/Vocabulary.js"></script>
+    <!-- OVERLAY POPUP -->
+    <div class="overlay" id="overlay">
+        <div class="help-popup">
+            <div class="help-popup-header">
+                <h2>Gợi Ý Chi Tiết</h2>
+                <button class="close-popup" id="closeBtn">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="help-popup-content">
+                <p id="word-suggest"> FINISH</p>
+                <p><strong>Gợi ý ngữ cảnh:</strong></p>
+                <p id="content-suggest">đang loading từ AI, vui vòng đợi trong vài giây ..................</p>
+            </div>
+        </div>
+    </div>
     
-    <script src="../js/clock.js"></script>
 </body>
+<script type="module" src="../js/Vocabulary.js"></script>
+<script type="module" src="../js/clock.js"></script>
+<script type="module" src="../js/checkLogined.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script  type="module" src="../js/avatar.js"></script>
+<script type="module" src="../js/logout.js"></script>
 </html>

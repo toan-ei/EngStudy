@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface VocabularyRepository extends JpaRepository<Vocabulary,String> {
+public interface VocabularyRepository extends JpaRepository<Vocabulary, String> {
     @Query(value = "(" +
             "  SELECT * FROM vocabulary " +
             "  WHERE is_deleted = false AND is_learned = false AND level = :level " +
@@ -24,10 +24,11 @@ public interface VocabularyRepository extends JpaRepository<Vocabulary,String> {
             "  ORDER BY wrong_count ASC " +
             "  LIMIT 50" +
             ") " +
-            "LIMIT 50",
-            nativeQuery = true)
+            "LIMIT 50", nativeQuery = true)
     List<Vocabulary> findByLevel(String level);
+
     boolean existsByWord(String word);
-    List<Vocabulary> findByIdIn(List<String> vocabularyId);
+
+    List<Vocabulary> findByVocabularyIdIn(List<String> vocabularyId);
 
 }
