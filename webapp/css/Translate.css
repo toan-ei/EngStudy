@@ -646,6 +646,10 @@
     margin-bottom: 0;
 }
 
+.vietnamese-text p:focus {
+  outline: none;
+}
+
 /* RESPONSIVE */
 @media screen and (max-width: 1200px) {
     .main-content {

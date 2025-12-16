@@ -50,11 +50,4 @@ public class UserController {
                 .build();
     }
 
-    @PreAuthorize("hasAuthority('ADMIN') or #userId == authentication.name")
-    @DeleteMapping("/{userId}")
-    public ApiResponse<UserResponse> deleteUser(@PathVariable String userId){
-        return ApiResponse.<UserResponse>builder()
-                .result(userService.deleteUser(userId))
-                .build();
-    }
 }

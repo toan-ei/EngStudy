@@ -2,7 +2,7 @@
     "api": {
         "login": "http://localhost:8080/identity/authentication/login",
         "register": "http://localhost:8080/identity/users",
-        "getUser": "",
+        "getUser": "http://localhost:8080/identity/users/",
         "getAllUser": "http://localhost:8080/identity/users/all",
         "outboundToken": "http://localhost:8080/identity/authentication/outbound/authentication",
         "checkToken": "http://localhost:8080/identity/authentication/validCheck",
@@ -12,6 +12,7 @@
         "getAllProfile": "http://localhost:8080/identity/profile/all",
         "getProfileFromUserId": "http://localhost:8080/identity/profile/withUserId/",
         "updateProfile": "http://localhost:8080/identity/profile/",
+        "deleteProfile": "http://localhost:8080/identity/profile/",
         "createVocabulary": "http://localhost:8080/identity/vocabylaries",
         "getVocabulary": "",
         "deleteVocabulary": "http://localhost:8080/identity/vocabylaries/",

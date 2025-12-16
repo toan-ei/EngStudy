@@ -182,113 +182,11 @@ function waitForChartJs(callback) {
 const tokenAdmin = localStorage.getItem('tokenAdmin');
 console.log("token admin\n", tokenAdmin)
 
-// Sample user data (replace with actual API call)
-let usersData = [
-  {
-    id: 1,
-    fullname: "Nguyễn Văn An",
-    gmail: "nguyenvanan@gmail.com",
-    avatar: "https://i.pravatar.cc/150?img=12",
-    role: "student"
-  },
-  {
-    id: 2,
-    fullname: "Trần Thị Bình",
-    gmail: "tranthibinh@gmail.com",
-    avatar: "https://i.pravatar.cc/150?img=5",
-    role: "teacher"
-  },
-  {
-    id: 3,
-    fullname: "Lê Văn Cường",
-    gmail: "levancuong@gmail.com",
-    avatar: "https://i.pravatar.cc/150?img=33",
-    role: "admin"
-  },
-  {
-    id: 4,
-    fullname: "Phạm Thị Diệu",
-    gmail: "phamthidieu@gmail.com",
-    avatar: "https://i.pravatar.cc/150?img=9",
-    role: "student"
-  },
-  {
-    id: 5,
-    fullname: "Hoàng Văn Em",
-    gmail: "hoangvanem@gmail.com",
-    avatar: "https://i.pravatar.cc/150?img=68",
-    role: "student"
-  },
-  {
-    id: 6,
-    fullname: "Đặng Thị Phương",
-    gmail: "dangthiphuong@gmail.com",
-    avatar: "https://i.pravatar.cc/150?img=20",
-    role: "teacher"
-  },
-  {
-    id: 7,
-    fullname: "Võ Văn Giang",
-    gmail: "vovangiang@gmail.com",
-    avatar: "https://i.pravatar.cc/150?img=51",
-    role: "student"
-  },
-  {
-    id: 8,
-    fullname: "Bùi Thị Hà",
-    gmail: "buithiha@gmail.com",
-    avatar: "https://i.pravatar.cc/150?img=24",
-    role: "student"
-  },
-  {
-    id: 9,
-    fullname: "Ngô Văn Hùng",
-    gmail: "ngovanhung@gmail.com",
-    avatar: "https://i.pravatar.cc/150?img=15",
-    role: "teacher"
-  },
-  {
-    id: 10,
-    fullname: "Phan Thị Lan",
-    gmail: "phanthilan@gmail.com",
-    avatar: "https://i.pravatar.cc/150?img=44",
-    role: "student"
-  },
-  {
-    id: 11,
-    fullname: "Trương Văn Minh",
-    gmail: "truongvanminh@gmail.com",
-    avatar: "https://i.pravatar.cc/150?img=32",
-    role: "admin"
-  },
-  {
-    id: 12,
-    fullname: "Lý Thị Nga",
-    gmail: "lythinga@gmail.com",
-    avatar: "https://i.pravatar.cc/150?img=47",
-    role: "student"
-  }
-];
-
-function getAllProfile(){
-  fetch(config.api.getAllProfile, {
-    method: "GET",
-    headers:{
-      'Authorization': `Bearer ${token}`,
-      "Content-Type": "application/json"
-    }
-  })
-  .then((respoonse) => {
-    return respoonse.json()
-  })
-  .then((data) => {
-
-  })
-}
-
-const ITEMS_PER_PAGE = 10;
 let currentPage = 1;
-let filteredUsers = [...usersData];
+const pageSize = 20;
+let totalPage = 0;
+let totalElement = 0;
+
 
 const userTableBody = document.getElementById('userTableBody');
 const userSearch = document.getElementById('userSearch');
@@ -296,19 +194,13 @@ const prevPageBtn = document.getElementById('prevPage');
 const nextPageBtn = document.getElementById('nextPage');
 const currentPageSpan = document.getElementById('currentPage');
 const totalPagesSpan = document.getElementById('totalPages');
-e
-document.addEventListener('DOMContentLoaded', () => {
-  console.log('User Table initialized');
-  renderUsers();
-  setupEventListeners();
-});
+
+console.log('User Table initialized');
+getAllProfile();
+setupEventListeners();
 
 // Setup Event Listeners
 function setupEventListeners() {
-  if (userSearch) {
-    userSearch.addEventListener('input', handleSearch);
-  }
-
   if (prevPageBtn) {
     prevPageBtn.addEventListener('click', () => changePage(-1));
   }
@@ -318,58 +210,79 @@ function setupEventListeners() {
   }
 }
 
-// Render Users Table
-function renderUsers() {
-  if (!userTableBody) return;
-
-  const totalPages = Math.ceil(filteredUsers.length / ITEMS_PER_PAGE);
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const endIndex = startIndex + ITEMS_PER_PAGE;
-  const usersToDisplay = filteredUsers.slice(startIndex, endIndex);
-
-  if (usersToDisplay.length === 0) {
-    userTableBody.innerHTML = `
-      <tr>
-        <td colspan="5" style="text-align: center; padding: 40px; color: var(--text-muted);">
-          <i class="fas fa-user-slash" style="font-size: 3rem; margin-bottom: 16px; display: block; opacity: 0.5;"></i>
-          <div style="font-size: 1.1rem; font-weight: 600;">Không tìm thấy người dùng</div>
-          <div style="font-size: 0.9rem; opacity: 0.7; margin-top: 8px;">Thử tìm kiếm với từ khóa khác</div>
-        </td>
-      </tr>
-    `;
-  } else {
-    userTableBody.innerHTML = usersToDisplay.map(user => `
-      <tr data-user-id="${user.id}">
-        <td>
-          <img src="${user.avatar || 'https://i.pravatar.cc/150?img=1'}" 
-               alt="${user.fullname}" 
-               class="esadmin-user-avatar"
-               onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(user.fullname)}&background=8b5cf6&color=fff&size=150'">
-        </td>
-        <td><strong class="esadmin-user-name">${escapeHtml(user.fullname)}</strong></td>
-        <td><span class="esadmin-user-gmail">${escapeHtml(user.gmail)}</span></td>
-        <td>${getRoleBadge(user.role)}</td>
-        <td>
-          <div class="esadmin-action-btns">
-            <button class="esadmin-btn-icon esadmin-btn-edit" 
-                    onclick="editUser(${user.id})" 
-                    title="Chỉnh sửa"
-                    aria-label="Chỉnh sửa ${user.fullname}">
-              <i class="fas fa-edit"></i>
-            </button>
-            <button class="esadmin-btn-icon esadmin-btn-delete" 
-                    onclick="deleteUser(${user.id})" 
-                    title="Xóa"
-                    aria-label="Xóa ${user.fullname}">
-              <i class="fas fa-trash"></i>
-            </button>
-          </div>
-        </td>
-      </tr>
-    `).join('');
-  }
-  updatePagination(totalPages);
+async function getUser(userId) {
+  const response = await fetch(`${config.api.getUser}${userId}`, {
+    method: "GET",
+    headers:{
+      'Authorization': `Bearer ${tokenAdmin}`,
+      "Content-Type": "application/json"
+    }
+  })
+  const data = await response.json();
+  return data.result.gmail;
 }
+
+
+async function getAllProfile() {
+  const response = await fetch(
+    `${config.api.getAllProfile}?page=${currentPage}&size=${pageSize}`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${tokenAdmin}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  const data = await response.json();
+  console.log("data users\n", data);
+
+  const rows = await Promise.all(
+    data.result.data.map(async (profile) => {
+      const gmail = await getUser(profile.userId);
+
+      return `
+        <tr data-user-id="${profile.profileId}">
+          <td>
+            <img src="${profile.avatar || 'https://i.pravatar.cc/150?img=1'}" 
+                 alt="${profile.fullName}" 
+                 class="esadmin-user-avatar"
+                 onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(profile.fullName)}&background=8b5cf6&color=fff&size=150'">
+          </td>
+          <td>
+            <strong class="esadmin-user-name">
+              ${escapeHtml(profile.fullName || "vô danh")}
+            </strong>
+          </td>
+          <td>
+            <span class="esadmin-user-gmail">
+              ${escapeHtml(gmail)}
+            </span>
+          </td>
+          <td>${getRoleBadge("User")}</td>
+          <td>
+            <div class="esadmin-action-btns">
+              <button class="esadmin-btn-icon esadmin-btn-delete"
+                      onclick="deleteUser('${profile.profileId}')"
+                      title="Xóa"
+                      aria-label="Xóa ${profile.fullName}">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `;
+    })
+  );
+
+  userTableBody.innerHTML = rows.join("");
+
+  totalPage = data.result.totalPage;
+  totalElement = data.result.totalElement;
+  updatePagination(totalPage);
+}
+
 
 function updatePagination(totalPages) {
   if (currentPageSpan) {
@@ -389,26 +302,21 @@ function updatePagination(totalPages) {
   }
 }
 
-// Get Role Badge HTML
 function getRoleBadge(role) {
   const roleMap = {
-    admin: { class: 'esadmin-role-admin', text: 'Quản trị viên' },
-    teacher: { class: 'esadmin-role-teacher', text: 'Giáo viên' },
-    student: { class: 'esadmin-role-student', text: 'Học viên' }
+    student: { class: 'esadmin-role-student', text: 'User' }
   };
   const roleInfo = roleMap[role] || roleMap.student;
   return `<span class="esadmin-role ${roleInfo.class}">${roleInfo.text}</span>`;
 }
-
-// Escape HTML to prevent XSS
 function escapeHtml(text) {
   const div = document.createElement('div');
   div.textContent = text;
   return div.innerHTML;
 }
 
-// Handle Search
-function handleSearch(e) {
+
+/*function handleSearch(e) {
   const searchTerm = e.target.value.toLowerCase().trim();
 
   if (searchTerm === '') {
@@ -423,18 +331,15 @@ function handleSearch(e) {
 
   currentPage = 1;
   renderUsers();
-}
+}*/
 
-// Change Page
 function changePage(direction) {
-  const totalPages = Math.ceil(filteredUsers.length / ITEMS_PER_PAGE);
   const newPage = currentPage + direction;
 
-  if (newPage >= 1 && newPage <= totalPages) {
+  if (newPage >= 1 && newPage <= totalPage) {
     currentPage = newPage;
-    renderUsers();
+    getAllProfile();
 
-    // Smooth scroll to top of table
     const tableContainer = document.querySelector('.esadmin-table-container');
     if (tableContainer) {
       tableContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -442,42 +347,22 @@ function changePage(direction) {
   }
 }
 
-// Edit User (placeholder - implement your own logic)
-function editUser(userId) {
-  const user = usersData.find(u => u.id === userId);
-  if (user) {
-    console.log('Edit user:', user);
-    alert(`Chỉnh sửa người dùng: ${user.fullname}\n\nChức năng này cần được implement.`);
-    // TODO: Implement edit functionality
-  }
-}
+window.deleteUser = async function (profileId) {
+  const confirmDelete = confirm("Bạn có chắc chắn muốn xóa người dùng này?");
+  if (!confirmDelete) return;
 
-// Delete User (placeholder - implement your own logic)
-function deleteUser(userId) {
-  const user = usersData.find(u => u.id === userId);
-  if (!user) return;
-
-  const confirmDelete = confirm(`Bạn có chắc chắn muốn xóa người dùng "${user.fullname}"?`);
-
-  if (confirmDelete) {
-    // Remove from data arrays
-    usersData = usersData.filter(u => u.id !== userId);
-    filteredUsers = filteredUsers.filter(u => u.id !== userId);
-
-    // Adjust page if needed
-    const totalPages = Math.ceil(filteredUsers.length / ITEMS_PER_PAGE);
-    if (currentPage > totalPages && totalPages > 0) {
-      currentPage = totalPages;
+  const response = await fetch(`${config.api.deleteProfile}${profileId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${tokenAdmin}`,
+      "Content-Type": "application/json",
     }
-    renderUsers();
+  });
 
-    console.log('Deleted user:', user);
-    alert(`Đã xóa người dùng: ${user.fullname}`);
-  }
-}
-
-window.editUser = editUser;
-window.deleteUser = deleteUser;
+  const data = await response.json();
+  alert("Xóa thành công");
+  getAllProfile();
+};
 
 console.log('User Table JS loaded successfully');
 

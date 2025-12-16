@@ -11,6 +11,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -62,13 +63,6 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
         User saveUser = userRepository.save(user);
         return userMapper.toUserResponse(saveUser);
-    }
-
-    public UserResponse deleteUser(String userId){
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("user not found"));
-        user.setDeleted(true);
-        return userMapper.toUserResponse(userRepository.save(user));
     }
 
 }

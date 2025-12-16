@@ -1,16 +1,23 @@
 package TheBoyIELTS.identity_service.service;
 
+import TheBoyIELTS.identity_service.DTO.PageResponse;
 import TheBoyIELTS.identity_service.DTO.Request.ProfileUpdateRequest;
 import TheBoyIELTS.identity_service.DTO.Response.ProfileResponse;
 import TheBoyIELTS.identity_service.entity.Profile;
+import TheBoyIELTS.identity_service.entity.User;
 import TheBoyIELTS.identity_service.mapper.ProfileMapper;
 import TheBoyIELTS.identity_service.repository.ProfileRepository;
+import TheBoyIELTS.identity_service.repository.UserRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import java.util.List;
-import java.util.stream.Collectors;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +25,7 @@ import java.util.stream.Collectors;
 public class ProfileService {
     ProfileRepository profileRepository;
     ProfileMapper profileMapper;
+    UserRepository userRepository;
 
     public ProfileResponse getProfile(String profileId){
          Profile profile = profileRepository.findById(profileId)
@@ -25,8 +33,17 @@ public class ProfileService {
          return profileMapper.toProfileResponse(profile);
     }
 
-    public List<ProfileResponse> getAllProfile(){
-        return profileRepository.findAll().stream().map(profileMapper::toProfileResponse).collect(Collectors.toList());
+    public PageResponse<ProfileResponse> getAllProfile(int page, int size){
+        Sort sort = Sort.by("fullName").descending();
+        Pageable pageable = PageRequest.of(page - 1, size, sort);
+        Page<Profile> all = profileRepository.findAllByIsDeleted(false, pageable);
+        return PageResponse.<ProfileResponse>builder()
+                .currentPage(page)
+                .totalPage(all.getTotalPages())
+                .totalElement(all.getTotalElements())
+                .pageSize(all.getSize())
+                .data(all.stream().map(profileMapper::toProfileResponse).toList())
+                .build();
     }
 
     public ProfileResponse updateProfile(String profileId, ProfileUpdateRequest request){
@@ -40,6 +57,10 @@ public class ProfileService {
         Profile profile = profileRepository.findById(profileId)
                 .orElseThrow(() -> new RuntimeException("profile not found"));
         profile.setDeleted(true);
+        Optional<User> byId = userRepository.findById(profile.getUserId());
+        User user = byId.get();
+        user.setDeleted(true);
+        userRepository.save(user);
         return profileMapper.toProfileResponse(profileRepository.save(profile));
     }
 

@@ -3,7 +3,7 @@ const config = await loadConfig();
 
 const contentLocalDiv = document.getElementById('contentLocal');
 const submitBtn = document.getElementById("submit");
-const translatedText = document.querySelector('.vietnamese-text');
+const translatedText = document.querySelector('.vietnamese-text p');
 let paragraph = '';
 
 

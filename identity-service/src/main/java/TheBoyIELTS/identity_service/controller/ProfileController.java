@@ -1,6 +1,7 @@
 package TheBoyIELTS.identity_service.controller;
 
 import TheBoyIELTS.identity_service.DTO.ApiResponse;
+import TheBoyIELTS.identity_service.DTO.PageResponse;
 import TheBoyIELTS.identity_service.DTO.Request.ProfileUpdateRequest;
 import TheBoyIELTS.identity_service.DTO.Response.ProfileResponse;
 import TheBoyIELTS.identity_service.service.ProfileService;
@@ -36,9 +37,12 @@ public class ProfileController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/all")
-    public ApiResponse<List<ProfileResponse>> getAllProfile(){
-        return ApiResponse.<List<ProfileResponse>>builder()
-                .result(profileService.getAllProfile())
+    public ApiResponse<PageResponse<ProfileResponse>> getAllProfile(
+            @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(value = "size", required = false, defaultValue = "16") int size
+    ){
+        return ApiResponse.<PageResponse<ProfileResponse>>builder()
+                .result(profileService.getAllProfile(page, size))
                 .build();
     }
 
