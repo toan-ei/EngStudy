@@ -15,6 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.nio.file.StandardOpenOption;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -27,12 +28,14 @@ public class FileManagementRepository {
 
     public FileDataResponse storage(MultipartFile file) throws IOException {
         Path path = Paths.get(storageDirAvatar);
+        Files.createDirectories(path);
         String fileExtension = StringUtils.getFilenameExtension(file.getOriginalFilename());
         String name = Objects.isNull(fileExtension)
                 ? UUID.randomUUID().toString()
                 : UUID.randomUUID().toString() + "." + fileExtension;
-        Path filePath = path.resolve(name).normalize().toAbsolutePath();
-        Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+        Path filePath = path.resolve(name).toAbsolutePath();
+        byte[] bytes = file.getBytes();
+        Files.write(filePath, bytes, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
         return FileDataResponse.builder()
                 .name(name)
                 .contentType(file.getContentType())
