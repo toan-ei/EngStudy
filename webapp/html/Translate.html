@@ -36,12 +36,27 @@
         </div>
 
         <div class="container-content">
-
-            <!-- TOP BAR MỚI – CÓ THANH 1-50 GIỐNG LISTENING -->
             <div class="top-bar">
                 <div class="name-feature">Translate</div>
-
                 <div class="right-group">
+                    <div>
+                        <table class="color-table">
+                            <tr>
+                                <td data-color="red"></td>
+                                <td data-color="blue"></td>
+                                <td data-color="green"></td>
+                                <td data-color="orange"></td>
+                            </tr>
+                            <tr>
+                                <td data-color="purple"></td>
+                                <td data-color="black"></td>
+                                <td data-color="brown"></td>
+                                <td data-color="pink"></td>
+                            </tr>
+                        </table>
+
+                    </div>
+
                     <div class="submit">
                         <button id="submit">Submit</button>
                     </div>
@@ -66,7 +81,7 @@
                         <div class="lang-info"><i class="fas fa-globe-asia"></i><span>Đoạn người dùng dịch</span></div>
                         <div class="status-badge"><i class="fas fa-edit"></i> Your Translation</div>
                     </div>
-                    <div class="card-content vietnamese-text">
+                    <div id="contentTranslate" class="card-content vietnamese-text">
                         <p contenteditable="true" spellcheck="false" placeholder="Nhập bản dịch của bạn ở đây..."></p>
                     </div>
                 </div>
@@ -90,10 +105,11 @@
 
     <!-- JS -->
 </body>
-    <script src="../js/clock.js"></script>
-    <script type="module" src="../js/avatar.js"></script>
-    <script type="module" src="../js/checkLogined.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script type="module" src="../js/translate.js"></script>
-    <script type="module" src="../js/logout.js"></script>
+<script src="../js/clock.js"></script>
+<script type="module" src="../js/avatar.js"></script>
+<script type="module" src="../js/checkLogined.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script type="module" src="../js/translate.js"></script>
+<script type="module" src="../js/logout.js"></script>
+
 </html>

@@ -391,6 +391,25 @@
     order: 2;
 }
 
+.color-table {
+  margin-top: 10px;
+  border-collapse: collapse;
+  border: 2px solid #ccc;
+}
+
+.color-table td {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  user-select: none;
+}
+
+.color-table td:hover {
+  outline: 2px solid #000;
+}
+
 /* MAIN CONTENT */
 /* THÊM HOẶC THAY ĐỔI CHỈ 1 DÒNG NÀY TRONG PHẦN .main-content */
 .main-content {
@@ -658,38 +677,6 @@
     }
 }
 
-/* ==================== NÚT SUBMIT - ĐẸP Y HỆT "Translate" ==================== */
-.submit button {
-    width: 280px;
-    height: 65px;
-    border: none;
-    outline: none;
-    background: linear-gradient(135deg, #0FA6A6 0%, #12448A 100%);
-    color: white;
-    font-size: 26px;
-    font-weight: 700;
-    border-radius: 20px;
-    box-shadow: 0 15px 40px rgba(15, 166, 166, 0.35);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: 'Montserrat', sans-serif;
-    position: relative;
-    overflow: hidden;
-}
-
-/* Hiệu ứng shine giống hệt .name-feature */
-.submit button::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transform: rotate(45deg);
-    transition: all 0.6s;
-}
-
 /* ==================== NÚT SUBMIT NHỎ VÀ MÀU KHÁC ==================== */
 .submit button {
     width: 160px;
@@ -797,86 +784,6 @@
 }
 
 
-/* SENTENCE BAR ------------------------------------------------ */
-.sentence-bar {
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(20px);
-    border-radius: 20px;
-    padding: 12px 20px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.list-vocabulary {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    overflow-x: auto;
-    padding: 4px 0;
-    scrollbar-width: none;
-}
-
-.list-vocabulary::-webkit-scrollbar {
-    display: none;
-}
-
-.list-vocabulary button {
-    min-width: 44px;
-    height: 38px;
-    background: rgba(255, 255, 255, 0.8);
-    border: 2px solid rgba(15, 166, 166, 0.3);
-    border-radius: 10px;
-    font-size: 14px;
-    font-weight: 700;
-    color: #2c3e50;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    flex-shrink: 0;
-}
-
-.list-vocabulary button:hover {
-    background: white;
-    border-color: #0FA6A6;
-    transform: translateY(-1px);
-    box-shadow: 0 8px 20px rgba(15, 166, 166, 0.25);
-}
-
-.list-vocabulary button.active {
-    background: linear-gradient(135deg, #0FA6A6, #12448A);
-    color: white;
-    border-color: #0FA6A6;
-    box-shadow: 0 8px 25px rgba(15, 166, 166, 0.35);
-}
-
-.icon-left,
-.icon-right {
-    width: 36px !important;
-    height: 36px !important;
-    background: linear-gradient(135deg, #12448A, #0FA6A6) !important;
-    color: white !important;
-    border: none !important;
-    box-shadow: 0 6px 15px rgba(18, 68, 138, 0.35) !important;
-    font-size: 12px !important;
-}
-
-.icon-left:hover,
-.icon-right:hover {
-    transform: scale(1.08);
-    box-shadow: 0 10px 20px rgba(18, 68, 138, 0.5) !important;
-}
-
-.top-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
 
 /* Đổi vị trí: Submit đứng trước sentence-bar */
 .submit {

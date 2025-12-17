@@ -8,7 +8,7 @@ console.log("questions: \n", vocabularyData);
 const TOTAL_QUESTIONS = 50;
 const PER_PAGE = 10;
 let currentPage = 1;
-let currentIndex = 0; 
+let currentIndex = 0;
 
 const wordDisplay = document.querySelector('.word p');
 const inputField = document.querySelector('.vocabulary input');
@@ -69,7 +69,7 @@ function updatePagination() {
     btnRight.disabled = currentPage === Math.ceil(TOTAL_QUESTIONS / PER_PAGE);
 }
 
-function suggestVocabulary(word){
+function suggestVocabulary(word) {
     const dataSuggest = {
         "word": word
     }
@@ -82,36 +82,36 @@ function suggestVocabulary(word){
         },
         body: JSON.stringify(dataSuggest)
     })
-    .then((response) => {
-        return response.json()
-    })
-    .then((response) => {
-        console.log("response form AI: \n",response.result.message);
-        const contentSuggest = document.getElementById("content-suggest");
-        contentSuggest.innerHTML = marked.parse(response.result.message);
-    })
-    .catch((err) => {
-        alert("error when call suggest from AI");
-        console.log("err: \n", err);
-    })
+        .then((response) => {
+            return response.json()
+        })
+        .then((response) => {
+            console.log("response form AI: \n", response.result.message);
+            const contentSuggest = document.getElementById("content-suggest");
+            contentSuggest.innerHTML = marked.parse(response.result.message);
+        })
+        .catch((err) => {
+            alert("error when call suggest from AI");
+            console.log("err: \n", err);
+        })
 }
 
-function submit(){
+function submit() {
     let correctCount = 0;
     const answersContainer = document.getElementById('answersContainer');
     answersContainer.innerHTML = '';
 
-    for(let i = 0; i < 50; i++){
+    for (let i = 0; i < 50; i++) {
         const vocabulary = vocabularyData[i];
         const word = vocabulary.word;
         const answer = (vocabulary.answer || "").trim().toLowerCase();
-        
+
         const meanings = Array.isArray(vocabulary.meanings)
             ? vocabulary.meanings.map(m => {
-                  // m might be a string or object {meaning:...}
-                  const raw = (typeof m === 'string') ? m : (m && (m.meaning || m.value || '')) ;
-                  return (raw || '').toString().trim().toLowerCase();
-              }).filter(Boolean) // remove '' and falsy values
+                // m might be a string or object {meaning:...}
+                const raw = (typeof m === 'string') ? m : (m && (m.meaning || m.value || ''));
+                return (raw || '').toString().trim().toLowerCase();
+            }).filter(Boolean) // remove '' and falsy values
             : [];
 
         console.log(`meanings: ${i} \n`, meanings);
@@ -148,41 +148,41 @@ function submit(){
     const percentage = Math.round((correctCount / vocabularyData.length) * 100);
     document.getElementById('correctCount').textContent = correctCount;
     document.getElementById('resultPercentage').textContent = percentage + '%';
-    
+
     const percentageEl = document.getElementById('resultPercentage');
     const messageEl = document.getElementById('resultMessage');
-    
+
     if (percentage >= 80) {
         percentageEl.className = 'result-percentage pass';
-        messageEl.textContent = 'Excellent! You did great! 🎉';
+        messageEl.textContent = 'Excellent! You did great! ';
     } else if (percentage >= 60) {
         percentageEl.className = 'result-percentage pass';
-        messageEl.textContent = 'Good job! Keep practicing! 👍';
+        messageEl.textContent = 'Good job! Keep practicing! ';
     } else {
         percentageEl.className = 'result-percentage fail';
-        messageEl.textContent = 'Keep studying and try again! 💪';
+        messageEl.textContent = 'Keep studying and try again! ';
     }
 
 
     // Show result section
     const resultSection = document.getElementById('resultSection');
     resultSection.classList.add('show');
-    
+
     // Add class to container-content to make it clickable
     const containerContent = document.querySelector('.container-content');
     containerContent.classList.add('result-shown')
 
 
     setTimeout(() => {
-        resultSection.scrollIntoView({ 
-            behavior: 'smooth', 
-            block: 'start' 
+        resultSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
         });
     }, 100);
 }
 
 
-function showLevel(){
+function showLevel() {
     const params = new URLSearchParams(window.location.search);
     const level = params.get("level");
 
@@ -219,6 +219,14 @@ document.querySelector('.next-btn').addEventListener('click', () => {
     loadQuestion(newIndex);
 });
 
+window.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+        inputField.blur(); 
+        const newIndex = (currentIndex + 1) % TOTAL_QUESTIONS;
+        loadQuestion(newIndex);
+    }
+})
+
 // ==================== NÚT MŨI TÊN TRÁI/PHẢI TRONG PHÂN TRANG ====================
 btnLeft.addEventListener('click', () => {
     if (currentPage > 1) {
@@ -226,6 +234,7 @@ btnLeft.addEventListener('click', () => {
         updatePagination();
     }
 });
+
 
 btnRight.addEventListener('click', () => {
     if (currentPage < Math.ceil(TOTAL_QUESTIONS / PER_PAGE)) {
@@ -236,7 +245,7 @@ btnRight.addEventListener('click', () => {
 
 inputField.addEventListener("blur", () => {
     const data = vocabularyData[currentIndex];
-        if(inputField.value.trim().length > 0){
+    if (inputField.value.trim().length > 0) {
         data.answer = inputField.value.trim();
     }
 })
@@ -254,18 +263,18 @@ const closeBtn = document.getElementById('closeBtn');
 const overlay = document.getElementById('overlay');
 const contentSuggest = document.getElementById("content-suggest");
 
-closeBtn.addEventListener('click', function() {
+closeBtn.addEventListener('click', function () {
     overlay.classList.remove('active');
     contentSuggest.textContent = "đang loading từ AI, vui vòng đợi trong vài giây ..................";
 });
 
-overlay.addEventListener('click', function(e) {
+overlay.addEventListener('click', function (e) {
     if (e.target === overlay) {
         overlay.classList.remove('active');
         contentSuggest.textContent = "đang loading từ AI, vui vòng đợi trong vài giây ..................";
     }
 });
-document.addEventListener('keydown', function(e) {
+document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && overlay.classList.contains('active')) {
         overlay.classList.remove('active');
         contentSuggest.textContent = "đang loading từ AI, vui vòng đợi trong vài giây ..................";
@@ -275,7 +284,7 @@ document.addEventListener('keydown', function(e) {
 // submit 
 btnSubmit.onclick = () => {
     const unanswered = vocabularyData.filter(vocabulary => vocabulary.answer === '').length;
-    if(unanswered > 0){
+    if (unanswered > 0) {
         if (!confirm(`Bạn có ${unanswered} từ vựng chưa trả lời. Gửi bài ngay?`)) {
             return;
         }
@@ -283,15 +292,15 @@ btnSubmit.onclick = () => {
     submit();
 }
 
-document.addEventListener('dblclick', function(e) {
+document.addEventListener('dblclick', function (e) {
     const containerContent = document.querySelector('.container-content');
-    
+
     if (!containerContent.classList.contains('result-shown')) return;
 
     const confirmBack = confirm('Bạn có muốn quay lại trang chọn level không?');
     if (confirmBack) {
         window.location.href = 'VocabularyChooseLevel.html';
-        
+
         containerContent.classList.remove('result-shown');
         document.getElementById('resultSection').classList.remove('show');
     }
@@ -299,5 +308,5 @@ document.addEventListener('dblclick', function(e) {
 
 window.addEventListener("beforeunload", function (e) {
     e.preventDefault();
-    e.returnValue = ""; 
+    e.returnValue = "";
 });

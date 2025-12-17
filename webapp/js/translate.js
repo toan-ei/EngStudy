@@ -64,7 +64,7 @@ async function askAIByLanguageVietnamese(userText) {
 
     } catch (error) {
         alert("loi");
-    } finally{
+    } finally {
         hideLoading();
     }
 }
@@ -91,7 +91,7 @@ async function askAIByLanguagEnglish(userText) {
 
     } catch (error) {
         alert("loi");
-    } finally{
+    } finally {
         hideLoading();
     }
 }
@@ -116,6 +116,67 @@ submitBtn.addEventListener('click', () => {
 
 getTranslate();
 
+
+let savedRange = null;
+
+const contentLocal = document.getElementById("contentLocal");
+const contentTranslate = document.getElementById("contentTranslate");
+
+contentLocal.addEventListener("mouseup", saveSelection);
+contentLocal.addEventListener("keyup", saveSelection);
+contentTranslate.addEventListener("mouseup", saveSelection);
+contentTranslate.addEventListener("keyup", saveSelection);
+
+function saveSelection() {
+    const selection = window.getSelection();
+    if (!selection.rangeCount) return;
+
+    const range = selection.getRangeAt(0);
+    if (contentLocal.contains(range.startContainer) || contentTranslate.contains(range.startContainer)) {
+        savedRange = range;
+    }
+    console.log("saved rage: ", savedRange);
+}
+
+document.querySelectorAll(".color-table td").forEach(cell => {
+    cell.style.backgroundColor = cell.dataset.color;
+
+    cell.addEventListener("click", () => {
+        applyColor(cell.dataset.color);
+    });
+});
+
+function applyColor(color) {
+    if (!savedRange) return;
+
+    const selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(savedRange);
+
+    unwrapSpansInRange(savedRange);
+
+    const span = document.createElement("span");
+    span.style.color = color;
+
+    span.appendChild(savedRange.extractContents());
+    savedRange.insertNode(span);
+
+    savedRange = null;
+}
+
+function unwrapSpansInRange(range) {
+    const fragment = range.cloneContents();
+    const spans = fragment.querySelectorAll("span");
+
+    spans.forEach(span => {
+        span.replaceWith(...span.childNodes);
+    });
+
+    range.deleteContents();
+    range.insertNode(fragment);
+}
+
+
 const extensionIcon = document.getElementById('extension-icon');
 extensionIcon.addEventListener('click', function (e) {
     e.stopPropagation();
@@ -125,3 +186,5 @@ extensionIcon.addEventListener('click', function (e) {
 document.addEventListener('click', function () {
     document.querySelectorAll('.list').forEach(list => list.style.display = 'none');
 });
+
+
